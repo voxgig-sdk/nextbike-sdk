@@ -1,0 +1,28 @@
+# BasicReservationStatusFlow
+
+main: kit: flow: BasicReservationStatusFlow:
+{
+  entity: "reservation_status",
+  kind: "basic",
+  name: "BasicReservationStatusFlow",
+  step: [
+    {
+      input: {
+        ref: "reservation_status_ref01",
+        srcdatavar: "reservation_status_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-reservation_status_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicReservationStatusFlow"
+}

@@ -1,0 +1,18 @@
+# BasicReservationFlow
+
+main: kit: flow: BasicReservationFlow:
+{
+  entity: "reservation",
+  kind: "basic",
+  name: "BasicReservationFlow",
+  step: [
+    {
+      input: {
+        ref: "reservation_ref01"
+      }
+
+      op: "create"
+    }
+  ],
+  "key$": "BasicReservationFlow"
+}

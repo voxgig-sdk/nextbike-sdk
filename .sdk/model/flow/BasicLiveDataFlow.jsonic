@@ -1,0 +1,22 @@
+# BasicLiveDataFlow
+
+main: kit: flow: BasicLiveDataFlow:
+{
+  entity: "live_data",
+  kind: "basic",
+  name: "BasicLiveDataFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "live_data_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicLiveDataFlow"
+}

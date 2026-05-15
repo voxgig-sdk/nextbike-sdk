@@ -1,0 +1,77 @@
+# Entity: reservation
+
+main: kit: entity: reservation: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "bike_number"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "expires_at"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "reservation_id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "station_id"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "status"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "unlock_code"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "user_id"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "reservation"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/reservation/reserve"
+          parts: [
+            "reservation"
+            "reserve"
+          ]
+          select: {
+            "$action": "reserve"
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

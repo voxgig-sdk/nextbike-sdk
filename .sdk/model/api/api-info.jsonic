@@ -1,0 +1,24 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        name: "Nextbike API Support"
+        url: "https://api.nextbike.net/api/doc.php"
+      }
+      description: "Nextbike Bikesharing API - Access bike sharing station data, bike availability, and rental information across Nextbike's global network"
+      servers: [
+        {
+          description: "Nextbike Production API Server"
+          url: "https://api.nextbike.net"
+        }
+      ]
+      title: "Nextbike API"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

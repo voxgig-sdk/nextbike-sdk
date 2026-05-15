@@ -1,0 +1,38 @@
+{
+  "existing": {
+    "reservation_status": {
+      "RESERVATION_STATUS00": {
+        "bike_number": "s32",
+        "created_at": "s33",
+        "expires_at": "s34",
+        "reservation_id": "RESERVATION01",
+        "status": "s36"
+      },
+      "RESERVATION_STATUS01": {
+        "bike_number": "s64",
+        "created_at": "s65",
+        "expires_at": "s66",
+        "reservation_id": "RESERVATION01",
+        "status": "s68"
+      },
+      "RESERVATION_STATUS02": {
+        "bike_number": "s96",
+        "created_at": "s97",
+        "expires_at": "s98",
+        "reservation_id": "RESERVATION01",
+        "status": "s9a"
+      }
+    }
+  },
+  "new": {
+    "reservation_status": {
+      "reservation_status_ref01": {
+        "bike_number": "sc8",
+        "created_at": "sc9",
+        "expires_at": "sca",
+        "reservation_id": "RESERVATION01",
+        "status": "scc"
+      }
+    }
+  }
+}

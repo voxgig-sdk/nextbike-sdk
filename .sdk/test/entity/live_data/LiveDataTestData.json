@@ -1,0 +1,66 @@
+{
+  "existing": {
+    "live_data": {
+      "LIVE_DATA00": {
+        "city": [],
+        "country": "s79",
+        "country_name": "s7a",
+        "domain": "s7b",
+        "hotline": "s7c",
+        "lat": 125,
+        "lng": 126,
+        "name": "s7f",
+        "policy": "s80",
+        "term": "s81",
+        "website": "s82",
+        "zoom": "s83"
+      },
+      "LIVE_DATA01": {
+        "city": [],
+        "country": "sf1",
+        "country_name": "sf2",
+        "domain": "sf3",
+        "hotline": "sf4",
+        "lat": 245,
+        "lng": 246,
+        "name": "sf7",
+        "policy": "sf8",
+        "term": "sf9",
+        "website": "sfa",
+        "zoom": "sfb"
+      },
+      "LIVE_DATA02": {
+        "city": [],
+        "country": "s169",
+        "country_name": "s16a",
+        "domain": "s16b",
+        "hotline": "s16c",
+        "lat": 365,
+        "lng": 366,
+        "name": "s16f",
+        "policy": "s170",
+        "term": "s171",
+        "website": "s172",
+        "zoom": "s173"
+      }
+    }
+  },
+  "new": {
+    "live_data": {
+      "live_data_ref01": {
+        "city": [],
+        "country": "s1e1",
+        "country_name": "s1e2",
+        "domain": "s1e3",
+        "hotline": "s1e4",
+        "lat": 485,
+        "lng": 486,
+        "name": "s1e7",
+        "policy": "s1e8",
+        "term": "s1e9",
+        "website": "s1ea",
+        "zoom": "s1eb"
+      }
+    }
+  }
+}

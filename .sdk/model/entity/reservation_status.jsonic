@@ -1,0 +1,74 @@
+# Entity: reservation_status
+
+main: kit: entity: reservation_status: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "bike_number"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "created_at"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "expires_at"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "reservation_id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "status"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "reservation_status"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "reservation_id"
+                orig: "reservation_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/reservation/status"
+          parts: [
+            "reservation"
+            "status"
+          ]
+          select: {
+            exist: [
+              "reservation_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

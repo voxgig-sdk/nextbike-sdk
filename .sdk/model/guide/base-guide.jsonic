@@ -1,0 +1,33 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 4
+  metrics: count: path: 4
+  metrics: count: method: 4
+
+  entity: live_data: {
+    path: "/maps/nextbike-live.json": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: public: {
+    path: "/maps/nextbike-live.xml": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: reservation: {
+    path: "/reservation/reserve": {
+      action: "reserve": {}
+      op: create: method: *POST
+    }
+  }
+
+  entity: reservation_status: {
+    path: "/reservation/status": {
+      op: load: method: *GET
+    }
+  }
+
+}

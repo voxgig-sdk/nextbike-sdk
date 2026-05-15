@@ -1,0 +1,617 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Nextbike API",
+    "description": "Nextbike Bikesharing API - Access bike sharing station data, bike availability, and rental information across Nextbike's global network",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Nextbike API Support",
+      "url": "https://api.nextbike.net/api/doc.php"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.nextbike.net",
+      "description": "Nextbike Production API Server"
+    }
+  ],
+  "paths": {
+    "/maps/nextbike-live.json": {
+      "get": {
+        "summary": "Get live bike and station data",
+        "description": "Retrieves real-time information about all Nextbike stations, available bikes, and locations worldwide",
+        "operationId": "getLiveData",
+        "tags": [
+          "Public"
+        ],
+        "parameters": [
+          {
+            "name": "city",
+            "in": "query",
+            "description": "Filter by city ID",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude for geographic filtering",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "Longitude for geographic filtering",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "distance",
+            "in": "query",
+            "description": "Search radius in meters when using lat/lng",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 5000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with live bike sharing data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LiveDataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - Invalid parameters"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/maps/nextbike-live.xml": {
+      "get": {
+        "summary": "Get live bike and station data (XML format)",
+        "description": "Retrieves real-time information about all Nextbike stations, available bikes, and locations worldwide in XML format",
+        "operationId": "getLiveDataXML",
+        "tags": [
+          "Public"
+        ],
+        "parameters": [
+          {
+            "name": "city",
+            "in": "query",
+            "description": "Filter by city ID",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude for geographic filtering",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "Longitude for geographic filtering",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "distance",
+            "in": "query",
+            "description": "Search radius in meters when using lat/lng",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 5000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with live bike sharing data in XML format",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - Invalid parameters"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/reservation/reserve": {
+      "post": {
+        "summary": "Reserve a bike",
+        "description": "Create a bike reservation at a specific station (requires API key)",
+        "operationId": "reserveBike",
+        "tags": [
+          "Restricted"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Bike successfully reserved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - Invalid input"
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing API key"
+          },
+          "404": {
+            "description": "Bike or station not found"
+          },
+          "409": {
+            "description": "Conflict - Bike already reserved or unavailable"
+          }
+        }
+      }
+    },
+    "/reservation/status": {
+      "get": {
+        "summary": "Get reservation status",
+        "description": "Check the status of an existing bike reservation (requires API key)",
+        "operationId": "getReservationStatus",
+        "tags": [
+          "Restricted"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "reservation_id",
+            "in": "query",
+            "description": "ID of the reservation to check",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reservation status retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationStatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - Invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing API key"
+          },
+          "404": {
+            "description": "Reservation not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "query",
+        "name": "apikey",
+        "description": "API key for accessing restricted endpoints"
+      }
+    },
+    "schemas": {
+      "LiveDataResponse": {
+        "type": "object",
+        "properties": {
+          "countries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Country"
+            }
+          }
+        }
+      },
+      "Country": {
+        "type": "object",
+        "properties": {
+          "lat": {
+            "type": "number",
+            "format": "double",
+            "description": "Country center latitude"
+          },
+          "lng": {
+            "type": "number",
+            "format": "double",
+            "description": "Country center longitude"
+          },
+          "zoom": {
+            "type": "integer",
+            "description": "Default zoom level"
+          },
+          "name": {
+            "type": "string",
+            "description": "Country name"
+          },
+          "hotline": {
+            "type": "string",
+            "description": "Support hotline number"
+          },
+          "domain": {
+            "type": "string",
+            "description": "Country domain"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country code"
+          },
+          "country_name": {
+            "type": "string",
+            "description": "Full country name"
+          },
+          "terms": {
+            "type": "string",
+            "description": "Terms and conditions URL"
+          },
+          "policy": {
+            "type": "string",
+            "description": "Privacy policy URL"
+          },
+          "website": {
+            "type": "string",
+            "description": "Website URL"
+          },
+          "cities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/City"
+            }
+          }
+        }
+      },
+      "City": {
+        "type": "object",
+        "properties": {
+          "uid": {
+            "type": "integer",
+            "description": "Unique city identifier"
+          },
+          "lat": {
+            "type": "number",
+            "format": "double",
+            "description": "City center latitude"
+          },
+          "lng": {
+            "type": "number",
+            "format": "double",
+            "description": "City center longitude"
+          },
+          "zoom": {
+            "type": "integer",
+            "description": "Default zoom level"
+          },
+          "maps_icon": {
+            "type": "string",
+            "description": "Icon URL for maps"
+          },
+          "alias": {
+            "type": "string",
+            "description": "City alias"
+          },
+          "break": {
+            "type": "boolean",
+            "description": "Service break status"
+          },
+          "name": {
+            "type": "string",
+            "description": "City name"
+          },
+          "num_places": {
+            "type": "integer",
+            "description": "Number of stations"
+          },
+          "refresh_rate": {
+            "type": "integer",
+            "description": "Data refresh rate in seconds"
+          },
+          "bounds": {
+            "$ref": "#/components/schemas/Bounds"
+          },
+          "booked_bikes": {
+            "type": "integer",
+            "description": "Number of currently booked bikes"
+          },
+          "set_point_bikes": {
+            "type": "integer",
+            "description": "Target number of bikes"
+          },
+          "available_bikes": {
+            "type": "integer",
+            "description": "Number of available bikes"
+          },
+          "places": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Station"
+            }
+          }
+        }
+      },
+      "Bounds": {
+        "type": "object",
+        "properties": {
+          "south_west": {
+            "$ref": "#/components/schemas/Coordinate"
+          },
+          "north_east": {
+            "$ref": "#/components/schemas/Coordinate"
+          }
+        }
+      },
+      "Coordinate": {
+        "type": "object",
+        "properties": {
+          "lat": {
+            "type": "number",
+            "format": "double"
+          },
+          "lng": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "Station": {
+        "type": "object",
+        "properties": {
+          "uid": {
+            "type": "integer",
+            "description": "Unique station identifier"
+          },
+          "lat": {
+            "type": "number",
+            "format": "double",
+            "description": "Station latitude"
+          },
+          "lng": {
+            "type": "number",
+            "format": "double",
+            "description": "Station longitude"
+          },
+          "name": {
+            "type": "string",
+            "description": "Station name"
+          },
+          "spot": {
+            "type": "boolean",
+            "description": "Is flex zone/spot"
+          },
+          "number": {
+            "type": "integer",
+            "description": "Station number"
+          },
+          "bikes": {
+            "type": "integer",
+            "description": "Number of available bikes"
+          },
+          "bikes_available_to_rent": {
+            "type": "integer",
+            "description": "Bikes available for rental"
+          },
+          "bike_racks": {
+            "type": "integer",
+            "description": "Total bike rack capacity"
+          },
+          "free_racks": {
+            "type": "integer",
+            "description": "Number of free racks"
+          },
+          "maintenance": {
+            "type": "boolean",
+            "description": "Station under maintenance"
+          },
+          "terminal_type": {
+            "type": "string",
+            "description": "Type of terminal"
+          },
+          "bike_list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Bike"
+            }
+          }
+        }
+      },
+      "Bike": {
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "string",
+            "description": "Bike number"
+          },
+          "bike_type": {
+            "type": "integer",
+            "description": "Type of bike"
+          },
+          "lock_types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Bike is active"
+          },
+          "state": {
+            "type": "string",
+            "description": "Current state of the bike"
+          },
+          "electric_lock": {
+            "type": "boolean",
+            "description": "Has electric lock"
+          },
+          "boardcomputer": {
+            "type": "integer",
+            "description": "Board computer identifier"
+          }
+        }
+      },
+      "ReservationRequest": {
+        "type": "object",
+        "required": [
+          "bike_number",
+          "user_id"
+        ],
+        "properties": {
+          "bike_number": {
+            "type": "string",
+            "description": "Number of the bike to reserve"
+          },
+          "user_id": {
+            "type": "string",
+            "description": "User identifier"
+          },
+          "station_id": {
+            "type": "integer",
+            "description": "Station identifier"
+          }
+        }
+      },
+      "ReservationResponse": {
+        "type": "object",
+        "properties": {
+          "reservation_id": {
+            "type": "string",
+            "description": "Unique reservation identifier"
+          },
+          "bike_number": {
+            "type": "string",
+            "description": "Reserved bike number"
+          },
+          "status": {
+            "type": "string",
+            "description": "Reservation status",
+            "enum": [
+              "confirmed",
+              "pending",
+              "failed"
+            ]
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Reservation expiration time"
+          },
+          "unlock_code": {
+            "type": "string",
+            "description": "Code to unlock the bike"
+          }
+        }
+      },
+      "ReservationStatusResponse": {
+        "type": "object",
+        "properties": {
+          "reservation_id": {
+            "type": "string",
+            "description": "Reservation identifier"
+          },
+          "status": {
+            "type": "string",
+            "description": "Current reservation status",
+            "enum": [
+              "active",
+              "expired",
+              "cancelled",
+              "completed"
+            ]
+          },
+          "bike_number": {
+            "type": "string",
+            "description": "Reserved bike number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Reservation creation time"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Reservation expiration time"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Public",
+      "description": "Publicly accessible endpoints without authentication"
+    },
+    {
+      "name": "Restricted",
+      "description": "Endpoints requiring API key authentication"
+    }
+  ]
+}

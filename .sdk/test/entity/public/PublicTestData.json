@@ -1,0 +1,14 @@
+{
+  "existing": {
+    "public": {
+      "PUBLIC00": {},
+      "PUBLIC01": {},
+      "PUBLIC02": {}
+    }
+  },
+  "new": {
+    "public": {
+      "public_ref01": {}
+    }
+  }
+}

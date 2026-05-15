@@ -1,0 +1,134 @@
+# Entity: live_data
+
+main: kit: entity: live_data: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "city"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "country"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "country_name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "domain"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "hotline"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "lat"
+      req: false
+      type: "`$NUMBER`"
+    }
+    {
+      name: "lng"
+      req: false
+      type: "`$NUMBER`"
+    }
+    {
+      name: "name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "policy"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "term"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "website"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "zoom"
+      req: false
+      type: "`$INTEGER`"
+    }
+  ]
+
+  name: "live_data"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "city"
+                orig: "city"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: 5000
+                kind: "query"
+                name: "distance"
+                orig: "distance"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "lat"
+                orig: "lat"
+                reqd: false
+                type: "`$NUMBER`"
+              }
+              {
+                kind: "query"
+                name: "lng"
+                orig: "lng"
+                reqd: false
+                type: "`$NUMBER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/maps/nextbike-live.json"
+          parts: [
+            "maps"
+            "nextbike-live.json"
+          ]
+          select: {
+            exist: [
+              "city"
+              "distance"
+              "lat"
+              "lng"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

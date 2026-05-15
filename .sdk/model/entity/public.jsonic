@@ -1,0 +1,71 @@
+# Entity: public
+
+main: kit: entity: public: {
+
+  alias: field: {}
+
+  name: "public"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "city"
+                orig: "city"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: 5000
+                kind: "query"
+                name: "distance"
+                orig: "distance"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "lat"
+                orig: "lat"
+                reqd: false
+                type: "`$NUMBER`"
+              }
+              {
+                kind: "query"
+                name: "lng"
+                orig: "lng"
+                reqd: false
+                type: "`$NUMBER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/maps/nextbike-live.xml"
+          parts: [
+            "maps"
+            "nextbike-live.xml"
+          ]
+          select: {
+            exist: [
+              "city"
+              "distance"
+              "lat"
+              "lng"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

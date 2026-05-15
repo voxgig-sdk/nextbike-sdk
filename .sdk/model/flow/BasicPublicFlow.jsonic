@@ -1,0 +1,28 @@
+# BasicPublicFlow
+
+main: kit: flow: BasicPublicFlow:
+{
+  entity: "public",
+  kind: "basic",
+  name: "BasicPublicFlow",
+  step: [
+    {
+      input: {
+        ref: "public_ref01",
+        srcdatavar: "public_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-public_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicPublicFlow"
+}
