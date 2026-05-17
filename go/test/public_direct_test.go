@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/nextbike-sdk"
-	"github.com/voxgig-sdk/nextbike-sdk/core"
+	sdk "github.com/voxgig-sdk/nextbike-sdk/go"
+	"github.com/voxgig-sdk/nextbike-sdk/go/core"
 )
 
 func TestPublicDirect(t *testing.T) {

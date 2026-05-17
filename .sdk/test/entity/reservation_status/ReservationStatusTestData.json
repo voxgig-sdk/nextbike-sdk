@@ -6,21 +6,24 @@
         "created_at": "s33",
         "expires_at": "s34",
         "reservation_id": "RESERVATION01",
-        "status": "s36"
+        "status": "s36",
+        "id": "RESERVATION_STATUS00"
       },
       "RESERVATION_STATUS01": {
         "bike_number": "s64",
         "created_at": "s65",
         "expires_at": "s66",
         "reservation_id": "RESERVATION01",
-        "status": "s68"
+        "status": "s68",
+        "id": "RESERVATION_STATUS01"
       },
       "RESERVATION_STATUS02": {
         "bike_number": "s96",
         "created_at": "s97",
         "expires_at": "s98",
         "reservation_id": "RESERVATION01",
-        "status": "s9a"
+        "status": "s9a",
+        "id": "RESERVATION_STATUS02"
       }
     }
   },

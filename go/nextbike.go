@@ -1,10 +1,10 @@
 package voxgignextbikesdk
 
 import (
-	"github.com/voxgig-sdk/nextbike-sdk/core"
-	"github.com/voxgig-sdk/nextbike-sdk/entity"
-	"github.com/voxgig-sdk/nextbike-sdk/feature"
-	_ "github.com/voxgig-sdk/nextbike-sdk/utility"
+	"github.com/voxgig-sdk/nextbike-sdk/go/core"
+	"github.com/voxgig-sdk/nextbike-sdk/go/entity"
+	"github.com/voxgig-sdk/nextbike-sdk/go/feature"
+	_ "github.com/voxgig-sdk/nextbike-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

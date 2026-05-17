@@ -1,9 +1,15 @@
 {
   "existing": {
     "public": {
-      "PUBLIC00": {},
-      "PUBLIC01": {},
-      "PUBLIC02": {}
+      "PUBLIC00": {
+        "id": "PUBLIC00"
+      },
+      "PUBLIC01": {
+        "id": "PUBLIC01"
+      },
+      "PUBLIC02": {
+        "id": "PUBLIC02"
+      }
     }
   },
   "new": {

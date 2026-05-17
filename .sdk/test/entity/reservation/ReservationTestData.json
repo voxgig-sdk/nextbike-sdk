@@ -8,7 +8,8 @@
         "station_id": "STATION01",
         "status": "s4a",
         "unlock_code": "s4b",
-        "user_id": "USER01"
+        "user_id": "USER01",
+        "id": "RESERVATION00"
       },
       "RESERVATION01": {
         "bike_number": "s8c",
@@ -17,7 +18,8 @@
         "station_id": "STATION01",
         "status": "s90",
         "unlock_code": "s91",
-        "user_id": "USER01"
+        "user_id": "USER01",
+        "id": "RESERVATION01"
       },
       "RESERVATION02": {
         "bike_number": "sd2",
@@ -26,7 +28,8 @@
         "station_id": "STATION01",
         "status": "sd6",
         "unlock_code": "sd7",
-        "user_id": "USER01"
+        "user_id": "USER01",
+        "id": "RESERVATION02"
       }
     }
   },
