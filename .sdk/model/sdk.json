@@ -17,7 +17,18 @@
           }
         ],
         "title": "Nextbike API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "tagline": "Query Nextbike's global bike-sharing network for stations, bike availability and rental data",
+        "homepage": "https://www.nextbike.net/",
+        "docs_url": "https://api.nextbike.net/api/doc.php",
+        "about_md": "[Nextbike](https://www.nextbike.net/) operates public bike-sharing systems in cities around the world. Its API exposes the live station and bike data that powers the Nextbike apps and partner integrations.\n\nThe API is split into a public area (live station and availability data) and a restricted area that requires an API key for actions such as reservations. Available data includes:\n\n- City- and domain-scoped station listings\n- Bike availability per station\n- Location-based station queries (latitude/longitude)\n- Reservation and reservation-status operations (key-protected)\n\nPublic read endpoints are open and CORS-enabled on most routes. Write operations and account-bound calls require an API key issued by Nextbike.",
+        "entity_desc": {
+          "live_data": "Real-time station and bike availability snapshots across the Nextbike network, scoped by city, domain or geographic coordinates.",
+          "public": "Open, unauthenticated endpoints exposing the public catalogue of stations and bikes.",
+          "reservation": "Operations for creating or managing a bike reservation; requires an API key from the restricted area.",
+          "reservation_status": "Lookups for the current state of an existing reservation."
+        },
+        "auth": false
       },
       "config": {
         "auth": {
@@ -25,7 +36,15 @@
         },
         "headers": {
           "content-type": "application/json"
-        }
+        },
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ]
       },
       "entity": {
         "live_data": {

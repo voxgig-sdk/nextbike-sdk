@@ -113,7 +113,6 @@ function basicSetup(extra?: any) {
     'NEXTBIKE_TEST_PUBLIC_ENTID': idmap,
     'NEXTBIKE_TEST_LIVE': 'FALSE',
     'NEXTBIKE_TEST_EXPLAIN': 'FALSE',
-    'NEXTBIKE_APIKEY': 'NONE',
   })
 
   idmap = env['NEXTBIKE_TEST_PUBLIC_ENTID']
@@ -123,7 +122,6 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new NextbikeSDK(merge([
       {
-        apikey: env.NEXTBIKE_APIKEY,
       },
       extra
     ]))

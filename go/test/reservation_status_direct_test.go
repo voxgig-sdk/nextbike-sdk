@@ -99,14 +99,12 @@ func reservation_statusDirectSetup(mockres any) *reservation_statusDirectSetupRe
 	env := envOverride(map[string]any{
 		"NEXTBIKE_TEST_RESERVATION_STATUS_ENTID": map[string]any{},
 		"NEXTBIKE_TEST_LIVE":    "FALSE",
-		"NEXTBIKE_APIKEY":       "NONE",
 	})
 
 	live := env["NEXTBIKE_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["NEXTBIKE_APIKEY"],
 		}
 		client := sdk.NewNextbikeSDK(mergedOpts)
 

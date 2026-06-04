@@ -17,9 +17,7 @@ loading a specific record.
 ```ts
 import { NextbikeSDK } from 'nextbike'
 
-const client = new NextbikeSDK({
-  apikey: process.env.NEXTBIKE_APIKEY,
-})
+const client = new NextbikeSDK({})
 ```
 
 ### 2. List livedatas
@@ -84,7 +82,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new NextbikeSDK({ apikey: '...' })
+const client = new NextbikeSDK()
 const testClient = client.tester()
 ```
 
@@ -120,7 +118,6 @@ const logger = {
 }
 
 const client = new NextbikeSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -131,7 +128,6 @@ Create a `.env.local` file at the project root:
 
 ```
 NEXTBIKE_TEST_LIVE=TRUE
-NEXTBIKE_APIKEY=<your-key>
 ```
 
 Then run:
@@ -149,7 +145,6 @@ cd ts && npm test
 
 ```ts
 new NextbikeSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -160,7 +155,6 @@ new NextbikeSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |

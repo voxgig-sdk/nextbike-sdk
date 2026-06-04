@@ -92,7 +92,6 @@ def _live_data_basic_setup(extra):
         "NEXTBIKE_TEST_LIVE_DATA_ENTID": idmap,
         "NEXTBIKE_TEST_LIVE": "FALSE",
         "NEXTBIKE_TEST_EXPLAIN": "FALSE",
-        "NEXTBIKE_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -103,7 +102,6 @@ def _live_data_basic_setup(extra):
     if env.get("NEXTBIKE_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("NEXTBIKE_APIKEY"),
             },
             extra or {},
         ])

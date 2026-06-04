@@ -61,14 +61,12 @@ def _live_data_direct_setup(mockres):
     env = runner.env_override({
         "NEXTBIKE_TEST_LIVE_DATA_ENTID": {},
         "NEXTBIKE_TEST_LIVE": "FALSE",
-        "NEXTBIKE_APIKEY": "NONE",
     })
 
     live = env.get("NEXTBIKE_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("NEXTBIKE_APIKEY"),
         }
         client = NextbikeSDK(merged_opts)
         return {

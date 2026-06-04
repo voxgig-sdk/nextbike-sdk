@@ -63,14 +63,12 @@ function live_data_direct_setup(mockres)
   local env = runner.env_override({
     ["NEXTBIKE_TEST_LIVE_DATA_ENTID"] = {},
     ["NEXTBIKE_TEST_LIVE"] = "FALSE",
-    ["NEXTBIKE_APIKEY"] = "NONE",
   })
 
   local live = env["NEXTBIKE_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["NEXTBIKE_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

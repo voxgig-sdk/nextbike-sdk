@@ -38,10 +38,6 @@ class Config {
   options = {
     base: 'https://api.nextbike.net',
 
-    auth: {
-      prefix: 'Bearer',
-    },
-
     headers: {
       "content-type": "application/json"
     },
