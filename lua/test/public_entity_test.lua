@@ -91,6 +91,7 @@ function public_basic_setup(extra)
     ["NEXTBIKE_TEST_PUBLIC_ENTID"] = idmap,
     ["NEXTBIKE_TEST_LIVE"] = "FALSE",
     ["NEXTBIKE_TEST_EXPLAIN"] = "FALSE",
+    ["NEXTBIKE_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -102,6 +103,7 @@ function public_basic_setup(extra)
   if env["NEXTBIKE_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
+        apikey = env["NEXTBIKE_APIKEY"],
       },
       extra or {},
     })

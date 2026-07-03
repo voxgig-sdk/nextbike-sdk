@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -123,7 +123,7 @@ local live_data = client:LiveData(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:LiveData(nil):list(nil, nil)
+local results, err = client:LiveData():list()
 ```
 
 ### Common Methods
@@ -169,7 +169,7 @@ local public = client:Public(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Public(nil):load({ id = "public_id" }, nil)
+local result, err = client:Public():load({ id = "public_id" })
 ```
 
 ### Common Methods
@@ -239,9 +239,9 @@ local reservation = client:Reservation(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Reservation(nil):create({
+local result, err = client:Reservation():create({
   user_id = --[[ `$STRING` ]],
-}, nil)
+})
 ```
 
 ### Common Methods
@@ -297,7 +297,7 @@ local reservation_status = client:ReservationStatus(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ReservationStatus(nil):load({ id = "reservation_status_id" }, nil)
+local result, err = client:ReservationStatus():load({ id = "reservation_status_id" })
 ```
 
 ### Common Methods

@@ -93,12 +93,14 @@ func live_dataDirectSetup(mockres any) *live_dataDirectSetupResult {
 	env := envOverride(map[string]any{
 		"NEXTBIKE_TEST_LIVE_DATA_ENTID": map[string]any{},
 		"NEXTBIKE_TEST_LIVE":    "FALSE",
+		"NEXTBIKE_APIKEY":       "NONE",
 	})
 
 	live := env["NEXTBIKE_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["NEXTBIKE_APIKEY"],
 		}
 		client := sdk.NewNextbikeSDK(mergedOpts)
 

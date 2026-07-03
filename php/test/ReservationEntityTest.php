@@ -80,6 +80,7 @@ function reservation_basic_setup($extra)
         "NEXTBIKE_TEST_RESERVATION_ENTID" => $idmap,
         "NEXTBIKE_TEST_LIVE" => "FALSE",
         "NEXTBIKE_TEST_EXPLAIN" => "FALSE",
+        "NEXTBIKE_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -91,6 +92,7 @@ function reservation_basic_setup($extra)
     if ($env["NEXTBIKE_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
+                "apikey" => $env["NEXTBIKE_APIKEY"],
             ],
             $extra ?? [],
         ]);

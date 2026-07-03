@@ -74,12 +74,14 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'NEXTBIKE_TEST_RESERVATION_STATUS_ENTID': {},
     'NEXTBIKE_TEST_LIVE': 'FALSE',
+    'NEXTBIKE_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.NEXTBIKE_TEST_LIVE
 
   if (live) {
     const client = new NextbikeSDK({
+      apikey: env.NEXTBIKE_APIKEY,
     })
 
     let idmap: any = env['NEXTBIKE_TEST_RESERVATION_STATUS_ENTID']

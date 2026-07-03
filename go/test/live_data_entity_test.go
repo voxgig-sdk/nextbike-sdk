@@ -119,6 +119,7 @@ func live_dataBasicSetup(extra map[string]any) *entityTestSetup {
 		"NEXTBIKE_TEST_LIVE_DATA_ENTID": idmap,
 		"NEXTBIKE_TEST_LIVE":      "FALSE",
 		"NEXTBIKE_TEST_EXPLAIN":   "FALSE",
+		"NEXTBIKE_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["NEXTBIKE_TEST_LIVE_DATA_ENTID"])
@@ -129,6 +130,7 @@ func live_dataBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["NEXTBIKE_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["NEXTBIKE_APIKEY"],
 			},
 			extra,
 		})

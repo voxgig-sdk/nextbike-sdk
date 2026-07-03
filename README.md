@@ -1,21 +1,8 @@
 # Nextbike SDK
 
-Query Nextbike's global bike-sharing network for stations, bike availability and rental data
+Nextbike API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Nextbike API
-
-[Nextbike](https://www.nextbike.net/) operates public bike-sharing systems in cities around the world. Its API exposes the live station and bike data that powers the Nextbike apps and partner integrations.
-
-The API is split into a public area (live station and availability data) and a restricted area that requires an API key for actions such as reservations. Available data includes:
-
-- City- and domain-scoped station listings
-- Bike availability per station
-- Location-based station queries (latitude/longitude)
-- Reservation and reservation-status operations (key-protected)
-
-Public read endpoints are open and CORS-enabled on most routes. Write operations and account-bound calls require an API key issued by Nextbike.
 
 ## Try it
 
@@ -49,29 +36,31 @@ gem install nextbike-sdk
 luarocks install nextbike-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { NextbikeSDK } from 'nextbike'
 
-const client = new NextbikeSDK({})
+const client = new NextbikeSDK({
+  apikey: process.env.NEXTBIKE_APIKEY,
+})
 
 // List all livedatas
 const livedatas = await client.LiveData().list()
+console.log(livedatas.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -101,10 +90,10 @@ The API exposes 4 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **LiveData** | Real-time station and bike availability snapshots across the Nextbike network, scoped by city, domain or geographic coordinates. | `/maps/nextbike-live.json` |
-| **Public** | Open, unauthenticated endpoints exposing the public catalogue of stations and bikes. | `/maps/nextbike-live.xml` |
-| **Reservation** | Operations for creating or managing a bike reservation; requires an API key from the restricted area. | `/reservation/reserve` |
-| **ReservationStatus** | Lookups for the current state of an existing reservation. | `/reservation/status` |
+| **LiveData** |  | `/maps/nextbike-live.json` |
+| **Public** |  | `/maps/nextbike-live.xml` |
+| **Reservation** |  | `/reservation/reserve` |
+| **ReservationStatus** |  | `/reservation/status` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -114,12 +103,16 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from nextbike_sdk import NextbikeSDK
 
-client = NextbikeSDK({})
+client = NextbikeSDK({
+    "apikey": os.environ.get("NEXTBIKE_APIKEY"),
+})
 
 # List all livedatas
-livedatas, err = client.LiveData(None).list(None, None)
+livedatas, err = client.LiveData().list()
+print(livedatas)
 ```
 
 ### PHP
@@ -128,10 +121,13 @@ livedatas, err = client.LiveData(None).list(None, None)
 <?php
 require_once 'nextbike_sdk.php';
 
-$client = new NextbikeSDK([]);
+$client = new NextbikeSDK([
+    "apikey" => getenv("NEXTBIKE_APIKEY"),
+]);
 
 // List all livedatas
-[$livedatas, $err] = $client->LiveData(null)->list(null, null);
+[$livedatas, $err] = $client->LiveData()->list();
+print_r($livedatas);
 ```
 
 ### Golang
@@ -139,10 +135,13 @@ $client = new NextbikeSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/nextbike-sdk/go"
 
-client := sdk.NewNextbikeSDK(map[string]any{})
+client := sdk.NewNextbikeSDK(map[string]any{
+    "apikey": os.Getenv("NEXTBIKE_APIKEY"),
+})
 
 // List all livedatas
 livedatas, err := client.LiveData(nil).List(nil, nil)
+fmt.Println(livedatas)
 ```
 
 ### Ruby
@@ -150,10 +149,13 @@ livedatas, err := client.LiveData(nil).List(nil, nil)
 ```ruby
 require_relative "Nextbike_sdk"
 
-client = NextbikeSDK.new({})
+client = NextbikeSDK.new({
+  "apikey" => ENV["NEXTBIKE_APIKEY"],
+})
 
 # List all livedatas
-livedatas, err = client.LiveData(nil).list(nil, nil)
+livedatas, err = client.LiveData().list
+puts livedatas
 ```
 
 ### Lua
@@ -161,10 +163,13 @@ livedatas, err = client.LiveData(nil).list(nil, nil)
 ```lua
 local sdk = require("nextbike_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("NEXTBIKE_APIKEY"),
+})
 
 -- List all livedatas
-local livedatas, err = client:LiveData(nil):list(nil, nil)
+local livedatas, err = client:LiveData():list()
+print(livedatas)
 ```
 
 ## Unit testing in offline mode
@@ -183,25 +188,21 @@ const result = await client.LiveData().load({ id: 'test01' })
 ### Python
 
 ```python
-client = NextbikeSDK.test(None, None)
-result, err = client.LiveData(None).load(
-    {"id": "test01"}, None
-)
+client = NextbikeSDK.test()
+result, err = client.LiveData().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = NextbikeSDK::test(null, null);
-[$result, $err] = $client->LiveData(null)->load(
-    ["id" => "test01"], null
-);
+$client = NextbikeSDK::test();
+[$result, $err] = $client->LiveData()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.LiveData(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -210,19 +211,15 @@ result, err := client.LiveData(nil).Load(
 ### Ruby
 
 ```ruby
-client = NextbikeSDK.test(nil, nil)
-result, err = client.LiveData(nil).load(
-  { "id" => "test01" }, nil
-)
+client = NextbikeSDK.test
+result, err = client.LiveData().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:LiveData(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:LiveData():load({ id = "test01" })
 ```
 
 ## How it works
@@ -326,11 +323,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Nextbike API
-
-- Upstream: [https://www.nextbike.net/](https://www.nextbike.net/)
-- API docs: [https://api.nextbike.net/api/doc.php](https://api.nextbike.net/api/doc.php)
 
 ---
 

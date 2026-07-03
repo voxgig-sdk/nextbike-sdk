@@ -67,12 +67,14 @@ function public_direct_setup($mockres)
     $env = Runner::env_override([
         "NEXTBIKE_TEST_PUBLIC_ENTID" => [],
         "NEXTBIKE_TEST_LIVE" => "FALSE",
+        "NEXTBIKE_APIKEY" => "NONE",
     ]);
 
     $live = $env["NEXTBIKE_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
+            "apikey" => $env["NEXTBIKE_APIKEY"],
         ];
         $client = new NextbikeSDK($merged_opts);
         return [
