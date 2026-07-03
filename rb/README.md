@@ -10,13 +10,13 @@ The Ruby SDK for the Nextbike API — an entity-oriented client using idiomatic 
 
 ## Install
 ```bash
-gem install nextbike-sdk
+gem install voxgig-sdk-nextbike
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "nextbike-sdk"
+gem "voxgig-sdk-nextbike"
 ```
 
 Then run:

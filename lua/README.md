@@ -10,7 +10,7 @@ The Lua SDK for the Nextbike API — an entity-oriented client using Lua convent
 
 ## Install
 ```bash
-luarocks install nextbike-sdk
+luarocks install voxgig-sdk-nextbike
 ```
 
 If the module is not yet published, add the source directory to

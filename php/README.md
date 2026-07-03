@@ -10,7 +10,7 @@ The PHP SDK for the Nextbike API — an entity-oriented client using PHP convent
 
 ## Install
 ```bash
-composer require voxgig/nextbike-sdk
+composer require voxgig-sdk/nextbike
 ```
 
 

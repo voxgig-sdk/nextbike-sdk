@@ -10,7 +10,7 @@ The TypeScript SDK for the Nextbike API — a type-safe, entity-oriented client 
 
 ## Install
 ```bash
-npm install nextbike
+npm install @voxgig-sdk/nextbike
 ```
 ## Tutorial: your first API call
 

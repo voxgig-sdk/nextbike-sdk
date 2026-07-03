@@ -1,8 +1,17 @@
 {
   "name": "voxgig-sdk/nextbike",
-  "description": "Nextbike SDK for PHP",
+  "description": "Unofficial generated PHP SDK for the Nextbike public API. Not affiliated with or endorsed by the upstream API provider.",
   "type": "library",
+  "keywords": ["voxgig", "sdk", "generated-sdk", "openapi", "api-client", "nextbike"],
+  "homepage": "https://github.com/voxgig-sdk/nextbike-sdk",
   "license": "MIT",
+  "authors": [
+    { "name": "Voxgig", "homepage": "https://voxgig.com" }
+  ],
+  "support": {
+    "issues": "https://github.com/voxgig-sdk/nextbike-sdk/issues",
+    "source": "https://github.com/voxgig-sdk/nextbike-sdk"
+  },
   "minimum-stability": "stable",
   "require": {
     "php": ">=8.2"

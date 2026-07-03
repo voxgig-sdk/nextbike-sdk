@@ -10,7 +10,7 @@ The Python SDK for the Nextbike API — an entity-oriented client following Pyth
 
 ## Install
 ```bash
-pip install nextbike-sdk
+pip install voxgig-sdk-nextbike
 ```
 
 Or install from source:
