@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch LiveDataListMatch
+---@param ctrl? table
+---@return LiveData[]
+---@return string? err
 function LiveDataEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

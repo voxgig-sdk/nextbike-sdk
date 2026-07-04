@@ -45,6 +45,7 @@ class ReservationStatusEntity
     end
   end
 
+  # @return [ReservationStatus, Hash] the current ReservationStatus data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class ReservationStatusEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of ReservationStatus fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single ReservationStatus.
+  #
+  # @param reqmatch [ReservationStatusLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [ReservationStatus, Hash] the loaded ReservationStatus; raises NextbikeError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

@@ -49,8 +49,7 @@ class TestReservationStatusEntity:
         # LOAD
         reservation_status_ref01_ent = client.ReservationStatus(None)
         reservation_status_ref01_match_dt0 = {}
-        reservation_status_ref01_data_dt0_loaded, err = reservation_status_ref01_ent.load(reservation_status_ref01_match_dt0, None)
-        assert err is None
+        reservation_status_ref01_data_dt0_loaded = reservation_status_ref01_ent.load(reservation_status_ref01_match_dt0, None)
         assert reservation_status_ref01_data_dt0_loaded is not None
 
 

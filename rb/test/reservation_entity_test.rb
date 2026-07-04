@@ -36,8 +36,7 @@ class ReservationEntityTest < Minitest::Test
     reservation_ref01_data = Helpers.to_map(Vs.getprop(
       Vs.getpath(setup[:data], "new.reservation"), "reservation_ref01"))
 
-    reservation_ref01_data_result, err = reservation_ref01_ent.create(reservation_ref01_data, nil)
-    assert_nil err
+    reservation_ref01_data_result = reservation_ref01_ent.create(reservation_ref01_data, nil)
     reservation_ref01_data = Helpers.to_map(reservation_ref01_data_result)
     assert !reservation_ref01_data.nil?
 

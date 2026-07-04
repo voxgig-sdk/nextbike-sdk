@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Public,
+  PublicLoadMatch,
+} from '../NextbikeTypes'
 
 // TODO: needs Entity superclass
-class PublicEntity extends NextbikeEntityBase {
+class PublicEntity extends NextbikeEntityBase<Public> {
 
   constructor(client: NextbikeSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class PublicEntity extends NextbikeEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: PublicLoadMatch, ctrl?: Control): Promise<Public> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class PublicEntity extends NextbikeEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Public> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

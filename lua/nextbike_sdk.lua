@@ -244,24 +244,76 @@ end
 
 
 
+-- Idiomatic facade: client:live_data():list() / client:live_data():load({ id = ... })
+function NextbikeSDK:live_data(data)
+  local EntityMod = require("entity.live_data_entity")
+  if data == nil then
+    if self._live_data == nil then
+      self._live_data = EntityMod.new(self, nil)
+    end
+    return self._live_data
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:live_data() instead.
 function NextbikeSDK:LiveData(data)
   local EntityMod = require("entity.live_data_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:public():list() / client:public():load({ id = ... })
+function NextbikeSDK:public(data)
+  local EntityMod = require("entity.public_entity")
+  if data == nil then
+    if self._public == nil then
+      self._public = EntityMod.new(self, nil)
+    end
+    return self._public
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:public() instead.
 function NextbikeSDK:Public(data)
   local EntityMod = require("entity.public_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:reservation():list() / client:reservation():load({ id = ... })
+function NextbikeSDK:reservation(data)
+  local EntityMod = require("entity.reservation_entity")
+  if data == nil then
+    if self._reservation == nil then
+      self._reservation = EntityMod.new(self, nil)
+    end
+    return self._reservation
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:reservation() instead.
 function NextbikeSDK:Reservation(data)
   local EntityMod = require("entity.reservation_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:reservation_status():list() / client:reservation_status():load({ id = ... })
+function NextbikeSDK:reservation_status(data)
+  local EntityMod = require("entity.reservation_status_entity")
+  if data == nil then
+    if self._reservation_status == nil then
+      self._reservation_status = EntityMod.new(self, nil)
+    end
+    return self._reservation_status
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:reservation_status() instead.
 function NextbikeSDK:ReservationStatus(data)
   local EntityMod = require("entity.reservation_status_entity")
   return EntityMod.new(self, data)

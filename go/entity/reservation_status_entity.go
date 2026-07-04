@@ -85,6 +85,27 @@ func (e *ReservationStatusEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an ReservationStatus; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *ReservationStatusEntity) DataTyped(data ...ReservationStatus) ReservationStatus {
+	if len(data) > 0 {
+		return typedFrom[ReservationStatus](e.Data(asMap(data[0])))
+	}
+	return typedFrom[ReservationStatus](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through ReservationStatus (all fields
+// optional at the wire level).
+func (e *ReservationStatusEntity) MatchTyped(match ...ReservationStatus) ReservationStatus {
+	if len(match) > 0 {
+		return typedFrom[ReservationStatus](e.Match(asMap(match[0])))
+	}
+	return typedFrom[ReservationStatus](e.Match())
+}
+
 
 func (e *ReservationStatusEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
@@ -109,6 +130,17 @@ func (e *ReservationStatusEntity) Load(reqmatch map[string]any, ctrl map[string]
 			}
 		}
 	})
+}
+
+// LoadTyped is the statically-typed variant of Load: it takes an
+// ReservationStatusLoadMatch and returns an ReservationStatus. It delegates to the untyped
+// Load (identical runtime) and converts at the typed boundary.
+func (e *ReservationStatusEntity) LoadTyped(reqmatch ReservationStatusLoadMatch, ctrl map[string]any) (ReservationStatus, error) {
+	res, err := e.Load(asMap(reqmatch), ctrl)
+	if err != nil {
+		return ReservationStatus{}, err
+	}
+	return typedFrom[ReservationStatus](res), nil
 }
 
 

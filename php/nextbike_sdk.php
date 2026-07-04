@@ -103,7 +103,7 @@ class NextbikeSDK
         return $this->_rootctx;
     }
 
-    public function prepare(array $fetchargs = []): array
+    public function prepare(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
         $fetchargs = $fetchargs ?? [];
@@ -149,19 +149,27 @@ class NextbikeSDK
 
         [$_, $err] = ($utility->prepare_auth)($ctx);
         if ($err) {
-            return [null, $err];
+            return ($utility->make_error)($ctx, $err);
         }
 
-        return ($utility->make_fetch_def)($ctx);
+        [$fetchdef, $fd_err] = ($utility->make_fetch_def)($ctx);
+        if ($fd_err) {
+            return ($utility->make_error)($ctx, $fd_err);
+        }
+        return $fetchdef;
     }
 
-    public function direct(array $fetchargs = []): array
+    public function direct(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
 
-        [$fetchdef, $err] = $this->prepare($fetchargs);
-        if ($err) {
-            return [["ok" => false, "err" => $err], null];
+        // direct() is the raw-HTTP escape hatch: it never throws, it returns
+        // an {ok, err, ...} dict. prepare() now raises on error, so catch it
+        // and surface the failure through the dict instead.
+        try {
+            $fetchdef = $this->prepare($fetchargs);
+        } catch (\Throwable $err) {
+            return ["ok" => false, "err" => $err];
         }
 
         $fetchargs = $fetchargs ?? [];
@@ -176,14 +184,14 @@ class NextbikeSDK
         [$fetched, $fetch_err] = ($utility->fetcher)($ctx, $url, $fetchdef);
 
         if ($fetch_err) {
-            return [["ok" => false, "err" => $fetch_err], null];
+            return ["ok" => false, "err" => $fetch_err];
         }
 
         if ($fetched === null) {
-            return [[
+            return [
                 "ok" => false,
                 "err" => $ctx->make_error("direct_no_response", "response: undefined"),
-            ], null];
+            ];
         }
 
         if (is_array($fetched)) {
@@ -208,45 +216,89 @@ class NextbikeSDK
                 }
             }
 
-            return [[
+            return [
                 "ok" => $status >= 200 && $status < 300,
                 "status" => $status,
                 "headers" => Struct::getprop($fetched, "headers"),
                 "data" => $json_data,
-            ], null];
+            ];
         }
 
-        return [[
+        return [
             "ok" => false,
             "err" => $ctx->make_error("direct_invalid", "invalid response type"),
-        ], null];
+        ];
     }
 
 
-    public function LiveData($data = null)
+    private $_live_data = null;
+
+    // Idiomatic facade: $client->live_data()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias LiveData() (PHP method
+    // names are case-insensitive).
+    public function live_data($data = null)
     {
         require_once __DIR__ . '/entity/live_data_entity.php';
+        if ($data === null) {
+            if ($this->_live_data === null) {
+                $this->_live_data = new LiveDataEntity($this, null);
+            }
+            return $this->_live_data;
+        }
         return new LiveDataEntity($this, $data);
     }
 
 
-    public function Public($data = null)
+    private $_public = null;
+
+    // Idiomatic facade: $client->public()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Public() (PHP method
+    // names are case-insensitive).
+    public function public($data = null)
     {
         require_once __DIR__ . '/entity/public_entity.php';
+        if ($data === null) {
+            if ($this->_public === null) {
+                $this->_public = new PublicEntity($this, null);
+            }
+            return $this->_public;
+        }
         return new PublicEntity($this, $data);
     }
 
 
-    public function Reservation($data = null)
+    private $_reservation = null;
+
+    // Idiomatic facade: $client->reservation()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Reservation() (PHP method
+    // names are case-insensitive).
+    public function reservation($data = null)
     {
         require_once __DIR__ . '/entity/reservation_entity.php';
+        if ($data === null) {
+            if ($this->_reservation === null) {
+                $this->_reservation = new ReservationEntity($this, null);
+            }
+            return $this->_reservation;
+        }
         return new ReservationEntity($this, $data);
     }
 
 
-    public function ReservationStatus($data = null)
+    private $_reservation_status = null;
+
+    // Idiomatic facade: $client->reservation_status()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias ReservationStatus() (PHP method
+    // names are case-insensitive).
+    public function reservation_status($data = null)
     {
         require_once __DIR__ . '/entity/reservation_status_entity.php';
+        if ($data === null) {
+            if ($this->_reservation_status === null) {
+                $this->_reservation_status = new ReservationStatusEntity($this, null);
+            }
+            return $this->_reservation_status;
+        }
         return new ReservationStatusEntity($this, $data);
     }
 

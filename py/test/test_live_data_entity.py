@@ -50,8 +50,7 @@ class TestLiveDataEntity:
         live_data_ref01_ent = client.LiveData(None)
         live_data_ref01_match = {}
 
-        live_data_ref01_list_result, err = live_data_ref01_ent.list(live_data_ref01_match, None)
-        assert err is None
+        live_data_ref01_list_result = live_data_ref01_ent.list(live_data_ref01_match, None)
         assert isinstance(live_data_ref01_list_result, list)
 
 

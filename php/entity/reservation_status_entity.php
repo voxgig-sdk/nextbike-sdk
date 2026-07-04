@@ -55,6 +55,9 @@ class ReservationStatusEntity
         return new ReservationStatusEntity($this->_client, $opts);
     }
 
+    /**
+     * @param ReservationStatus|array $args ReservationStatus data (assoc-array) to store.
+     */
     public function data_set($args): void
     {
         if ($args) {
@@ -63,12 +66,18 @@ class ReservationStatusEntity
         }
     }
 
+    /**
+     * @return ReservationStatus|array The current ReservationStatus data as an assoc-array.
+     */
     public function data_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetData");
         return Struct::clone($this->_data);
     }
 
+    /**
+     * @param array $args Match filter (any subset of ReservationStatus fields).
+     */
     public function match_set($args): void
     {
         if ($args) {
@@ -77,6 +86,9 @@ class ReservationStatusEntity
         }
     }
 
+    /**
+     * @return array The current match filter (any subset of ReservationStatus fields).
+     */
     public function match_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetMatch");
@@ -84,7 +96,16 @@ class ReservationStatusEntity
     }
 
     
-    public function load($reqmatch, $ctrl = null): array
+    /**
+     * Load a single ReservationStatus.
+     *
+     * @param ReservationStatusLoadMatch|array|null $reqmatch Match criteria (id/query
+     *   fields) as an assoc-array; a typed ReservationStatusLoadMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return ReservationStatus|array The loaded ReservationStatus as an assoc-array at the
+     *   SDK boundary; throws NextbikeError on failure (item-5 convention).
+     */
+    public function load(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -117,7 +138,7 @@ class ReservationStatusEntity
 
     
 
-    private function _run_op($ctx, callable $post_done): array
+    private function _run_op($ctx, callable $post_done): mixed
     {
         $utility = $this->_utility;
 

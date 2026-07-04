@@ -144,16 +144,23 @@ class NextbikeSDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class NextbikeSDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,30 +212,74 @@ class NextbikeSDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def live_data(self):
+        """Idiomatic facade: client.live_data.list() / client.live_data.load({"id": ...})."""
+        from entity.live_data_entity import LiveDataEntity
+        cached = getattr(self, "_live_data", None)
+        if cached is None:
+            cached = LiveDataEntity(self, None)
+            self._live_data = cached
+        return cached
 
     def LiveData(self, data=None):
+        # Deprecated: use client.live_data instead.
         from entity.live_data_entity import LiveDataEntity
         return LiveDataEntity(self, data)
 
 
+    @property
+    def public(self):
+        """Idiomatic facade: client.public.list() / client.public.load({"id": ...})."""
+        from entity.public_entity import PublicEntity
+        cached = getattr(self, "_public", None)
+        if cached is None:
+            cached = PublicEntity(self, None)
+            self._public = cached
+        return cached
+
     def Public(self, data=None):
+        # Deprecated: use client.public instead.
         from entity.public_entity import PublicEntity
         return PublicEntity(self, data)
 
 
+    @property
+    def reservation(self):
+        """Idiomatic facade: client.reservation.list() / client.reservation.load({"id": ...})."""
+        from entity.reservation_entity import ReservationEntity
+        cached = getattr(self, "_reservation", None)
+        if cached is None:
+            cached = ReservationEntity(self, None)
+            self._reservation = cached
+        return cached
+
     def Reservation(self, data=None):
+        # Deprecated: use client.reservation instead.
         from entity.reservation_entity import ReservationEntity
         return ReservationEntity(self, data)
 
 
+    @property
+    def reservation_status(self):
+        """Idiomatic facade: client.reservation_status.list() / client.reservation_status.load({"id": ...})."""
+        from entity.reservation_status_entity import ReservationStatusEntity
+        cached = getattr(self, "_reservation_status", None)
+        if cached is None:
+            cached = ReservationStatusEntity(self, None)
+            self._reservation_status = cached
+        return cached
+
     def ReservationStatus(self, data=None):
+        # Deprecated: use client.reservation_status instead.
         from entity.reservation_status_entity import ReservationStatusEntity
         return ReservationStatusEntity(self, data)
 

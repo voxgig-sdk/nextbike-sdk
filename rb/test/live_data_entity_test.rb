@@ -43,8 +43,7 @@ class LiveDataEntityTest < Minitest::Test
     live_data_ref01_ent = client.LiveData(nil)
     live_data_ref01_match = {}
 
-    live_data_ref01_list_result, err = live_data_ref01_ent.list(live_data_ref01_match, nil)
-    assert_nil err
+    live_data_ref01_list_result = live_data_ref01_ent.list(live_data_ref01_match, nil)
     assert live_data_ref01_list_result.is_a?(Array)
 
   end

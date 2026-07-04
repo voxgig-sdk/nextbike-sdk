@@ -245,21 +245,33 @@ func (sdk *NextbikeSDK) Direct(fetchargs map[string]any) (map[string]any, error)
 }
 
 
+// LiveData returns a LiveData entity bound to this client.
+// Idiomatic usage: client.LiveData(nil).List(nil, nil) or
+// client.LiveData(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NextbikeSDK) LiveData(data map[string]any) NextbikeEntity {
 	return NewLiveDataEntityFunc(sdk, data)
 }
 
 
+// Public returns a Public entity bound to this client.
+// Idiomatic usage: client.Public(nil).List(nil, nil) or
+// client.Public(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NextbikeSDK) Public(data map[string]any) NextbikeEntity {
 	return NewPublicEntityFunc(sdk, data)
 }
 
 
+// Reservation returns a Reservation entity bound to this client.
+// Idiomatic usage: client.Reservation(nil).List(nil, nil) or
+// client.Reservation(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NextbikeSDK) Reservation(data map[string]any) NextbikeEntity {
 	return NewReservationEntityFunc(sdk, data)
 }
 
 
+// ReservationStatus returns a ReservationStatus entity bound to this client.
+// Idiomatic usage: client.ReservationStatus(nil).List(nil, nil) or
+// client.ReservationStatus(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NextbikeSDK) ReservationStatus(data map[string]any) NextbikeEntity {
 	return NewReservationStatusEntityFunc(sdk, data)
 }

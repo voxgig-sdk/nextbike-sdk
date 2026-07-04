@@ -83,6 +83,10 @@ end
 
 
 
+---@param reqdata ReservationCreateData
+---@param ctrl? table
+---@return Reservation
+---@return string? err
 function ReservationEntity:create(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

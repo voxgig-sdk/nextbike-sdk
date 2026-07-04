@@ -50,8 +50,7 @@ class LiveDataEntityTest extends TestCase
         $live_data_ref01_ent = $client->LiveData(null);
         $live_data_ref01_match = [];
 
-        [$live_data_ref01_list_result, $err] = $live_data_ref01_ent->list($live_data_ref01_match, null);
-        $this->assertNull($err);
+        $live_data_ref01_list_result = $live_data_ref01_ent->list($live_data_ref01_match, null);
         $this->assertIsArray($live_data_ref01_list_result);
 
     }

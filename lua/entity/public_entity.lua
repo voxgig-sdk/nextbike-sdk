@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch PublicLoadMatch
+---@param ctrl? table
+---@return Public
+---@return string? err
 function PublicEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

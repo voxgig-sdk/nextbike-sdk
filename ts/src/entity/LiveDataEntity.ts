@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  LiveData,
+  LiveDataListMatch,
+} from '../NextbikeTypes'
 
 // TODO: needs Entity superclass
-class LiveDataEntity extends NextbikeEntityBase {
+class LiveDataEntity extends NextbikeEntityBase<LiveData> {
 
   constructor(client: NextbikeSDK, entopts: any) {
     super(client, entopts)
@@ -33,7 +37,7 @@ class LiveDataEntity extends NextbikeEntityBase {
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: LiveDataListMatch, ctrl?: Control): Promise<LiveData[]> {
 
     const utility = this._utility
 
@@ -133,7 +137,9 @@ class LiveDataEntity extends NextbikeEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<LiveData[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

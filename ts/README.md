@@ -9,9 +9,12 @@ The TypeScript SDK for the Nextbike API — a type-safe, entity-oriented client 
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/nextbike
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/nextbike-sdk/releases](https://github.com/voxgig-sdk/nextbike-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,7 +23,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { NextbikeSDK } from 'nextbike'
+import { NextbikeSDK } from '@voxgig-sdk/nextbike'
 
 const client = new NextbikeSDK({
   apikey: process.env.NEXTBIKE_APIKEY,
@@ -30,7 +33,7 @@ const client = new NextbikeSDK({
 ### 2. List livedatas
 
 ```ts
-const result = await client.LiveData().list()
+const result = await client.livedata.list()
 
 if (result.ok) {
   for (const item of result.data) {
@@ -81,7 +84,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = NextbikeSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.livedata.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -98,7 +101,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.livedata
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -321,7 +324,7 @@ API path: `/reservation/status`
 
 ### LiveData
 
-Create an instance: `const live_data = client.LiveData()`
+Create an instance: `const live_data = client.live_data`
 
 #### Operations
 
@@ -349,13 +352,13 @@ Create an instance: `const live_data = client.LiveData()`
 #### Example: List
 
 ```ts
-const live_datas = await client.LiveData().list()
+const live_datas = await client.live_data.list()
 ```
 
 
 ### Public
 
-Create an instance: `const public = client.Public()`
+Create an instance: `const public = client.public`
 
 #### Operations
 
@@ -366,13 +369,13 @@ Create an instance: `const public = client.Public()`
 #### Example: Load
 
 ```ts
-const public = await client.Public().load({ id: 'public_id' })
+const public = await client.public.load({ id: 'public_id' })
 ```
 
 
 ### Reservation
 
-Create an instance: `const reservation = client.Reservation()`
+Create an instance: `const reservation = client.reservation`
 
 #### Operations
 
@@ -395,7 +398,7 @@ Create an instance: `const reservation = client.Reservation()`
 #### Example: Create
 
 ```ts
-const reservation = await client.Reservation().create({
+const reservation = await client.reservation.create({
   user_id: /* `$STRING` */,
 })
 ```
@@ -403,7 +406,7 @@ const reservation = await client.Reservation().create({
 
 ### ReservationStatus
 
-Create an instance: `const reservation_status = client.ReservationStatus()`
+Create an instance: `const reservation_status = client.reservation_status`
 
 #### Operations
 
@@ -424,7 +427,7 @@ Create an instance: `const reservation_status = client.ReservationStatus()`
 #### Example: Load
 
 ```ts
-const reservation_status = await client.ReservationStatus().load({ id: 'reservation_status_id' })
+const reservation_status = await client.reservation_status.load({ id: 'reservation_status_id' })
 ```
 
 
@@ -485,7 +488,7 @@ nextbike/
 Import the SDK from the package root:
 
 ```ts
-import { NextbikeSDK } from 'nextbike'
+import { NextbikeSDK } from '@voxgig-sdk/nextbike'
 ```
 
 ### Entity state
@@ -495,11 +498,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const livedata = client.livedata
+await livedata.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// livedata.data() now returns the loaded livedata data
+// livedata.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

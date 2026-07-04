@@ -49,8 +49,7 @@ class TestPublicEntity:
         # LOAD
         public_ref01_ent = client.Public(None)
         public_ref01_match_dt0 = {}
-        public_ref01_data_dt0_loaded, err = public_ref01_ent.load(public_ref01_match_dt0, None)
-        assert err is None
+        public_ref01_data_dt0_loaded = public_ref01_ent.load(public_ref01_match_dt0, None)
         assert public_ref01_data_dt0_loaded is not None
 
 

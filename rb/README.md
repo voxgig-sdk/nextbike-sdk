@@ -9,21 +9,10 @@ The Ruby SDK for the Nextbike API — an entity-oriented client using idiomatic 
 
 
 ## Install
-```bash
-gem install voxgig-sdk-nextbike
-```
+This package is not yet published to RubyGems. Install it from the
+GitHub release tag (`rb/vX.Y.Z`):
 
-Or add to your `Gemfile`:
-
-```ruby
-gem "voxgig-sdk-nextbike"
-```
-
-Then run:
-
-```bash
-bundle install
-```
+- Releases: [https://github.com/voxgig-sdk/nextbike-sdk/releases](https://github.com/voxgig-sdk/nextbike-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -44,14 +33,16 @@ client = NextbikeSDK.new({
 ### 2. List livedatas
 
 ```ruby
-result, err = client.LiveData().list
-raise err if err
-
-if result.is_a?(Array)
-  result.each do |item|
-    d = item.data_get
-    puts "#{d["id"]} #{d["name"]}"
+begin
+  result = client.livedata.list
+  if result.is_a?(Array)
+    result.each do |item|
+      d = item.data_get
+      puts "#{d["id"]} #{d["name"]}"
+    end
   end
+rescue => err
+  warn "list failed: #{err}"
 end
 ```
 
@@ -63,32 +54,35 @@ end
 For endpoints not covered by entity methods:
 
 ```ruby
-result, err = client.direct({
+result = client.direct({
   "path" => "/api/resource/{id}",
   "method" => "GET",
   "params" => { "id" => "example" },
 })
-raise err if err
 
 if result["ok"]
   puts result["status"]  # 200
   puts result["data"]    # response body
+else
+  warn result["err"]
 end
 ```
 
 ### Prepare a request without sending it
 
 ```ruby
-fetchdef, err = client.prepare({
-  "path" => "/api/resource/{id}",
-  "method" => "DELETE",
-  "params" => { "id" => "example" },
-})
-raise err if err
-
-puts fetchdef["url"]
-puts fetchdef["method"]
-puts fetchdef["headers"]
+begin
+  fetchdef = client.prepare({
+    "path" => "/api/resource/{id}",
+    "method" => "DELETE",
+    "params" => { "id" => "example" },
+  })
+  puts fetchdef["url"]
+  puts fetchdef["method"]
+  puts fetchdef["headers"]
+rescue => err
+  warn "prepare failed: #{err}"
+end
 ```
 
 ### Use test mode
@@ -98,7 +92,7 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = NextbikeSDK.test
 
-result, err = client.Nextbike().load({ "id" => "test01" })
+result = client.livedata.load({ "id" => "test01" })
 # result contains mock response data
 ```
 
@@ -175,8 +169,8 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | --- | --- | --- |
 | `options_map` | `() -> Hash` | Deep copy of current SDK options. |
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
-| `prepare` | `(fetchargs) -> [Hash, err]` | Build an HTTP request definition without sending. |
-| `direct` | `(fetchargs) -> [Hash, err]` | Build and send an HTTP request. |
+| `prepare` | `(fetchargs) -> Hash` | Build an HTTP request definition without sending. Raises on error. |
+| `direct` | `(fetchargs) -> Hash` | Build and send an HTTP request. Returns a result hash (`result["ok"]`); does not raise. |
 | `LiveData` | `(data) -> LiveDataEntity` | Create a LiveData entity instance. |
 | `Public` | `(data) -> PublicEntity` | Create a Public entity instance. |
 | `Reservation` | `(data) -> ReservationEntity` | Create a Reservation entity instance. |
@@ -188,11 +182,11 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> [any, err]` | Load a single entity by match criteria. |
-| `list` | `(reqmatch, ctrl) -> [any, err]` | List entities matching the criteria. |
-| `create` | `(reqdata, ctrl) -> [any, err]` | Create a new entity. |
-| `update` | `(reqdata, ctrl) -> [any, err]` | Update an existing entity. |
-| `remove` | `(reqmatch, ctrl) -> [any, err]` | Remove an entity. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
+| `list` | `(reqmatch, ctrl) -> Array` | List entities matching the criteria. Raises on error. |
+| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
+| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
+| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -202,8 +196,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[any, err]`. The first value is a
-`Hash` with these keys:
+Entity operations return the result data directly. On failure they
+raise a `NextbikeError` (a `StandardError` subclass), so wrap
+calls in `begin`/`rescue` where you need to handle errors.
+
+The `direct` escape hatch is the exception: it never raises and instead
+returns a result `Hash` with these keys:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -211,8 +209,7 @@ Entity operations return `[any, err]`. The first value is a
 | `status` | `Integer` | HTTP status code. |
 | `headers` | `Hash` | Response headers. |
 | `data` | `any` | Parsed JSON response body. |
-
-On error, `ok` is `false` and `err` contains the error value.
+| `err` | `Error` | Present when `ok` is `false`. |
 
 ### Entities
 
@@ -283,7 +280,7 @@ API path: `/reservation/status`
 
 ### LiveData
 
-Create an instance: `const live_data = client.LiveData()`
+Create an instance: `const live_data = client.live_data`
 
 #### Operations
 
@@ -311,13 +308,13 @@ Create an instance: `const live_data = client.LiveData()`
 #### Example: List
 
 ```ts
-const live_datas = await client.LiveData().list()
+const live_datas = await client.live_data.list()
 ```
 
 
 ### Public
 
-Create an instance: `const public = client.Public()`
+Create an instance: `const public = client.public`
 
 #### Operations
 
@@ -328,13 +325,13 @@ Create an instance: `const public = client.Public()`
 #### Example: Load
 
 ```ts
-const public = await client.Public().load({ id: 'public_id' })
+const public = await client.public.load({ id: 'public_id' })
 ```
 
 
 ### Reservation
 
-Create an instance: `const reservation = client.Reservation()`
+Create an instance: `const reservation = client.reservation`
 
 #### Operations
 
@@ -357,7 +354,7 @@ Create an instance: `const reservation = client.Reservation()`
 #### Example: Create
 
 ```ts
-const reservation = await client.Reservation().create({
+const reservation = await client.reservation.create({
   user_id: /* `$STRING` */,
 })
 ```
@@ -365,7 +362,7 @@ const reservation = await client.Reservation().create({
 
 ### ReservationStatus
 
-Create an instance: `const reservation_status = client.ReservationStatus()`
+Create an instance: `const reservation_status = client.reservation_status`
 
 #### Operations
 
@@ -386,7 +383,7 @@ Create an instance: `const reservation_status = client.ReservationStatus()`
 #### Example: Load
 
 ```ts
-const reservation_status = await client.ReservationStatus().load({ id: 'reservation_status_id' })
+const reservation_status = await client.reservation_status.load({ id: 'reservation_status_id' })
 ```
 
 
@@ -461,11 +458,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-moon = client.Moon
-moon.load({ "planet_id" => "earth", "id" => "luna" })
+livedata = client.livedata
+livedata.load({ "id" => "example_id" })
 
-# moon.data_get now returns the loaded moon data
-# moon.match_get returns the last match criteria
+# livedata.data_get now returns the loaded livedata data
+# livedata.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

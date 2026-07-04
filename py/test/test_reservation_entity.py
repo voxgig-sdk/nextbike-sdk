@@ -44,9 +44,7 @@ class TestReservationEntity:
         reservation_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.reservation"), "reservation_ref01"))
 
-        reservation_ref01_data_result, err = reservation_ref01_ent.create(reservation_ref01_data, None)
-        assert err is None
-        reservation_ref01_data = helpers.to_map(reservation_ref01_data_result)
+        reservation_ref01_data = helpers.to_map(reservation_ref01_ent.create(reservation_ref01_data, None))
         assert reservation_ref01_data is not None
 
 

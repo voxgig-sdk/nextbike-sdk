@@ -5,6 +5,8 @@ import { PublicEntity } from './entity/PublicEntity'
 import { ReservationEntity } from './entity/ReservationEntity'
 import { ReservationStatusEntity } from './entity/ReservationStatusEntity'
 
+export type * from './NextbikeTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -205,24 +207,56 @@ class NextbikeSDK {
 
 
 
+  _live_data?: LiveDataEntity
+
+  // Idiomatic facade: `client.live_data.list()` / `client.live_data.load({ id })`.
+  get live_data(): LiveDataEntity {
+    return (this._live_data ??= new LiveDataEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.live_data` instead. */
   LiveData(data?: any) {
     const self = this
     return new LiveDataEntity(self,data)
   }
 
 
+  _public?: PublicEntity
+
+  // Idiomatic facade: `client.public.list()` / `client.public.load({ id })`.
+  get public(): PublicEntity {
+    return (this._public ??= new PublicEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.public` instead. */
   Public(data?: any) {
     const self = this
     return new PublicEntity(self,data)
   }
 
 
+  _reservation?: ReservationEntity
+
+  // Idiomatic facade: `client.reservation.list()` / `client.reservation.load({ id })`.
+  get reservation(): ReservationEntity {
+    return (this._reservation ??= new ReservationEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.reservation` instead. */
   Reservation(data?: any) {
     const self = this
     return new ReservationEntity(self,data)
   }
 
 
+  _reservation_status?: ReservationStatusEntity
+
+  // Idiomatic facade: `client.reservation_status.list()` / `client.reservation_status.load({ id })`.
+  get reservation_status(): ReservationStatusEntity {
+    return (this._reservation_status ??= new ReservationStatusEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.reservation_status` instead. */
   ReservationStatus(data?: any) {
     const self = this
     return new ReservationStatusEntity(self,data)

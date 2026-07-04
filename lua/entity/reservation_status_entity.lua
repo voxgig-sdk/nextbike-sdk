@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch ReservationStatusLoadMatch
+---@param ctrl? table
+---@return ReservationStatus
+---@return string? err
 function ReservationStatusEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

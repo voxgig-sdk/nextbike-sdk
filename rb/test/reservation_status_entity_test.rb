@@ -42,8 +42,7 @@ class ReservationStatusEntityTest < Minitest::Test
     # LOAD
     reservation_status_ref01_ent = client.ReservationStatus(nil)
     reservation_status_ref01_match_dt0 = {}
-    reservation_status_ref01_data_dt0_loaded, err = reservation_status_ref01_ent.load(reservation_status_ref01_match_dt0, nil)
-    assert_nil err
+    reservation_status_ref01_data_dt0_loaded = reservation_status_ref01_ent.load(reservation_status_ref01_match_dt0, nil)
     assert !reservation_status_ref01_data_dt0_loaded.nil?
 
   end

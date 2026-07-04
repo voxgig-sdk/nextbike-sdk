@@ -49,8 +49,7 @@ class PublicEntityTest extends TestCase
         // LOAD
         $public_ref01_ent = $client->Public(null);
         $public_ref01_match_dt0 = [];
-        [$public_ref01_data_dt0_loaded, $err] = $public_ref01_ent->load($public_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $public_ref01_data_dt0_loaded = $public_ref01_ent->load($public_ref01_match_dt0, null);
         $this->assertNotNull($public_ref01_data_dt0_loaded);
 
     }

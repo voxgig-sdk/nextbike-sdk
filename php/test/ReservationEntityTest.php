@@ -43,8 +43,7 @@ class ReservationEntityTest extends TestCase
         $reservation_ref01_data = Helpers::to_map(Vs::getprop(
             Vs::getpath($setup["data"], "new.reservation"), "reservation_ref01"));
 
-        [$reservation_ref01_data_result, $err] = $reservation_ref01_ent->create($reservation_ref01_data, null);
-        $this->assertNull($err);
+        $reservation_ref01_data_result = $reservation_ref01_ent->create($reservation_ref01_data, null);
         $reservation_ref01_data = Helpers::to_map($reservation_ref01_data_result);
         $this->assertNotNull($reservation_ref01_data);
 

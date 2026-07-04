@@ -9,12 +9,9 @@ The Lua SDK for the Nextbike API — an entity-oriented client using Lua convent
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-nextbike
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/nextbike-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -39,7 +36,7 @@ local client = sdk.new({
 ### 2. List livedatas
 
 ```lua
-local result, err = client:LiveData():list()
+local result, err = client:livedata():list()
 if err then error(err) end
 
 if type(result) == "table" then
@@ -93,7 +90,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Nextbike():load({ id = "test01" })
+local result, err = client:livedata():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -280,7 +277,7 @@ API path: `/reservation/status`
 
 ### LiveData
 
-Create an instance: `const live_data = client.LiveData()`
+Create an instance: `const live_data = client.live_data`
 
 #### Operations
 
@@ -308,13 +305,13 @@ Create an instance: `const live_data = client.LiveData()`
 #### Example: List
 
 ```ts
-const live_datas = await client.LiveData().list()
+const live_datas = await client.live_data.list()
 ```
 
 
 ### Public
 
-Create an instance: `const public = client.Public()`
+Create an instance: `const public = client.public`
 
 #### Operations
 
@@ -325,13 +322,13 @@ Create an instance: `const public = client.Public()`
 #### Example: Load
 
 ```ts
-const public = await client.Public().load({ id: 'public_id' })
+const public = await client.public.load({ id: 'public_id' })
 ```
 
 
 ### Reservation
 
-Create an instance: `const reservation = client.Reservation()`
+Create an instance: `const reservation = client.reservation`
 
 #### Operations
 
@@ -354,7 +351,7 @@ Create an instance: `const reservation = client.Reservation()`
 #### Example: Create
 
 ```ts
-const reservation = await client.Reservation().create({
+const reservation = await client.reservation.create({
   user_id: /* `$STRING` */,
 })
 ```
@@ -362,7 +359,7 @@ const reservation = await client.Reservation().create({
 
 ### ReservationStatus
 
-Create an instance: `const reservation_status = client.ReservationStatus()`
+Create an instance: `const reservation_status = client.reservation_status`
 
 #### Operations
 
@@ -383,7 +380,7 @@ Create an instance: `const reservation_status = client.ReservationStatus()`
 #### Example: Load
 
 ```ts
-const reservation_status = await client.ReservationStatus().load({ id: 'reservation_status_id' })
+const reservation_status = await client.reservation_status.load({ id: 'reservation_status_id' })
 ```
 
 
@@ -458,11 +455,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local livedata = client:livedata()
+livedata:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- livedata:data_get() now returns the loaded livedata data
+-- livedata:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration
