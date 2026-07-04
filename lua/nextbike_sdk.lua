@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:live_data():list() / client:live_data():load({ id = ... })
-function NextbikeSDK:live_data(data)
+-- Idiomatic facade: client:LiveData():list() / client:LiveData():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function NextbikeSDK:LiveData(data)
   local EntityMod = require("entity.live_data_entity")
   if data == nil then
     if self._live_data == nil then
@@ -256,15 +257,10 @@ function NextbikeSDK:live_data(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:live_data() instead.
-function NextbikeSDK:LiveData(data)
-  local EntityMod = require("entity.live_data_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:public():list() / client:public():load({ id = ... })
-function NextbikeSDK:public(data)
+-- Idiomatic facade: client:Public():list() / client:Public():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function NextbikeSDK:Public(data)
   local EntityMod = require("entity.public_entity")
   if data == nil then
     if self._public == nil then
@@ -275,15 +271,10 @@ function NextbikeSDK:public(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:public() instead.
-function NextbikeSDK:Public(data)
-  local EntityMod = require("entity.public_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:reservation():list() / client:reservation():load({ id = ... })
-function NextbikeSDK:reservation(data)
+-- Idiomatic facade: client:Reservation():list() / client:Reservation():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function NextbikeSDK:Reservation(data)
   local EntityMod = require("entity.reservation_entity")
   if data == nil then
     if self._reservation == nil then
@@ -294,15 +285,10 @@ function NextbikeSDK:reservation(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:reservation() instead.
-function NextbikeSDK:Reservation(data)
-  local EntityMod = require("entity.reservation_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:reservation_status():list() / client:reservation_status():load({ id = ... })
-function NextbikeSDK:reservation_status(data)
+-- Idiomatic facade: client:ReservationStatus():list() / client:ReservationStatus():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function NextbikeSDK:ReservationStatus(data)
   local EntityMod = require("entity.reservation_status_entity")
   if data == nil then
     if self._reservation_status == nil then
@@ -310,12 +296,6 @@ function NextbikeSDK:reservation_status(data)
     end
     return self._reservation_status
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:reservation_status() instead.
-function NextbikeSDK:ReservationStatus(data)
-  local EntityMod = require("entity.reservation_status_entity")
   return EntityMod.new(self, data)
 end
 

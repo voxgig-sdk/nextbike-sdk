@@ -28,9 +28,11 @@ const client = new NextbikeSDK({
   apikey: process.env.NEXTBIKE_APIKEY,
 })
 
-// List all livedatas
-const livedatas = await client.livedata.list()
-console.log(livedatas.data)
+// List all livedatas (returns LiveData[])
+const livedatas = await client.LiveData().list()
+for (const livedata of livedatas) {
+  console.log(livedata)
+}
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -91,9 +93,10 @@ client = NextbikeSDK({
     "apikey": os.environ.get("NEXTBIKE_APIKEY"),
 })
 
-# List all livedatas
-livedatas = client.livedata.list()
-print(livedatas)
+# List all livedatas (returns a list, raises on error)
+livedatas = client.LiveData().list({})
+for livedata in livedatas:
+    print(livedata)
 ```
 
 ### PHP
@@ -106,8 +109,8 @@ $client = new NextbikeSDK([
     "apikey" => getenv("NEXTBIKE_APIKEY"),
 ]);
 
-// List all livedatas (throws on error)
-$livedatas = $client->livedata()->list();
+// List all livedatas (returns an array; throws on error)
+$livedatas = $client->LiveData()->list();
 print_r($livedatas);
 ```
 
@@ -134,8 +137,8 @@ client = NextbikeSDK.new({
   "apikey" => ENV["NEXTBIKE_APIKEY"],
 })
 
-# List all livedatas
-livedatas = client.livedata.list
+# List all livedatas (returns an Array; raises on error)
+livedatas = client.LiveData.list
 puts livedatas
 ```
 
@@ -149,7 +152,7 @@ local client = sdk.new({
 })
 
 -- List all livedatas
-local livedatas, err = client:livedata():list()
+local livedatas, err = client:LiveData():list()
 print(livedatas)
 ```
 
@@ -162,22 +165,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = NextbikeSDK.test()
-const result = await client.livedata.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const livedata = await client.LiveData().load({ id: 'test01' })
+// livedata is a bare LiveData populated with mock data
+console.log(livedata)
 ```
 
 ### Python
 
 ```python
 client = NextbikeSDK.test()
-result = client.livedata.load({"id": "test01"})
+livedata = client.LiveData().load({"id": "test01"})
+print(livedata)
 ```
 
 ### PHP
 
 ```php
-$client = NextbikeSDK::test();
-$result = $client->livedata()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = NextbikeSDK::test([
+    "entity" => ["livedata" => ["test01" => ["id" => "test01"]]],
+]);
+$livedata = $client->LiveData()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -192,15 +200,18 @@ result, err := client.LiveData(nil).Load(
 ### Ruby
 
 ```ruby
-client = NextbikeSDK.test
-result = client.livedata.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = NextbikeSDK.test({
+  "entity" => { "livedata" => { "test01" => { "id" => "test01" } } },
+})
+livedata = client.LiveData.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:livedata():load({ id = "test01" })
+local result, err = client:LiveData():load({ id = "test01" })
 ```
 
 ## How it works
@@ -248,6 +259,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

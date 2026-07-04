@@ -208,52 +208,28 @@ class NextbikeSDK
   end
 
 
-  # Idiomatic facade: client.live_data.list / client.live_data.load({ "id" => ... })
-  def live_data
-    require_relative 'entity/live_data_entity'
-    @live_data ||= LiveDataEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.live_data instead.
+  # Canonical facade: client.LiveData.list / client.LiveData.load({ "id" => ... })
   def LiveData(data = nil)
     require_relative 'entity/live_data_entity'
     LiveDataEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.public.list / client.public.load({ "id" => ... })
-  def public
-    require_relative 'entity/public_entity'
-    @public ||= PublicEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.public instead.
+  # Canonical facade: client.Public.list / client.Public.load({ "id" => ... })
   def Public(data = nil)
     require_relative 'entity/public_entity'
     PublicEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.reservation.list / client.reservation.load({ "id" => ... })
-  def reservation
-    require_relative 'entity/reservation_entity'
-    @reservation ||= ReservationEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.reservation instead.
+  # Canonical facade: client.Reservation.list / client.Reservation.load({ "id" => ... })
   def Reservation(data = nil)
     require_relative 'entity/reservation_entity'
     ReservationEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.reservation_status.list / client.reservation_status.load({ "id" => ... })
-  def reservation_status
-    require_relative 'entity/reservation_status_entity'
-    @reservation_status ||= ReservationStatusEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.reservation_status instead.
+  # Canonical facade: client.ReservationStatus.list / client.ReservationStatus.load({ "id" => ... })
   def ReservationStatus(data = nil)
     require_relative 'entity/reservation_status_entity'
     ReservationStatusEntity.new(self, data)

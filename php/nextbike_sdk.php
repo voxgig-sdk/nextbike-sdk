@@ -233,10 +233,10 @@ class NextbikeSDK
 
     private $_live_data = null;
 
-    // Idiomatic facade: $client->live_data()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias LiveData() (PHP method
-    // names are case-insensitive).
-    public function live_data($data = null)
+    // Canonical facade: $client->LiveData()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->live_data()
+    // resolves here too.
+    public function LiveData($data = null)
     {
         require_once __DIR__ . '/entity/live_data_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class NextbikeSDK
 
     private $_public = null;
 
-    // Idiomatic facade: $client->public()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Public() (PHP method
-    // names are case-insensitive).
-    public function public($data = null)
+    // Canonical facade: $client->Public()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->public()
+    // resolves here too.
+    public function Public($data = null)
     {
         require_once __DIR__ . '/entity/public_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class NextbikeSDK
 
     private $_reservation = null;
 
-    // Idiomatic facade: $client->reservation()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Reservation() (PHP method
-    // names are case-insensitive).
-    public function reservation($data = null)
+    // Canonical facade: $client->Reservation()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->reservation()
+    // resolves here too.
+    public function Reservation($data = null)
     {
         require_once __DIR__ . '/entity/reservation_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class NextbikeSDK
 
     private $_reservation_status = null;
 
-    // Idiomatic facade: $client->reservation_status()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias ReservationStatus() (PHP method
-    // names are case-insensitive).
-    public function reservation_status($data = null)
+    // Canonical facade: $client->ReservationStatus()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->reservation_status()
+    // resolves here too.
+    public function ReservationStatus($data = null)
     {
         require_once __DIR__ . '/entity/reservation_status_entity.php';
         if ($data === null) {

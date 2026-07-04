@@ -30,16 +30,14 @@ client = NextbikeSDK.new({
 })
 ```
 
-### 2. List livedatas
+### 2. List livedata records
 
 ```ruby
 begin
-  result = client.livedata.list
-  if result.is_a?(Array)
-    result.each do |item|
-      d = item.data_get
-      puts "#{d["id"]} #{d["name"]}"
-    end
+  # list returns an Array of LiveData records — iterate directly.
+  livedatas = client.LiveData.list
+  livedatas.each do |item|
+    puts "#{item["id"]} #{item["name"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -87,13 +85,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = NextbikeSDK.test
+client = NextbikeSDK.test({
+  "entity" => { "livedata" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.livedata.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+livedata = client.LiveData.load({ "id" => "test01" })
+puts livedata
 ```
 
 ### Use a custom fetch function
@@ -280,7 +282,7 @@ API path: `/reservation/status`
 
 ### LiveData
 
-Create an instance: `const live_data = client.live_data`
+Create an instance: `live_data = client.LiveData`
 
 #### Operations
 
@@ -307,14 +309,15 @@ Create an instance: `const live_data = client.live_data`
 
 #### Example: List
 
-```ts
-const live_datas = await client.live_data.list()
+```ruby
+# list returns an Array of LiveData records (raises on error).
+live_datas = client.LiveData.list
 ```
 
 
 ### Public
 
-Create an instance: `const public = client.public`
+Create an instance: `public = client.Public`
 
 #### Operations
 
@@ -324,14 +327,15 @@ Create an instance: `const public = client.public`
 
 #### Example: Load
 
-```ts
-const public = await client.public.load({ id: 'public_id' })
+```ruby
+# load returns the bare Public record (raises on error).
+public = client.Public.load({ "id" => "public_id" })
 ```
 
 
 ### Reservation
 
-Create an instance: `const reservation = client.reservation`
+Create an instance: `reservation = client.Reservation`
 
 #### Operations
 
@@ -353,16 +357,16 @@ Create an instance: `const reservation = client.reservation`
 
 #### Example: Create
 
-```ts
-const reservation = await client.reservation.create({
-  user_id: /* `$STRING` */,
+```ruby
+reservation = client.Reservation.create({
+  "user_id" => nil, # `$STRING`
 })
 ```
 
 
 ### ReservationStatus
 
-Create an instance: `const reservation_status = client.reservation_status`
+Create an instance: `reservation_status = client.ReservationStatus`
 
 #### Operations
 
@@ -382,8 +386,9 @@ Create an instance: `const reservation_status = client.reservation_status`
 
 #### Example: Load
 
-```ts
-const reservation_status = await client.reservation_status.load({ id: 'reservation_status_id' })
+```ruby
+# load returns the bare ReservationStatus record (raises on error).
+reservation_status = client.ReservationStatus.load({ "id" => "reservation_status_id" })
 ```
 
 
@@ -458,7 +463,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-livedata = client.livedata
+livedata = client.LiveData
 livedata.load({ "id" => "example_id" })
 
 # livedata.data_get now returns the loaded livedata data

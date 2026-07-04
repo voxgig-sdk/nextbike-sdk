@@ -93,7 +93,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## LiveDataEntity
 
 ```python
-live_data = client.live_data
+live_data = client.LiveData()
 ```
 
 ### Fields
@@ -120,7 +120,9 @@ live_data = client.live_data
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.live_data.list({})
+results = client.LiveData().list({})
+for live_data in results:
+    print(live_data)
 ```
 
 ### Common Methods
@@ -155,7 +157,7 @@ Return the entity name.
 ## PublicEntity
 
 ```python
-public = client.public
+public = client.Public()
 ```
 
 ### Operations
@@ -165,7 +167,7 @@ public = client.public
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.public.load({"id": "public_id"})
+result = client.Public().load({"id": "public_id"})
 ```
 
 ### Common Methods
@@ -200,7 +202,7 @@ Return the entity name.
 ## ReservationEntity
 
 ```python
-reservation = client.reservation
+reservation = client.Reservation()
 ```
 
 ### Fields
@@ -234,8 +236,8 @@ reservation = client.reservation
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.reservation.create({
-    "user_id": # `$STRING`,
+result = client.Reservation().create({
+    "user_id": ...,  # `$STRING`
 })
 ```
 
@@ -271,7 +273,7 @@ Return the entity name.
 ## ReservationStatusEntity
 
 ```python
-reservation_status = client.reservation_status
+reservation_status = client.ReservationStatus()
 ```
 
 ### Fields
@@ -291,7 +293,7 @@ reservation_status = client.reservation_status
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.reservation_status.load({"id": "reservation_status_id"})
+result = client.ReservationStatus().load({"id": "reservation_status_id"})
 ```
 
 ### Common Methods

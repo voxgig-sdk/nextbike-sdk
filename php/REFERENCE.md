@@ -98,7 +98,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## LiveDataEntity
 
 ```php
-$live_data = $client->live_data();
+$live_data = $client->LiveData();
 ```
 
 ### Fields
@@ -125,7 +125,7 @@ $live_data = $client->live_data();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->live_data()->list([]);
+$results = $client->LiveData()->list([]);
 ```
 
 ### Common Methods
@@ -161,7 +161,7 @@ Return the entity name.
 ## PublicEntity
 
 ```php
-$public = $client->public();
+$public = $client->Public();
 ```
 
 ### Operations
@@ -171,7 +171,7 @@ $public = $client->public();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->public()->load(["id" => "public_id"]);
+$result = $client->Public()->load(["id" => "public_id"]);
 ```
 
 ### Common Methods
@@ -207,7 +207,7 @@ Return the entity name.
 ## ReservationEntity
 
 ```php
-$reservation = $client->reservation();
+$reservation = $client->Reservation();
 ```
 
 ### Fields
@@ -241,7 +241,7 @@ $reservation = $client->reservation();
 Create a new entity with the given data. Throws on error.
 
 ```php
-$result = $client->reservation()->create([
+$result = $client->Reservation()->create([
   "user_id" => /* `$STRING` */,
 ]);
 ```
@@ -279,7 +279,7 @@ Return the entity name.
 ## ReservationStatusEntity
 
 ```php
-$reservation_status = $client->reservation_status();
+$reservation_status = $client->ReservationStatus();
 ```
 
 ### Fields
@@ -299,7 +299,7 @@ $reservation_status = $client->reservation_status();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->reservation_status()->load(["id" => "reservation_status_id"]);
+$result = $client->ReservationStatus()->load(["id" => "reservation_status_id"]);
 ```
 
 ### Common Methods

@@ -207,56 +207,28 @@ class NextbikeSDK {
 
 
 
-  _live_data?: LiveDataEntity
-
-  // Idiomatic facade: `client.live_data.list()` / `client.live_data.load({ id })`.
-  get live_data(): LiveDataEntity {
-    return (this._live_data ??= new LiveDataEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.live_data` instead. */
+  // Entity access: `client.LiveData().list()` / `client.LiveData().load({ id })`.
   LiveData(data?: any) {
     const self = this
     return new LiveDataEntity(self,data)
   }
 
 
-  _public?: PublicEntity
-
-  // Idiomatic facade: `client.public.list()` / `client.public.load({ id })`.
-  get public(): PublicEntity {
-    return (this._public ??= new PublicEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.public` instead. */
+  // Entity access: `client.Public().list()` / `client.Public().load({ id })`.
   Public(data?: any) {
     const self = this
     return new PublicEntity(self,data)
   }
 
 
-  _reservation?: ReservationEntity
-
-  // Idiomatic facade: `client.reservation.list()` / `client.reservation.load({ id })`.
-  get reservation(): ReservationEntity {
-    return (this._reservation ??= new ReservationEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.reservation` instead. */
+  // Entity access: `client.Reservation().list()` / `client.Reservation().load({ id })`.
   Reservation(data?: any) {
     const self = this
     return new ReservationEntity(self,data)
   }
 
 
-  _reservation_status?: ReservationStatusEntity
-
-  // Idiomatic facade: `client.reservation_status.list()` / `client.reservation_status.load({ id })`.
-  get reservation_status(): ReservationStatusEntity {
-    return (this._reservation_status ??= new ReservationStatusEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.reservation_status` instead. */
+  // Entity access: `client.ReservationStatus().list()` / `client.ReservationStatus().load({ id })`.
   ReservationStatus(data?: any) {
     const self = this
     return new ReservationStatusEntity(self,data)

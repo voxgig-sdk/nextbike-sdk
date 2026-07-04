@@ -30,15 +30,15 @@ const client = new NextbikeSDK({
 })
 ```
 
-### 2. List livedatas
+### 2. List livedata records
+
+`list()` resolves to an array of LiveData objects — iterate it directly:
 
 ```ts
-const result = await client.livedata.list()
+const livedatas = await client.LiveData().list()
 
-if (result.ok) {
-  for (const item of result.data) {
-    console.log(item.id, item.name)
-  }
+for (const livedata of livedatas) {
+  console.log(livedata)
 }
 ```
 
@@ -56,6 +56,9 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
+if (result instanceof Error) {
+  throw result
+}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -84,9 +87,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = NextbikeSDK.test()
 
-const result = await client.livedata.load({ id: 'test01' })
-// result.ok === true
-// result.data contains mock response data
+const livedata = await client.LiveData().load({ id: 'test01' })
+// livedata is a bare entity populated with mock response data
+console.log(livedata)
 ```
 
 You can also use the instance method:
@@ -101,7 +104,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.livedata
+const entity = client.LiveData()
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -203,29 +206,30 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Result>` | Load a single entity by match criteria. |
-| `list` | `list(reqmatch?, ctrl?): Promise<Result>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Result>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Result>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<Result>` | Remove an entity. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
+| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
+| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
+| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
 | `data` | `data(data?): any` | Get or set entity data. |
 | `match` | `match(match?): any` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): NextbikeSDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
 
-#### Result shape
+#### Return values
 
-All entity operations return a Result object:
+Entity operations resolve to the entity data directly — there is no
+result envelope:
 
-```ts
-{
-  ok: boolean      // true if the HTTP status is 2xx
-  status: number   // HTTP status code
-  headers: object  // response headers
-  data: any        // parsed JSON response body
-}
-```
+- `load`, `create` and `update` resolve to a single entity object.
+- `list` resolves to an **array** of entity objects (iterate it directly;
+  there is no `.data` and no `.ok`).
+- `remove` resolves to `void`.
+
+On a failed request these methods **throw**, so wrap calls in
+`try`/`catch` to handle errors. Only `direct()` returns the result
+envelope described below.
 
 ### DirectResult shape
 
@@ -324,7 +328,7 @@ API path: `/reservation/status`
 
 ### LiveData
 
-Create an instance: `const live_data = client.live_data`
+Create an instance: `const live_data = client.LiveData()`
 
 #### Operations
 
@@ -352,13 +356,13 @@ Create an instance: `const live_data = client.live_data`
 #### Example: List
 
 ```ts
-const live_datas = await client.live_data.list()
+const live_datas = await client.LiveData().list()
 ```
 
 
 ### Public
 
-Create an instance: `const public = client.public`
+Create an instance: `const public = client.Public()`
 
 #### Operations
 
@@ -369,13 +373,13 @@ Create an instance: `const public = client.public`
 #### Example: Load
 
 ```ts
-const public = await client.public.load({ id: 'public_id' })
+const public = await client.Public().load({ id: 'public_id' })
 ```
 
 
 ### Reservation
 
-Create an instance: `const reservation = client.reservation`
+Create an instance: `const reservation = client.Reservation()`
 
 #### Operations
 
@@ -398,7 +402,7 @@ Create an instance: `const reservation = client.reservation`
 #### Example: Create
 
 ```ts
-const reservation = await client.reservation.create({
+const reservation = await client.Reservation().create({
   user_id: /* `$STRING` */,
 })
 ```
@@ -406,7 +410,7 @@ const reservation = await client.reservation.create({
 
 ### ReservationStatus
 
-Create an instance: `const reservation_status = client.reservation_status`
+Create an instance: `const reservation_status = client.ReservationStatus()`
 
 #### Operations
 
@@ -427,7 +431,7 @@ Create an instance: `const reservation_status = client.reservation_status`
 #### Example: Load
 
 ```ts
-const reservation_status = await client.reservation_status.load({ id: 'reservation_status_id' })
+const reservation_status = await client.ReservationStatus().load({ id: 'reservation_status_id' })
 ```
 
 
@@ -498,7 +502,7 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const livedata = client.livedata
+const livedata = client.LiveData()
 await livedata.load({ id: "example_id" })
 
 // livedata.data() now returns the loaded livedata data

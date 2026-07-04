@@ -34,14 +34,16 @@ client = NextbikeSDK({
 })
 ```
 
-### 2. List livedatas
+### 2. List livedata records
+
+`list()` returns a `list` of records (each a `dict`) and raises on
+error — iterate it directly.
 
 ```python
 try:
-    result = client.livedata.list()
-    for item in result:
-        d = item.data_get()
-        print(d["id"], d["name"])
+    livedatas = client.LiveData().list({})
+    for livedata in livedatas:
+        print(livedata)
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -89,8 +91,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = NextbikeSDK.test()
 
-result = client.livedata.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+livedata = client.LiveData().load({"id": "test01"})
+# livedata contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -278,7 +281,7 @@ API path: `/reservation/status`
 
 ### LiveData
 
-Create an instance: `const live_data = client.live_data`
+Create an instance: `live_data = client.LiveData()`
 
 #### Operations
 
@@ -305,14 +308,14 @@ Create an instance: `const live_data = client.live_data`
 
 #### Example: List
 
-```ts
-const live_datas = await client.live_data.list()
+```python
+live_datas = client.LiveData().list({})
 ```
 
 
 ### Public
 
-Create an instance: `const public = client.public`
+Create an instance: `public = client.Public()`
 
 #### Operations
 
@@ -322,14 +325,14 @@ Create an instance: `const public = client.public`
 
 #### Example: Load
 
-```ts
-const public = await client.public.load({ id: 'public_id' })
+```python
+public = client.Public().load({"id": "public_id"})
 ```
 
 
 ### Reservation
 
-Create an instance: `const reservation = client.reservation`
+Create an instance: `reservation = client.Reservation()`
 
 #### Operations
 
@@ -351,16 +354,16 @@ Create an instance: `const reservation = client.reservation`
 
 #### Example: Create
 
-```ts
-const reservation = await client.reservation.create({
-  user_id: /* `$STRING` */,
+```python
+reservation = client.Reservation().create({
+    "user_id": ...,  # `$STRING`
 })
 ```
 
 
 ### ReservationStatus
 
-Create an instance: `const reservation_status = client.reservation_status`
+Create an instance: `reservation_status = client.ReservationStatus()`
 
 #### Operations
 
@@ -380,8 +383,8 @@ Create an instance: `const reservation_status = client.reservation_status`
 
 #### Example: Load
 
-```ts
-const reservation_status = await client.reservation_status.load({ id: 'reservation_status_id' })
+```python
+reservation_status = client.ReservationStatus().load({"id": "reservation_status_id"})
 ```
 
 
@@ -455,7 +458,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-livedata = client.livedata
+livedata = client.LiveData()
 livedata.load({"id": "example_id"})
 
 # livedata.data_get() now returns the loaded livedata data

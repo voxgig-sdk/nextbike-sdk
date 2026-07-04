@@ -220,73 +220,33 @@ class NextbikeSDK:
         }
 
 
-    @property
-    def live_data(self):
-        """Idiomatic facade: client.live_data.list() / client.live_data.load({"id": ...})."""
-        from entity.live_data_entity import LiveDataEntity
-        cached = getattr(self, "_live_data", None)
-        if cached is None:
-            cached = LiveDataEntity(self, None)
-            self._live_data = cached
-        return cached
-
-    def LiveData(self, data=None):
-        # Deprecated: use client.live_data instead.
+    def LiveData(self, data=None) -> "LiveDataEntity":
+        """Entity factory: client.LiveData().list({}) / client.LiveData().load({"id": ...})."""
         from entity.live_data_entity import LiveDataEntity
         return LiveDataEntity(self, data)
 
 
-    @property
-    def public(self):
-        """Idiomatic facade: client.public.list() / client.public.load({"id": ...})."""
-        from entity.public_entity import PublicEntity
-        cached = getattr(self, "_public", None)
-        if cached is None:
-            cached = PublicEntity(self, None)
-            self._public = cached
-        return cached
-
-    def Public(self, data=None):
-        # Deprecated: use client.public instead.
+    def Public(self, data=None) -> "PublicEntity":
+        """Entity factory: client.Public().list({}) / client.Public().load({"id": ...})."""
         from entity.public_entity import PublicEntity
         return PublicEntity(self, data)
 
 
-    @property
-    def reservation(self):
-        """Idiomatic facade: client.reservation.list() / client.reservation.load({"id": ...})."""
-        from entity.reservation_entity import ReservationEntity
-        cached = getattr(self, "_reservation", None)
-        if cached is None:
-            cached = ReservationEntity(self, None)
-            self._reservation = cached
-        return cached
-
-    def Reservation(self, data=None):
-        # Deprecated: use client.reservation instead.
+    def Reservation(self, data=None) -> "ReservationEntity":
+        """Entity factory: client.Reservation().list({}) / client.Reservation().load({"id": ...})."""
         from entity.reservation_entity import ReservationEntity
         return ReservationEntity(self, data)
 
 
-    @property
-    def reservation_status(self):
-        """Idiomatic facade: client.reservation_status.list() / client.reservation_status.load({"id": ...})."""
-        from entity.reservation_status_entity import ReservationStatusEntity
-        cached = getattr(self, "_reservation_status", None)
-        if cached is None:
-            cached = ReservationStatusEntity(self, None)
-            self._reservation_status = cached
-        return cached
-
-    def ReservationStatus(self, data=None):
-        # Deprecated: use client.reservation_status instead.
+    def ReservationStatus(self, data=None) -> "ReservationStatusEntity":
+        """Entity factory: client.ReservationStatus().list({}) / client.ReservationStatus().load({"id": ...})."""
         from entity.reservation_status_entity import ReservationStatusEntity
         return ReservationStatusEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "NextbikeSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -306,3 +266,12 @@ class NextbikeSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.live_data_entity import LiveDataEntity
+    from entity.public_entity import PublicEntity
+    from entity.reservation_entity import ReservationEntity
+    from entity.reservation_status_entity import ReservationStatusEntity

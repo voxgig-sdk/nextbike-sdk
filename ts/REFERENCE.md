@@ -146,7 +146,7 @@ Alias for `NextbikeSDK.test()`.
 ## LiveDataEntity
 
 ```ts
-const live_data = client.live_data
+const live_data = client.LiveData()
 ```
 
 ### Fields
@@ -173,7 +173,7 @@ const live_data = client.live_data
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.live_data.list()
+const results = await client.LiveData().list()
 ```
 
 ### Common Methods
@@ -207,7 +207,7 @@ Return a copy of the entity options.
 ## PublicEntity
 
 ```ts
-const public = client.public
+const public = client.Public()
 ```
 
 ### Operations
@@ -217,7 +217,7 @@ const public = client.public
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.public.load({ id: 'public_id' })
+const result = await client.Public().load({ id: 'public_id' })
 ```
 
 ### Common Methods
@@ -251,7 +251,7 @@ Return a copy of the entity options.
 ## ReservationEntity
 
 ```ts
-const reservation = client.reservation
+const reservation = client.Reservation()
 ```
 
 ### Fields
@@ -285,7 +285,7 @@ const reservation = client.reservation
 Create a new entity with the given data.
 
 ```ts
-const result = await client.reservation.create({
+const result = await client.Reservation().create({
   user_id: /* `$STRING` */,
 })
 ```
@@ -321,7 +321,7 @@ Return a copy of the entity options.
 ## ReservationStatusEntity
 
 ```ts
-const reservation_status = client.reservation_status
+const reservation_status = client.ReservationStatus()
 ```
 
 ### Fields
@@ -341,7 +341,7 @@ const reservation_status = client.reservation_status
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.reservation_status.load({ id: 'reservation_status_id' })
+const result = await client.ReservationStatus().load({ id: 'reservation_status_id' })
 ```
 
 ### Common Methods

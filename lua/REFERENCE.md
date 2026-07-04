@@ -96,7 +96,7 @@ same parameters as `direct()`.
 ## LiveDataEntity
 
 ```lua
-local live_data = client:live_data(nil)
+local live_data = client:LiveData(nil)
 ```
 
 ### Fields
@@ -123,7 +123,7 @@ local live_data = client:live_data(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:live_data():list()
+local results, err = client:LiveData():list()
 ```
 
 ### Common Methods
@@ -159,7 +159,7 @@ Return the entity name.
 ## PublicEntity
 
 ```lua
-local public = client:public(nil)
+local public = client:Public(nil)
 ```
 
 ### Operations
@@ -169,7 +169,7 @@ local public = client:public(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:public():load({ id = "public_id" })
+local result, err = client:Public():load({ id = "public_id" })
 ```
 
 ### Common Methods
@@ -205,7 +205,7 @@ Return the entity name.
 ## ReservationEntity
 
 ```lua
-local reservation = client:reservation(nil)
+local reservation = client:Reservation(nil)
 ```
 
 ### Fields
@@ -239,7 +239,7 @@ local reservation = client:reservation(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:reservation():create({
+local result, err = client:Reservation():create({
   user_id = --[[ `$STRING` ]],
 })
 ```
@@ -277,7 +277,7 @@ Return the entity name.
 ## ReservationStatusEntity
 
 ```lua
-local reservation_status = client:reservation_status(nil)
+local reservation_status = client:ReservationStatus(nil)
 ```
 
 ### Fields
@@ -297,7 +297,7 @@ local reservation_status = client:reservation_status(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:reservation_status():load({ id = "reservation_status_id" })
+local result, err = client:ReservationStatus():load({ id = "reservation_status_id" })
 ```
 
 ### Common Methods

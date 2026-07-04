@@ -99,7 +99,7 @@ same parameters as `direct()`. Raises on error.
 ## LiveDataEntity
 
 ```ruby
-live_data = client.live_data
+live_data = client.LiveData
 ```
 
 ### Fields
@@ -126,7 +126,7 @@ live_data = client.live_data
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.live_data.list(nil)
+results = client.LiveData.list(nil)
 ```
 
 ### Common Methods
@@ -162,7 +162,7 @@ Return the entity name.
 ## PublicEntity
 
 ```ruby
-public = client.public
+public = client.Public
 ```
 
 ### Operations
@@ -172,7 +172,7 @@ public = client.public
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.public.load({ "id" => "public_id" })
+result = client.Public.load({ "id" => "public_id" })
 ```
 
 ### Common Methods
@@ -208,7 +208,7 @@ Return the entity name.
 ## ReservationEntity
 
 ```ruby
-reservation = client.reservation
+reservation = client.Reservation
 ```
 
 ### Fields
@@ -242,7 +242,7 @@ reservation = client.reservation
 Create a new entity with the given data. Raises on error.
 
 ```ruby
-result = client.reservation.create({
+result = client.Reservation.create({
   "user_id" => # `$STRING`,
 })
 ```
@@ -280,7 +280,7 @@ Return the entity name.
 ## ReservationStatusEntity
 
 ```ruby
-reservation_status = client.reservation_status
+reservation_status = client.ReservationStatus
 ```
 
 ### Fields
@@ -300,7 +300,7 @@ reservation_status = client.reservation_status
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.reservation_status.load({ "id" => "reservation_status_id" })
+result = client.ReservationStatus.load({ "id" => "reservation_status_id" })
 ```
 
 ### Common Methods

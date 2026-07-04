@@ -4,91 +4,90 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class LiveData:
-    city: Optional[list] = None
-    country: Optional[str] = None
-    country_name: Optional[str] = None
-    domain: Optional[str] = None
-    hotline: Optional[str] = None
-    lat: Optional[float] = None
-    lng: Optional[float] = None
-    name: Optional[str] = None
-    policy: Optional[str] = None
-    term: Optional[str] = None
-    website: Optional[str] = None
-    zoom: Optional[int] = None
+class LiveData(TypedDict, total=False):
+    city: list
+    country: str
+    country_name: str
+    domain: str
+    hotline: str
+    lat: float
+    lng: float
+    name: str
+    policy: str
+    term: str
+    website: str
+    zoom: int
 
 
-@dataclass
-class LiveDataListMatch:
-    city: Optional[list] = None
-    country: Optional[str] = None
-    country_name: Optional[str] = None
-    domain: Optional[str] = None
-    hotline: Optional[str] = None
-    lat: Optional[float] = None
-    lng: Optional[float] = None
-    name: Optional[str] = None
-    policy: Optional[str] = None
-    term: Optional[str] = None
-    website: Optional[str] = None
-    zoom: Optional[int] = None
+class LiveDataListMatch(TypedDict, total=False):
+    city: list
+    country: str
+    country_name: str
+    domain: str
+    hotline: str
+    lat: float
+    lng: float
+    name: str
+    policy: str
+    term: str
+    website: str
+    zoom: int
 
 
-@dataclass
-class Public:
+class Public(TypedDict):
     pass
 
 
-@dataclass
-class PublicLoadMatch:
+class PublicLoadMatch(TypedDict):
     pass
 
 
-@dataclass
-class Reservation:
+class ReservationRequired(TypedDict):
     user_id: str
-    bike_number: Optional[str] = None
-    expires_at: Optional[str] = None
-    reservation_id: Optional[str] = None
-    station_id: Optional[int] = None
-    status: Optional[str] = None
-    unlock_code: Optional[str] = None
 
 
-@dataclass
-class ReservationCreateData:
-    bike_number: Optional[str] = None
-    expires_at: Optional[str] = None
-    reservation_id: Optional[str] = None
-    station_id: Optional[int] = None
-    status: Optional[str] = None
-    unlock_code: Optional[str] = None
-    user_id: Optional[str] = None
+class Reservation(ReservationRequired, total=False):
+    bike_number: str
+    expires_at: str
+    reservation_id: str
+    station_id: int
+    status: str
+    unlock_code: str
 
 
-@dataclass
-class ReservationStatus:
-    bike_number: Optional[str] = None
-    created_at: Optional[str] = None
-    expires_at: Optional[str] = None
-    reservation_id: Optional[str] = None
-    status: Optional[str] = None
+class ReservationCreateData(TypedDict, total=False):
+    bike_number: str
+    expires_at: str
+    reservation_id: str
+    station_id: int
+    status: str
+    unlock_code: str
+    user_id: str
 
 
-@dataclass
-class ReservationStatusLoadMatch:
-    bike_number: Optional[str] = None
-    created_at: Optional[str] = None
-    expires_at: Optional[str] = None
-    reservation_id: Optional[str] = None
-    status: Optional[str] = None
+class ReservationStatus(TypedDict, total=False):
+    bike_number: str
+    created_at: str
+    expires_at: str
+    reservation_id: str
+    status: str
 
+
+class ReservationStatusLoadMatch(TypedDict, total=False):
+    bike_number: str
+    created_at: str
+    expires_at: str
+    reservation_id: str
+    status: str
