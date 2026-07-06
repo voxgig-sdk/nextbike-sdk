@@ -103,18 +103,18 @@ local live_data = client:LiveData(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `city` | ``$ARRAY`` | No |  |
-| `country` | ``$STRING`` | No |  |
-| `country_name` | ``$STRING`` | No |  |
-| `domain` | ``$STRING`` | No |  |
-| `hotline` | ``$STRING`` | No |  |
-| `lat` | ``$NUMBER`` | No |  |
-| `lng` | ``$NUMBER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `policy` | ``$STRING`` | No |  |
-| `term` | ``$STRING`` | No |  |
-| `website` | ``$STRING`` | No |  |
-| `zoom` | ``$INTEGER`` | No |  |
+| `city` | `table` | No |  |
+| `country` | `string` | No |  |
+| `country_name` | `string` | No |  |
+| `domain` | `string` | No |  |
+| `hotline` | `string` | No |  |
+| `lat` | `number` | No |  |
+| `lng` | `number` | No |  |
+| `name` | `string` | No |  |
+| `policy` | `string` | No |  |
+| `term` | `string` | No |  |
+| `website` | `string` | No |  |
+| `zoom` | `number` | No |  |
 
 ### Operations
 
@@ -169,7 +169,7 @@ local public = client:Public(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Public():load({ id = "public_id" })
+local result, err = client:Public():load()
 ```
 
 ### Common Methods
@@ -212,25 +212,25 @@ local reservation = client:Reservation(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bike_number` | ``$STRING`` | No |  |
-| `expires_at` | ``$STRING`` | No |  |
-| `reservation_id` | ``$STRING`` | No |  |
-| `station_id` | ``$INTEGER`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `unlock_code` | ``$STRING`` | No |  |
-| `user_id` | ``$STRING`` | Yes |  |
+| `bike_number` | `string` | No |  |
+| `expires_at` | `string` | No |  |
+| `reservation_id` | `string` | No |  |
+| `station_id` | `number` | No |  |
+| `status` | `string` | No |  |
+| `unlock_code` | `string` | No |  |
+| `user_id` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `bike_number` | - | - | Yes | - | - |
-| `expires_at` | - | - | - | - | - |
-| `reservation_id` | - | - | - | - | - |
-| `station_id` | - | - | - | - | - |
-| `status` | - | - | - | - | - |
-| `unlock_code` | - | - | - | - | - |
-| `user_id` | - | - | - | - | - |
+| Field | create |
+| --- | --- |
+| `bike_number` | Yes |
+| `expires_at` | - |
+| `reservation_id` | - |
+| `station_id` | - |
+| `status` | - |
+| `unlock_code` | - |
+| `user_id` | - |
 
 ### Operations
 
@@ -240,7 +240,7 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Reservation():create({
-  user_id = --[[ `$STRING` ]],
+  user_id = --[[ string ]],
 })
 ```
 
@@ -284,11 +284,11 @@ local reservation_status = client:ReservationStatus(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bike_number` | ``$STRING`` | No |  |
-| `created_at` | ``$STRING`` | No |  |
-| `expires_at` | ``$STRING`` | No |  |
-| `reservation_id` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `bike_number` | `string` | No |  |
+| `created_at` | `string` | No |  |
+| `expires_at` | `string` | No |  |
+| `reservation_id` | `string` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -297,7 +297,7 @@ local reservation_status = client:ReservationStatus(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ReservationStatus():load({ id = "reservation_status_id" })
+local result, err = client:ReservationStatus():load()
 ```
 
 ### Common Methods

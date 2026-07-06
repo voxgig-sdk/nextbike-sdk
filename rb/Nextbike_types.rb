@@ -61,7 +61,7 @@ LiveData = Struct.new(
   keyword_init: true
 )
 
-# Match filter for LiveData#list (any subset of LiveData fields).
+# Request payload for LiveData#list.
 #
 # @!attribute [rw] city
 #   @return [Array, nil]
@@ -118,7 +118,7 @@ LiveDataListMatch = Struct.new(
 class Public
 end
 
-# Match filter for Public#load (any subset of Public fields).
+# Request payload for Public#load.
 class PublicLoadMatch
 end
 
@@ -155,7 +155,7 @@ Reservation = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Reservation#create (any subset of Reservation fields).
+# Request payload for Reservation#create.
 #
 # @!attribute [rw] bike_number
 #   @return [String, nil]
@@ -176,7 +176,7 @@ Reservation = Struct.new(
 #   @return [String, nil]
 #
 # @!attribute [rw] user_id
-#   @return [String, nil]
+#   @return [String]
 ReservationCreateData = Struct.new(
   :bike_number,
   :expires_at,
@@ -213,7 +213,7 @@ ReservationStatus = Struct.new(
   keyword_init: true
 )
 
-# Match filter for ReservationStatus#load (any subset of ReservationStatus fields).
+# Request payload for ReservationStatus#load.
 #
 # @!attribute [rw] bike_number
 #   @return [String, nil]

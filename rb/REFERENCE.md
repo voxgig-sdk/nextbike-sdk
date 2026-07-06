@@ -8,7 +8,7 @@ Complete API reference for the Nextbike Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'nextbike_sdk'
+require_relative 'Nextbike_sdk'
 
 client = NextbikeSDK.new(options)
 ```
@@ -106,27 +106,27 @@ live_data = client.LiveData
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `city` | ``$ARRAY`` | No |  |
-| `country` | ``$STRING`` | No |  |
-| `country_name` | ``$STRING`` | No |  |
-| `domain` | ``$STRING`` | No |  |
-| `hotline` | ``$STRING`` | No |  |
-| `lat` | ``$NUMBER`` | No |  |
-| `lng` | ``$NUMBER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `policy` | ``$STRING`` | No |  |
-| `term` | ``$STRING`` | No |  |
-| `website` | ``$STRING`` | No |  |
-| `zoom` | ``$INTEGER`` | No |  |
+| `city` | `Array` | No |  |
+| `country` | `String` | No |  |
+| `country_name` | `String` | No |  |
+| `domain` | `String` | No |  |
+| `hotline` | `String` | No |  |
+| `lat` | `Float` | No |  |
+| `lng` | `Float` | No |  |
+| `name` | `String` | No |  |
+| `policy` | `String` | No |  |
+| `term` | `String` | No |  |
+| `website` | `String` | No |  |
+| `zoom` | `Integer` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.LiveData.list(nil)
+results = client.LiveData.list
 ```
 
 ### Common Methods
@@ -172,7 +172,7 @@ public = client.Public
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Public.load({ "id" => "public_id" })
+result = client.Public.load()
 ```
 
 ### Common Methods
@@ -215,25 +215,25 @@ reservation = client.Reservation
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bike_number` | ``$STRING`` | No |  |
-| `expires_at` | ``$STRING`` | No |  |
-| `reservation_id` | ``$STRING`` | No |  |
-| `station_id` | ``$INTEGER`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `unlock_code` | ``$STRING`` | No |  |
-| `user_id` | ``$STRING`` | Yes |  |
+| `bike_number` | `String` | No |  |
+| `expires_at` | `String` | No |  |
+| `reservation_id` | `String` | No |  |
+| `station_id` | `Integer` | No |  |
+| `status` | `String` | No |  |
+| `unlock_code` | `String` | No |  |
+| `user_id` | `String` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `bike_number` | - | - | Yes | - | - |
-| `expires_at` | - | - | - | - | - |
-| `reservation_id` | - | - | - | - | - |
-| `station_id` | - | - | - | - | - |
-| `status` | - | - | - | - | - |
-| `unlock_code` | - | - | - | - | - |
-| `user_id` | - | - | - | - | - |
+| Field | create |
+| --- | --- |
+| `bike_number` | Yes |
+| `expires_at` | - |
+| `reservation_id` | - |
+| `station_id` | - |
+| `status` | - |
+| `unlock_code` | - |
+| `user_id` | - |
 
 ### Operations
 
@@ -243,7 +243,7 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Reservation.create({
-  "user_id" => # `$STRING`,
+  "user_id" => "example", # String
 })
 ```
 
@@ -287,11 +287,11 @@ reservation_status = client.ReservationStatus
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bike_number` | ``$STRING`` | No |  |
-| `created_at` | ``$STRING`` | No |  |
-| `expires_at` | ``$STRING`` | No |  |
-| `reservation_id` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `bike_number` | `String` | No |  |
+| `created_at` | `String` | No |  |
+| `expires_at` | `String` | No |  |
+| `reservation_id` | `String` | No |  |
+| `status` | `String` | No |  |
 
 ### Operations
 
@@ -300,7 +300,7 @@ reservation_status = client.ReservationStatus
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.ReservationStatus.load({ "id" => "reservation_status_id" })
+result = client.ReservationStatus.load()
 ```
 
 ### Common Methods

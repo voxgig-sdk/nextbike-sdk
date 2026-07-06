@@ -100,27 +100,27 @@ live_data = client.LiveData()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `city` | ``$ARRAY`` | No |  |
-| `country` | ``$STRING`` | No |  |
-| `country_name` | ``$STRING`` | No |  |
-| `domain` | ``$STRING`` | No |  |
-| `hotline` | ``$STRING`` | No |  |
-| `lat` | ``$NUMBER`` | No |  |
-| `lng` | ``$NUMBER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `policy` | ``$STRING`` | No |  |
-| `term` | ``$STRING`` | No |  |
-| `website` | ``$STRING`` | No |  |
-| `zoom` | ``$INTEGER`` | No |  |
+| `city` | `list` | No |  |
+| `country` | `str` | No |  |
+| `country_name` | `str` | No |  |
+| `domain` | `str` | No |  |
+| `hotline` | `str` | No |  |
+| `lat` | `float` | No |  |
+| `lng` | `float` | No |  |
+| `name` | `str` | No |  |
+| `policy` | `str` | No |  |
+| `term` | `str` | No |  |
+| `website` | `str` | No |  |
+| `zoom` | `int` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.LiveData().list({})
+results = client.LiveData().list()
 for live_data in results:
     print(live_data)
 ```
@@ -167,7 +167,7 @@ public = client.Public()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Public().load({"id": "public_id"})
+result = client.Public().load()
 ```
 
 ### Common Methods
@@ -209,25 +209,25 @@ reservation = client.Reservation()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bike_number` | ``$STRING`` | No |  |
-| `expires_at` | ``$STRING`` | No |  |
-| `reservation_id` | ``$STRING`` | No |  |
-| `station_id` | ``$INTEGER`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `unlock_code` | ``$STRING`` | No |  |
-| `user_id` | ``$STRING`` | Yes |  |
+| `bike_number` | `str` | No |  |
+| `expires_at` | `str` | No |  |
+| `reservation_id` | `str` | No |  |
+| `station_id` | `int` | No |  |
+| `status` | `str` | No |  |
+| `unlock_code` | `str` | No |  |
+| `user_id` | `str` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `bike_number` | - | - | Yes | - | - |
-| `expires_at` | - | - | - | - | - |
-| `reservation_id` | - | - | - | - | - |
-| `station_id` | - | - | - | - | - |
-| `status` | - | - | - | - | - |
-| `unlock_code` | - | - | - | - | - |
-| `user_id` | - | - | - | - | - |
+| Field | create |
+| --- | --- |
+| `bike_number` | Yes |
+| `expires_at` | - |
+| `reservation_id` | - |
+| `station_id` | - |
+| `status` | - |
+| `unlock_code` | - |
+| `user_id` | - |
 
 ### Operations
 
@@ -237,7 +237,7 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Reservation().create({
-    "user_id": ...,  # `$STRING`
+    "user_id": "example",  # str
 })
 ```
 
@@ -280,11 +280,11 @@ reservation_status = client.ReservationStatus()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bike_number` | ``$STRING`` | No |  |
-| `created_at` | ``$STRING`` | No |  |
-| `expires_at` | ``$STRING`` | No |  |
-| `reservation_id` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `bike_number` | `str` | No |  |
+| `created_at` | `str` | No |  |
+| `expires_at` | `str` | No |  |
+| `reservation_id` | `str` | No |  |
+| `status` | `str` | No |  |
 
 ### Operations
 
@@ -293,7 +293,7 @@ reservation_status = client.ReservationStatus()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.ReservationStatus().load({"id": "reservation_status_id"})
+result = client.ReservationStatus().load()
 ```
 
 ### Common Methods

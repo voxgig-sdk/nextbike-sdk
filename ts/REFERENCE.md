@@ -153,18 +153,18 @@ const live_data = client.LiveData()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `city` | ``$ARRAY`` | No |  |
-| `country` | ``$STRING`` | No |  |
-| `country_name` | ``$STRING`` | No |  |
-| `domain` | ``$STRING`` | No |  |
-| `hotline` | ``$STRING`` | No |  |
-| `lat` | ``$NUMBER`` | No |  |
-| `lng` | ``$NUMBER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `policy` | ``$STRING`` | No |  |
-| `term` | ``$STRING`` | No |  |
-| `website` | ``$STRING`` | No |  |
-| `zoom` | ``$INTEGER`` | No |  |
+| `city` | `any[]` | No |  |
+| `country` | `string` | No |  |
+| `country_name` | `string` | No |  |
+| `domain` | `string` | No |  |
+| `hotline` | `string` | No |  |
+| `lat` | `number` | No |  |
+| `lng` | `number` | No |  |
+| `name` | `string` | No |  |
+| `policy` | `string` | No |  |
+| `term` | `string` | No |  |
+| `website` | `string` | No |  |
+| `zoom` | `number` | No |  |
 
 ### Operations
 
@@ -207,7 +207,7 @@ Return a copy of the entity options.
 ## PublicEntity
 
 ```ts
-const public = client.Public()
+const public_ = client.Public()
 ```
 
 ### Operations
@@ -217,7 +217,7 @@ const public = client.Public()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Public().load({ id: 'public_id' })
+const result = await client.Public().load()
 ```
 
 ### Common Methods
@@ -258,25 +258,25 @@ const reservation = client.Reservation()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bike_number` | ``$STRING`` | No |  |
-| `expires_at` | ``$STRING`` | No |  |
-| `reservation_id` | ``$STRING`` | No |  |
-| `station_id` | ``$INTEGER`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `unlock_code` | ``$STRING`` | No |  |
-| `user_id` | ``$STRING`` | Yes |  |
+| `bike_number` | `string` | No |  |
+| `expires_at` | `string` | No |  |
+| `reservation_id` | `string` | No |  |
+| `station_id` | `number` | No |  |
+| `status` | `string` | No |  |
+| `unlock_code` | `string` | No |  |
+| `user_id` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `bike_number` | - | - | Yes | - | - |
-| `expires_at` | - | - | - | - | - |
-| `reservation_id` | - | - | - | - | - |
-| `station_id` | - | - | - | - | - |
-| `status` | - | - | - | - | - |
-| `unlock_code` | - | - | - | - | - |
-| `user_id` | - | - | - | - | - |
+| Field | create |
+| --- | --- |
+| `bike_number` | Yes |
+| `expires_at` | - |
+| `reservation_id` | - |
+| `station_id` | - |
+| `status` | - |
+| `unlock_code` | - |
+| `user_id` | - |
 
 ### Operations
 
@@ -286,7 +286,7 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Reservation().create({
-  user_id: /* `$STRING` */,
+  user_id: /* string */,
 })
 ```
 
@@ -328,11 +328,11 @@ const reservation_status = client.ReservationStatus()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bike_number` | ``$STRING`` | No |  |
-| `created_at` | ``$STRING`` | No |  |
-| `expires_at` | ``$STRING`` | No |  |
-| `reservation_id` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `bike_number` | `string` | No |  |
+| `created_at` | `string` | No |  |
+| `expires_at` | `string` | No |  |
+| `reservation_id` | `string` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -341,7 +341,7 @@ const reservation_status = client.ReservationStatus()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ReservationStatus().load({ id: 'reservation_status_id' })
+const result = await client.ReservationStatus().load()
 ```
 
 ### Common Methods

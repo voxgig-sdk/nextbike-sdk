@@ -24,8 +24,7 @@ type LiveData struct {
 	Zoom *int `json:"zoom,omitempty"`
 }
 
-// LiveDataListMatch mirrors the live_data fields as an all-optional match
-// filter (Go analog of Partial<LiveData>).
+// LiveDataListMatch is the typed request payload for LiveData.ListTyped.
 type LiveDataListMatch struct {
 	City *[]any `json:"city,omitempty"`
 	Country *string `json:"country,omitempty"`
@@ -45,8 +44,7 @@ type LiveDataListMatch struct {
 type Public struct {
 }
 
-// PublicLoadMatch mirrors the public fields as an all-optional match
-// filter (Go analog of Partial<Public>).
+// PublicLoadMatch is the typed request payload for Public.LoadTyped.
 type PublicLoadMatch struct {
 }
 
@@ -61,8 +59,7 @@ type Reservation struct {
 	UserId string `json:"user_id"`
 }
 
-// ReservationCreateData mirrors the reservation fields as an all-optional match
-// filter (Go analog of Partial<Reservation>).
+// ReservationCreateData is the typed request payload for Reservation.CreateTyped.
 type ReservationCreateData struct {
 	BikeNumber *string `json:"bike_number,omitempty"`
 	ExpiresAt *string `json:"expires_at,omitempty"`
@@ -70,7 +67,7 @@ type ReservationCreateData struct {
 	StationId *int `json:"station_id,omitempty"`
 	Status *string `json:"status,omitempty"`
 	UnlockCode *string `json:"unlock_code,omitempty"`
-	UserId *string `json:"user_id,omitempty"`
+	UserId string `json:"user_id"`
 }
 
 // ReservationStatus is the typed data model for the reservation_status entity.
@@ -82,8 +79,7 @@ type ReservationStatus struct {
 	Status *string `json:"status,omitempty"`
 }
 
-// ReservationStatusLoadMatch mirrors the reservation_status fields as an all-optional match
-// filter (Go analog of Partial<ReservationStatus>).
+// ReservationStatusLoadMatch is the typed request payload for ReservationStatus.LoadTyped.
 type ReservationStatusLoadMatch struct {
 	BikeNumber *string `json:"bike_number,omitempty"`
 	CreatedAt *string `json:"created_at,omitempty"`

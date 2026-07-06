@@ -29,7 +29,7 @@ class LiveData
     public ?int $zoom = null;
 }
 
-/** Match filter for LiveData#list (any subset of LiveData fields). */
+/** Request payload for LiveData#list. */
 class LiveDataListMatch
 {
     public ?array $city = null;
@@ -51,7 +51,7 @@ class Public
 {
 }
 
-/** Match filter for Public#load (any subset of Public fields). */
+/** Request payload for Public#load. */
 class PublicLoadMatch
 {
 }
@@ -68,7 +68,7 @@ class Reservation
     public string $user_id;
 }
 
-/** Match filter for Reservation#create (any subset of Reservation fields). */
+/** Request payload for Reservation#create. */
 class ReservationCreateData
 {
     public ?string $bike_number = null;
@@ -77,7 +77,7 @@ class ReservationCreateData
     public ?int $station_id = null;
     public ?string $status = null;
     public ?string $unlock_code = null;
-    public ?string $user_id = null;
+    public string $user_id;
 }
 
 /** ReservationStatus entity data model. */
@@ -90,7 +90,7 @@ class ReservationStatus
     public ?string $status = null;
 }
 
-/** Match filter for ReservationStatus#load (any subset of ReservationStatus fields). */
+/** Request payload for ReservationStatus#load. */
 class ReservationStatusLoadMatch
 {
     public ?string $bike_number = null;

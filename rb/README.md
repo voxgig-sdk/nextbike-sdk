@@ -4,6 +4,8 @@
 
 The Ruby SDK for the Nextbike API — an entity-oriented client using idiomatic Ruby conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.LiveData` — with named operations (`list`/`load`/`create`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -37,11 +39,38 @@ begin
   # list returns an Array of LiveData records — iterate directly.
   livedatas = client.LiveData.list
   livedatas.each do |item|
-    puts "#{item["id"]} #{item["name"]}"
+    puts "#{item["city"]}"
   end
 rescue => err
   warn "list failed: #{err}"
 end
+```
+
+
+## Error handling
+
+Entity operations raise on failure, so rescue them:
+
+```ruby
+begin
+  livedatas = client.LiveData.list()
+rescue => err
+  warn "list failed: #{err}"
+end
+```
+
+`direct` does **not** raise — it returns the result hash. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```ruby
+result = client.direct({
+  "path" => "/api/resource/{id}",
+  "method" => "GET",
+  "params" => { "id" => "example_id" },
+})
+
+warn "request failed: #{result["err"] || "HTTP #{result["status"]}"}" unless result["ok"]
 ```
 
 
@@ -62,7 +91,9 @@ if result["ok"]
   puts result["status"]  # 200
   puts result["data"]    # response body
 else
-  warn result["err"]
+  # On an HTTP error status there is no err (only a transport failure sets
+  # it), so fall back to the status code.
+  warn(result["err"] || "HTTP #{result["status"]}")
 end
 ```
 
@@ -85,16 +116,13 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```ruby
-client = NextbikeSDK.test({
-  "entity" => { "livedata" => { "test01" => { "id" => "test01" } } },
-})
+client = NextbikeSDK.test
 
-# load returns the bare mock record (raises on error).
-livedata = client.LiveData.load({ "id" => "test01" })
+# Entity ops return the bare mock record (raises on error).
+livedata = client.LiveData.list()
 puts livedata
 ```
 
@@ -185,10 +213,8 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch, ctrl) -> Array` | List entities matching the criteria. Raises on error. |
+| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all). Raises on error. |
 | `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
-| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
-| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -294,18 +320,18 @@ Create an instance: `live_data = client.LiveData`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `city` | ``$ARRAY`` |  |
-| `country` | ``$STRING`` |  |
-| `country_name` | ``$STRING`` |  |
-| `domain` | ``$STRING`` |  |
-| `hotline` | ``$STRING`` |  |
-| `lat` | ``$NUMBER`` |  |
-| `lng` | ``$NUMBER`` |  |
-| `name` | ``$STRING`` |  |
-| `policy` | ``$STRING`` |  |
-| `term` | ``$STRING`` |  |
-| `website` | ``$STRING`` |  |
-| `zoom` | ``$INTEGER`` |  |
+| `city` | `Array` |  |
+| `country` | `String` |  |
+| `country_name` | `String` |  |
+| `domain` | `String` |  |
+| `hotline` | `String` |  |
+| `lat` | `Float` |  |
+| `lng` | `Float` |  |
+| `name` | `String` |  |
+| `policy` | `String` |  |
+| `term` | `String` |  |
+| `website` | `String` |  |
+| `zoom` | `Integer` |  |
 
 #### Example: List
 
@@ -329,7 +355,7 @@ Create an instance: `public = client.Public`
 
 ```ruby
 # load returns the bare Public record (raises on error).
-public = client.Public.load({ "id" => "public_id" })
+public = client.Public.load()
 ```
 
 
@@ -347,19 +373,19 @@ Create an instance: `reservation = client.Reservation`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bike_number` | ``$STRING`` |  |
-| `expires_at` | ``$STRING`` |  |
-| `reservation_id` | ``$STRING`` |  |
-| `station_id` | ``$INTEGER`` |  |
-| `status` | ``$STRING`` |  |
-| `unlock_code` | ``$STRING`` |  |
-| `user_id` | ``$STRING`` |  |
+| `bike_number` | `String` |  |
+| `expires_at` | `String` |  |
+| `reservation_id` | `String` |  |
+| `station_id` | `Integer` |  |
+| `status` | `String` |  |
+| `unlock_code` | `String` |  |
+| `user_id` | `String` |  |
 
 #### Example: Create
 
 ```ruby
 reservation = client.Reservation.create({
-  "user_id" => nil, # `$STRING`
+  "user_id" => "example", # String
 })
 ```
 
@@ -378,26 +404,30 @@ Create an instance: `reservation_status = client.ReservationStatus`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bike_number` | ``$STRING`` |  |
-| `created_at` | ``$STRING`` |  |
-| `expires_at` | ``$STRING`` |  |
-| `reservation_id` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
+| `bike_number` | `String` |  |
+| `created_at` | `String` |  |
+| `expires_at` | `String` |  |
+| `reservation_id` | `String` |  |
+| `status` | `String` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare ReservationStatus record (raises on error).
-reservation_status = client.ReservationStatus.load({ "id" => "reservation_status_id" })
+reservation_status = client.ReservationStatus.load()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -414,8 +444,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as a second return value.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -459,14 +490,14 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
 livedata = client.LiveData
-livedata.load({ "id" => "example_id" })
+livedata.list()
 
-# livedata.data_get now returns the loaded livedata data
+# livedata.data_get now returns the livedata data from the last list
 # livedata.match_get returns the last match criteria
 ```
 

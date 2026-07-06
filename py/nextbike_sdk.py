@@ -221,25 +221,25 @@ class NextbikeSDK:
 
 
     def LiveData(self, data=None) -> "LiveDataEntity":
-        """Entity factory: client.LiveData().list({}) / client.LiveData().load({"id": ...})."""
+        """Entity factory: client.LiveData().list() / client.LiveData().load({"id": ...})."""
         from entity.live_data_entity import LiveDataEntity
         return LiveDataEntity(self, data)
 
 
     def Public(self, data=None) -> "PublicEntity":
-        """Entity factory: client.Public().list({}) / client.Public().load({"id": ...})."""
+        """Entity factory: client.Public().list() / client.Public().load({"id": ...})."""
         from entity.public_entity import PublicEntity
         return PublicEntity(self, data)
 
 
     def Reservation(self, data=None) -> "ReservationEntity":
-        """Entity factory: client.Reservation().list({}) / client.Reservation().load({"id": ...})."""
+        """Entity factory: client.Reservation().list() / client.Reservation().load({"id": ...})."""
         from entity.reservation_entity import ReservationEntity
         return ReservationEntity(self, data)
 
 
     def ReservationStatus(self, data=None) -> "ReservationStatusEntity":
-        """Entity factory: client.ReservationStatus().list({}) / client.ReservationStatus().load({"id": ...})."""
+        """Entity factory: client.ReservationStatus().list() / client.ReservationStatus().load({"id": ...})."""
         from entity.reservation_status_entity import ReservationStatusEntity
         return ReservationStatusEntity(self, data)
 

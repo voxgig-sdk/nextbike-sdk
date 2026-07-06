@@ -20,12 +20,26 @@ export interface LiveData {
   zoom?: number
 }
 
-export type LiveDataListMatch = Partial<LiveData>
+export interface LiveDataListMatch {
+  city?: any[]
+  country?: string
+  country_name?: string
+  domain?: string
+  hotline?: string
+  lat?: number
+  lng?: number
+  name?: string
+  policy?: string
+  term?: string
+  website?: string
+  zoom?: number
+}
 
 export interface Public {
 }
 
-export type PublicLoadMatch = Partial<Public>
+export interface PublicLoadMatch {
+}
 
 export interface Reservation {
   bike_number?: string
@@ -37,7 +51,15 @@ export interface Reservation {
   user_id: string
 }
 
-export type ReservationCreateData = Partial<Reservation>
+export interface ReservationCreateData {
+  bike_number?: string
+  expires_at?: string
+  reservation_id?: string
+  station_id?: number
+  status?: string
+  unlock_code?: string
+  user_id: string
+}
 
 export interface ReservationStatus {
   bike_number?: string
@@ -47,5 +69,11 @@ export interface ReservationStatus {
   status?: string
 }
 
-export type ReservationStatusLoadMatch = Partial<ReservationStatus>
+export interface ReservationStatusLoadMatch {
+  bike_number?: string
+  created_at?: string
+  expires_at?: string
+  reservation_id?: string
+  status?: string
+}
 

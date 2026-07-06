@@ -4,6 +4,11 @@
 
 The TypeScript SDK for the Nextbike API — a type-safe, entity-oriented client with full async/await support.
 
+The API is exposed as capitalised, semantic **Entities** — e.g.
+`client.LiveData()` — each with a small set of operations (`list`, `load`, `create`)
+instead of raw URL paths and query parameters. This keeps the surface
+predictable and low-friction for both humans and AI agents.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -39,6 +44,35 @@ const livedatas = await client.LiveData().list()
 
 for (const livedata of livedatas) {
   console.log(livedata)
+}
+```
+
+
+## Error handling
+
+Entity operations reject on failure, so wrap them in `try` / `catch`:
+
+```ts
+try {
+  const livedatas = await client.LiveData().list()
+  console.log(livedatas)
+} catch (err) {
+  console.error('list failed:', err)
+}
+```
+
+The low-level `direct()` method does **not** throw — it returns the
+value or an `Error`, so check the result before using it:
+
+```ts
+const result = await client.direct({
+  path: '/api/resource/{id}',
+  method: 'GET',
+  params: { id: 'example_id' },
+})
+
+if (result instanceof Error) {
+  throw result
 }
 ```
 
@@ -87,7 +121,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = NextbikeSDK.test()
 
-const livedata = await client.LiveData().load({ id: 'test01' })
+const livedata = await client.LiveData().list()
 // livedata is a bare entity populated with mock response data
 console.log(livedata)
 ```
@@ -106,12 +140,12 @@ Entity instances remember their last match and data:
 ```ts
 const entity = client.LiveData()
 
-// First call sets internal match
-await entity.load({ id: 'example' })
+// First call runs the operation and stores its result
+await entity.list()
 
-// Subsequent calls reuse the stored match
+// Subsequent calls reuse the stored state
 const data = entity.data()
-console.log(data.id) // 'example'
+console.log(data)
 ```
 
 ### Add custom middleware
@@ -209,10 +243,8 @@ All entities share the same interface.
 | `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
 | `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
 | `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
-| `data` | `data(data?): any` | Get or set entity data. |
-| `match` | `match(match?): any` | Get or set entity match criteria. |
+| `data` | `data(data?: Partial<Entity>): Entity` | Get or set entity data. |
+| `match` | `match(match?: Partial<Entity>): Partial<Entity>` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): NextbikeSDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
@@ -222,10 +254,9 @@ All entities share the same interface.
 Entity operations resolve to the entity data directly — there is no
 result envelope:
 
-- `load`, `create` and `update` resolve to a single entity object.
+- `load` and `create` resolve to a single entity object.
 - `list` resolves to an **array** of entity objects (iterate it directly;
   there is no `.data` and no `.ok`).
-- `remove` resolves to `void`.
 
 On a failed request these methods **throw**, so wrap calls in
 `try`/`catch` to handle errors. Only `direct()` returns the result
@@ -340,18 +371,18 @@ Create an instance: `const live_data = client.LiveData()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `city` | ``$ARRAY`` |  |
-| `country` | ``$STRING`` |  |
-| `country_name` | ``$STRING`` |  |
-| `domain` | ``$STRING`` |  |
-| `hotline` | ``$STRING`` |  |
-| `lat` | ``$NUMBER`` |  |
-| `lng` | ``$NUMBER`` |  |
-| `name` | ``$STRING`` |  |
-| `policy` | ``$STRING`` |  |
-| `term` | ``$STRING`` |  |
-| `website` | ``$STRING`` |  |
-| `zoom` | ``$INTEGER`` |  |
+| `city` | `any[]` |  |
+| `country` | `string` |  |
+| `country_name` | `string` |  |
+| `domain` | `string` |  |
+| `hotline` | `string` |  |
+| `lat` | `number` |  |
+| `lng` | `number` |  |
+| `name` | `string` |  |
+| `policy` | `string` |  |
+| `term` | `string` |  |
+| `website` | `string` |  |
+| `zoom` | `number` |  |
 
 #### Example: List
 
@@ -362,7 +393,7 @@ const live_datas = await client.LiveData().list()
 
 ### Public
 
-Create an instance: `const public = client.Public()`
+Create an instance: `const public_ = client.Public()`
 
 #### Operations
 
@@ -373,7 +404,7 @@ Create an instance: `const public = client.Public()`
 #### Example: Load
 
 ```ts
-const public = await client.Public().load({ id: 'public_id' })
+const public_ = await client.Public().load()
 ```
 
 
@@ -391,19 +422,19 @@ Create an instance: `const reservation = client.Reservation()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bike_number` | ``$STRING`` |  |
-| `expires_at` | ``$STRING`` |  |
-| `reservation_id` | ``$STRING`` |  |
-| `station_id` | ``$INTEGER`` |  |
-| `status` | ``$STRING`` |  |
-| `unlock_code` | ``$STRING`` |  |
-| `user_id` | ``$STRING`` |  |
+| `bike_number` | `string` |  |
+| `expires_at` | `string` |  |
+| `reservation_id` | `string` |  |
+| `station_id` | `number` |  |
+| `status` | `string` |  |
+| `unlock_code` | `string` |  |
+| `user_id` | `string` |  |
 
 #### Example: Create
 
 ```ts
 const reservation = await client.Reservation().create({
-  user_id: /* `$STRING` */,
+  user_id: /* string */,
 })
 ```
 
@@ -422,25 +453,29 @@ Create an instance: `const reservation_status = client.ReservationStatus()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bike_number` | ``$STRING`` |  |
-| `created_at` | ``$STRING`` |  |
-| `expires_at` | ``$STRING`` |  |
-| `reservation_id` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
+| `bike_number` | `string` |  |
+| `created_at` | `string` |  |
+| `expires_at` | `string` |  |
+| `reservation_id` | `string` |  |
+| `status` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const reservation_status = await client.ReservationStatus().load({ id: 'reservation_status_id' })
+const reservation_status = await client.ReservationStatus().load()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -457,11 +492,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller.
-
-An unexpected exception triggers the `PreUnexpected` hook before
-propagating.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -497,16 +530,16 @@ import { NextbikeSDK } from '@voxgig-sdk/nextbike'
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
 const livedata = client.LiveData()
-await livedata.load({ id: "example_id" })
+await livedata.list()
 
-// livedata.data() now returns the loaded livedata data
-// livedata.match() returns { id: "example_id" }
+// livedata.data() now returns the livedata data from the last `list`
+// livedata.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

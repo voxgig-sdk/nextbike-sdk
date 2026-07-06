@@ -110,18 +110,18 @@ live_data := client.LiveData(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `city` | ``$ARRAY`` | No |  |
-| `country` | ``$STRING`` | No |  |
-| `country_name` | ``$STRING`` | No |  |
-| `domain` | ``$STRING`` | No |  |
-| `hotline` | ``$STRING`` | No |  |
-| `lat` | ``$NUMBER`` | No |  |
-| `lng` | ``$NUMBER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `policy` | ``$STRING`` | No |  |
-| `term` | ``$STRING`` | No |  |
-| `website` | ``$STRING`` | No |  |
-| `zoom` | ``$INTEGER`` | No |  |
+| `city` | `[]any` | No |  |
+| `country` | `string` | No |  |
+| `country_name` | `string` | No |  |
+| `domain` | `string` | No |  |
+| `hotline` | `string` | No |  |
+| `lat` | `float64` | No |  |
+| `lng` | `float64` | No |  |
+| `name` | `string` | No |  |
+| `policy` | `string` | No |  |
+| `term` | `string` | No |  |
+| `website` | `string` | No |  |
+| `zoom` | `int` | No |  |
 
 ### Operations
 
@@ -170,7 +170,7 @@ public := client.Public(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Public(nil).Load(map[string]any{"id": "public_id"}, nil)
+result, err := client.Public(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -207,25 +207,25 @@ reservation := client.Reservation(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bike_number` | ``$STRING`` | No |  |
-| `expires_at` | ``$STRING`` | No |  |
-| `reservation_id` | ``$STRING`` | No |  |
-| `station_id` | ``$INTEGER`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `unlock_code` | ``$STRING`` | No |  |
-| `user_id` | ``$STRING`` | Yes |  |
+| `bike_number` | `string` | No |  |
+| `expires_at` | `string` | No |  |
+| `reservation_id` | `string` | No |  |
+| `station_id` | `int` | No |  |
+| `status` | `string` | No |  |
+| `unlock_code` | `string` | No |  |
+| `user_id` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `bike_number` | - | - | Yes | - | - |
-| `expires_at` | - | - | - | - | - |
-| `reservation_id` | - | - | - | - | - |
-| `station_id` | - | - | - | - | - |
-| `status` | - | - | - | - | - |
-| `unlock_code` | - | - | - | - | - |
-| `user_id` | - | - | - | - | - |
+| Field | create |
+| --- | --- |
+| `bike_number` | Yes |
+| `expires_at` | - |
+| `reservation_id` | - |
+| `station_id` | - |
+| `status` | - |
+| `unlock_code` | - |
+| `user_id` | - |
 
 ### Operations
 
@@ -235,7 +235,7 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Reservation(nil).Create(map[string]any{
-    "user_id": /* `$STRING` */,
+    "user_id": /* string */,
 }, nil)
 ```
 
@@ -273,11 +273,11 @@ reservation_status := client.ReservationStatus(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bike_number` | ``$STRING`` | No |  |
-| `created_at` | ``$STRING`` | No |  |
-| `expires_at` | ``$STRING`` | No |  |
-| `reservation_id` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `bike_number` | `string` | No |  |
+| `created_at` | `string` | No |  |
+| `expires_at` | `string` | No |  |
+| `reservation_id` | `string` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -286,7 +286,7 @@ reservation_status := client.ReservationStatus(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.ReservationStatus(nil).Load(map[string]any{"id": "reservation_status_id"}, nil)
+result, err := client.ReservationStatus(nil).Load(nil, nil)
 ```
 
 ### Common Methods

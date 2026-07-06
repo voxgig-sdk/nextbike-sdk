@@ -67,14 +67,17 @@ class Reservation(ReservationRequired, total=False):
     unlock_code: str
 
 
-class ReservationCreateData(TypedDict, total=False):
+class ReservationCreateDataRequired(TypedDict):
+    user_id: str
+
+
+class ReservationCreateData(ReservationCreateDataRequired, total=False):
     bike_number: str
     expires_at: str
     reservation_id: str
     station_id: int
     status: str
     unlock_code: str
-    user_id: str
 
 
 class ReservationStatus(TypedDict, total=False):
