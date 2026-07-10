@@ -434,7 +434,7 @@ Create an instance: `const reservation = client.Reservation()`
 
 ```ts
 const reservation = await client.Reservation().create({
-  user_id: /* string */,
+  user_id: 'example_user_id',
 })
 ```
 

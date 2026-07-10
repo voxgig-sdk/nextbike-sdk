@@ -390,7 +390,7 @@ Create an instance: `reservation = client.Reservation()`
 
 ```python
 reservation = client.Reservation().create({
-    "user_id": "example",  # str
+    "user_id": "example_user_id",  # str
 })
 ```
 

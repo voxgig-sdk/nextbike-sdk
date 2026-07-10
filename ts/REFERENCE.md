@@ -286,7 +286,7 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Reservation().create({
-  user_id: /* string */,
+  user_id: 'example_user_id',
 })
 ```
 

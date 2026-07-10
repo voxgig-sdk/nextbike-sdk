@@ -385,7 +385,7 @@ Create an instance: `reservation = client.Reservation`
 
 ```ruby
 reservation = client.Reservation.create({
-  "user_id" => "example", # String
+  "user_id" => "example_user_id", # String
 })
 ```
 

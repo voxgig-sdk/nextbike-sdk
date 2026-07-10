@@ -9,15 +9,22 @@ main: {
         url: "https://api.nextbike.net/api/doc.php"
       }
       description: "Nextbike Bikesharing API - Access bike sharing station data, bike availability, and rental information across Nextbike's global network"
+      security: {
+        in: "query"
+        name: "apikey"
+        prefix: ""
+        scheme: "ApiKeyAuth"
+        type: "apiKey"
+      }
       servers: [
         {
           description: "Nextbike Production API Server"
           url: "https://api.nextbike.net"
         }
       ]
+      summary: "Nextbike Bikesharing API - Access bike sharing station data, bike availability, and rental information across Nextbike's global network"
       title: "Nextbike API"
       version: "1.0.0"
+      website: "https://nextbike.net"
     }
   }
-}
-

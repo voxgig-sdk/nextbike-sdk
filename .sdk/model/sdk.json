@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -623,14 +620,24 @@
           "url": "https://api.nextbike.net/api/doc.php"
         },
         "description": "Nextbike Bikesharing API - Access bike sharing station data, bike availability, and rental information across Nextbike's global network",
+        "meta_source": "https://www.freepublicapis.com",
+        "security": {
+          "in": "query",
+          "name": "apikey",
+          "prefix": "",
+          "scheme": "ApiKeyAuth",
+          "type": "apiKey"
+        },
         "servers": [
           {
             "description": "Nextbike Production API Server",
             "url": "https://api.nextbike.net"
           }
         ],
+        "summary": "Nextbike Bikesharing API - Access bike sharing station data, bike availability, and rental information across Nextbike's global network",
         "title": "Nextbike API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://nextbike.net"
       },
       "option": {},
       "target": {
@@ -683,6 +690,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -733,6 +743,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },

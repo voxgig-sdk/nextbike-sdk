@@ -103,7 +103,8 @@ same parameters as `Direct()`.
 ## LiveDataEntity
 
 ```go
-live_data := client.LiveData(nil)
+liveData := client.LiveData(nil)
+fmt.Println(liveData.GetName()) // "live_data"
 ```
 
 ### Fields
@@ -131,6 +132,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.LiveData(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -161,6 +166,7 @@ Return the entity name.
 
 ```go
 public := client.Public(nil)
+fmt.Println(public.GetName()) // "public"
 ```
 
 ### Operations
@@ -171,6 +177,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Public(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -201,6 +211,7 @@ Return the entity name.
 
 ```go
 reservation := client.Reservation(nil)
+fmt.Println(reservation.GetName()) // "reservation"
 ```
 
 ### Fields
@@ -235,8 +246,12 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Reservation(nil).Create(map[string]any{
-    "user_id": /* string */,
+    "user_id": "example_user_id",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -266,7 +281,8 @@ Return the entity name.
 ## ReservationStatusEntity
 
 ```go
-reservation_status := client.ReservationStatus(nil)
+reservationStatus := client.ReservationStatus(nil)
+fmt.Println(reservationStatus.GetName()) // "reservation_status"
 ```
 
 ### Fields
@@ -287,6 +303,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.ReservationStatus(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

@@ -53,12 +53,12 @@ func main() {
         "apikey": os.Getenv("NEXTBIKE_APIKEY"),
     })
 
-    // List livedata records — the value is the array of records itself.
-    livedatas, err := client.LiveData(nil).List(nil, nil)
+    // List liveData records — the value is the array of records itself.
+    liveDatas, err := client.LiveData(nil).List(nil, nil)
     if err != nil {
         panic(err)
     }
-    for _, item := range livedatas.([]any) {
+    for _, item := range liveDatas.([]any) {
         fmt.Println(item)
     }
 }
@@ -140,13 +140,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-livedata, err := client.LiveData(nil).List(
+liveData, err := client.LiveData(nil).List(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(livedata) // the returned mock data
+fmt.Println(liveData) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -258,9 +258,9 @@ Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    livedata, err := client.LiveData(nil).List(map[string]any{/* fields */}, nil)
+    liveData, err := client.LiveData(nil).List(map[string]any{/* fields */}, nil)
     if err != nil { /* handle */ }
-    // livedata is the returned record
+    // liveData is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -334,7 +334,7 @@ API path: `/reservation/status`
 
 ### LiveData
 
-Create an instance: `live_data := client.LiveData(nil)`
+Create an instance: `liveData := client.LiveData(nil)`
 
 #### Operations
 
@@ -362,11 +362,11 @@ Create an instance: `live_data := client.LiveData(nil)`
 #### Example: List
 
 ```go
-live_datas, err := client.LiveData(nil).List(nil, nil)
+liveDatas, err := client.LiveData(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(live_datas) // the array of records
+fmt.Println(liveDatas) // the array of records
 ```
 
 
@@ -417,14 +417,18 @@ Create an instance: `reservation := client.Reservation(nil)`
 
 ```go
 result, err := client.Reservation(nil).Create(map[string]any{
-    "user_id": /* string */,
+    "user_id": "example_user_id",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 
 ### ReservationStatus
 
-Create an instance: `reservation_status := client.ReservationStatus(nil)`
+Create an instance: `reservationStatus := client.ReservationStatus(nil)`
 
 #### Operations
 
@@ -445,11 +449,11 @@ Create an instance: `reservation_status := client.ReservationStatus(nil)`
 #### Example: Load
 
 ```go
-reservation_status, err := client.ReservationStatus(nil).Load(nil, nil)
+reservationStatus, err := client.ReservationStatus(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(reservation_status) // the loaded record
+fmt.Println(reservationStatus) // the loaded record
 ```
 
 

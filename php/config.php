@@ -21,7 +21,7 @@ class NextbikeConfig
             "options" => [
                 "base" => "https://api.nextbike.net",
                 "auth" => [
-                    "prefix" => "Bearer",
+                    "prefix" => "",
                 ],
                 "headers" => [
           'content-type' => 'application/json',

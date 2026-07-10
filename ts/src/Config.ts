@@ -39,7 +39,7 @@ class Config {
     base: 'https://api.nextbike.net',
 
     auth: {
-      prefix: 'Bearer',
+      prefix: '',
     },
 
     headers: {

@@ -237,7 +237,7 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Reservation().create({
-    "user_id": "example",  # str
+    "user_id": "example_user_id",  # str
 })
 ```
 

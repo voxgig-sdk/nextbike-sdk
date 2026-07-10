@@ -379,7 +379,7 @@ Create an instance: `local reservation = client:Reservation(nil)`
 
 ```lua
 local reservation, err = client:Reservation():create({
-  user_id = nil, -- string
+  user_id = "example_user_id", -- string
 })
 ```
 
