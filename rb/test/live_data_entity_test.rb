@@ -12,6 +12,42 @@ class LiveDataEntityTest < Minitest::Test
     assert !ent.nil?
   end
 
+  # Feature #4: the entity stream(action, ...) method runs the op pipeline and
+  # returns an Enumerator over result items. With the streaming feature active
+  # it yields the feature's incremental output; otherwise it falls back to the
+  # materialised list so stream always yields.
+  def test_stream
+    seed = {
+      "entity" => {
+        "live_data" => {
+          "s1" => { "id" => "s1" },
+          "s2" => { "id" => "s2" },
+          "s3" => { "id" => "s3" },
+        },
+      },
+    }
+
+    # Fallback: streaming inactive -> yields the materialised list items.
+    base = NextbikeSDK.test(seed, nil)
+    seen = base.LiveData(nil).stream("list", nil, nil).to_a
+    assert_equal 3, seen.length
+
+    # Inbound: streaming active -> yields each item from the feature.
+    cfg = NextbikeConfig.make_config
+    if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
+      sdk = NextbikeSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
+      got = []
+      sdk.LiveData(nil).stream("list", nil, nil).each do |item|
+        if item.is_a?(Array)
+          got.concat(item)
+        else
+          got << item
+        end
+      end
+      assert_equal 3, got.length
+    end
+  end
+
   def test_basic_flow
     setup = live_data_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
