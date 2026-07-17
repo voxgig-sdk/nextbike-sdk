@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- Nextbike SDK exists test
 
 local sdk = require("nextbike_sdk")
 
