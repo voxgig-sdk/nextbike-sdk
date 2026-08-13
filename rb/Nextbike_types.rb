@@ -10,7 +10,7 @@
 
 # LiveData entity data model.
 #
-# @!attribute [rw] city
+# @!attribute [rw] cities
 #   @return [Array, nil]
 #
 # @!attribute [rw] country
@@ -37,7 +37,7 @@
 # @!attribute [rw] policy
 #   @return [String, nil]
 #
-# @!attribute [rw] term
+# @!attribute [rw] terms
 #   @return [String, nil]
 #
 # @!attribute [rw] website
@@ -46,7 +46,7 @@
 # @!attribute [rw] zoom
 #   @return [Integer, nil]
 LiveData = Struct.new(
-  :city,
+  :cities,
   :country,
   :country_name,
   :domain,
@@ -55,7 +55,7 @@ LiveData = Struct.new(
   :lng,
   :name,
   :policy,
-  :term,
+  :terms,
   :website,
   :zoom,
   keyword_init: true
@@ -63,7 +63,7 @@ LiveData = Struct.new(
 
 # Request payload for LiveData#list.
 #
-# @!attribute [rw] city
+# @!attribute [rw] cities
 #   @return [Array, nil]
 #
 # @!attribute [rw] country
@@ -90,7 +90,7 @@ LiveData = Struct.new(
 # @!attribute [rw] policy
 #   @return [String, nil]
 #
-# @!attribute [rw] term
+# @!attribute [rw] terms
 #   @return [String, nil]
 #
 # @!attribute [rw] website
@@ -99,7 +99,7 @@ LiveData = Struct.new(
 # @!attribute [rw] zoom
 #   @return [Integer, nil]
 LiveDataListMatch = Struct.new(
-  :city,
+  :cities,
   :country,
   :country_name,
   :domain,
@@ -108,7 +108,7 @@ LiveDataListMatch = Struct.new(
   :lng,
   :name,
   :policy,
-  :term,
+  :terms,
   :website,
   :zoom,
   keyword_init: true

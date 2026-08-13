@@ -2,7 +2,7 @@
   "existing": {
     "live_data": {
       "LIVE_DATA00": {
-        "city": [],
+        "cities": [],
         "country": "s79",
         "country_name": "s7a",
         "domain": "s7b",
@@ -11,12 +11,12 @@
         "lng": 126,
         "name": "s7f",
         "policy": "s80",
-        "term": "s81",
+        "terms": "s81",
         "website": "s82",
         "zoom": "s83"
       },
       "LIVE_DATA01": {
-        "city": [],
+        "cities": [],
         "country": "sf1",
         "country_name": "sf2",
         "domain": "sf3",
@@ -25,12 +25,12 @@
         "lng": 246,
         "name": "sf7",
         "policy": "sf8",
-        "term": "sf9",
+        "terms": "sf9",
         "website": "sfa",
         "zoom": "sfb"
       },
       "LIVE_DATA02": {
-        "city": [],
+        "cities": [],
         "country": "s169",
         "country_name": "s16a",
         "domain": "s16b",
@@ -39,7 +39,7 @@
         "lng": 366,
         "name": "s16f",
         "policy": "s170",
-        "term": "s171",
+        "terms": "s171",
         "website": "s172",
         "zoom": "s173"
       }
@@ -48,7 +48,7 @@
   "new": {
     "live_data": {
       "live_data_ref01": {
-        "city": [],
+        "cities": [],
         "country": "s1e1",
         "country_name": "s1e2",
         "domain": "s1e3",
@@ -57,7 +57,7 @@
         "lng": 486,
         "name": "s1e7",
         "policy": "s1e8",
-        "term": "s1e9",
+        "terms": "s1e9",
         "website": "s1ea",
         "zoom": "s1eb"
       }

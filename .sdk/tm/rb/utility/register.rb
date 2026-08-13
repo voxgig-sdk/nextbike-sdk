@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ NextbikeUtility.registrar = ->(u) {
   u.prepare_params = NextbikeUtilities::PrepareParams
   u.prepare_path = NextbikeUtilities::PreparePath
   u.prepare_query = NextbikeUtilities::PrepareQuery
+  u.graphql_body = NextbikeUtilities::GraphqlBody
+  u.graphql_errors = NextbikeUtilities::GraphqlErrors
   u.result_basic = NextbikeUtilities::ResultBasic
   u.result_body = NextbikeUtilities::ResultBody
   u.result_headers = NextbikeUtilities::ResultHeaders

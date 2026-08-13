@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import NextbikeControl
-from core.error import NextbikeError
-from core.result import NextbikeResult
-from core.spec import NextbikeSpec
+from nextbike_sdk.config import make_config
+from nextbike_sdk.features import _make_feature
+from nextbike_sdk.core.control import NextbikeControl
+from nextbike_sdk.core.error import NextbikeError
+from nextbike_sdk.core.result import NextbikeResult
+from nextbike_sdk.core.spec import NextbikeSpec
 
 
 # True when this SDK was generated with the named feature.

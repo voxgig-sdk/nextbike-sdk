@@ -8,6 +8,7 @@ guide: {
   entity: live_data: {
     path: "/maps/nextbike-live.json": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.countries`")|top
     }
   }
 

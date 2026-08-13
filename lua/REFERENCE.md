@@ -103,7 +103,7 @@ local live_data = client:LiveData(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `city` | `table` | No |  |
+| `cities` | `table` | No |  |
 | `country` | `string` | No |  |
 | `country_name` | `string` | No |  |
 | `domain` | `string` | No |  |
@@ -112,7 +112,7 @@ local live_data = client:LiveData(nil)
 | `lng` | `number` | No |  |
 | `name` | `string` | No |  |
 | `policy` | `string` | No |  |
-| `term` | `string` | No |  |
+| `terms` | `string` | No |  |
 | `website` | `string` | No |  |
 | `zoom` | `number` | No |  |
 

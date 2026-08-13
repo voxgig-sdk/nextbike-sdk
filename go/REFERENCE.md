@@ -111,7 +111,7 @@ fmt.Println(liveData.GetName()) // "live_data"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `city` | `[]any` | No |  |
+| `cities` | `[]any` | No |  |
 | `country` | `string` | No |  |
 | `country_name` | `string` | No |  |
 | `domain` | `string` | No |  |
@@ -120,7 +120,7 @@ fmt.Println(liveData.GetName()) // "live_data"
 | `lng` | `float64` | No |  |
 | `name` | `string` | No |  |
 | `policy` | `string` | No |  |
-| `term` | `string` | No |  |
+| `terms` | `string` | No |  |
 | `website` | `string` | No |  |
 | `zoom` | `int` | No |  |
 

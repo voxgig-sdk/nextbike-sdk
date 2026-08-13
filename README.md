@@ -38,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = NextbikeSDK.test()
-const livedatas = await client.LiveData().list()
-// livedatas is an array of bare LiveData records populated with mock data
-console.log(livedatas)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = NextbikeSDK.test({
+  entity: {
+    reservation_status: {
+      test01: { id: 'test01' },
+    },
+  },
+})
+const reservationstatus = await client.ReservationStatus().load()
+// reservationstatus is the ReservationStatus entity, populated with mock data
+// — call reservationstatus.data() for the record itself
+console.log(reservationstatus)
 ```
 
 ### Python
 
 ```python
 client = NextbikeSDK.test()
-livedatas = client.LiveData().list()
-print(livedatas)
+reservationstatus = client.ReservationStatus().load()
+print(reservationstatus)
 ```
 
 ### PHP
@@ -57,16 +66,16 @@ print(livedatas)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = NextbikeSDK::test([
-    "entity" => ["livedata" => ["test01" => []]],
+    "entity" => ["reservationstatus" => ["test01" => []]],
 ]);
-$livedatas = $client->LiveData()->list();
+$reservationstatus = $client->ReservationStatus()->load();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.LiveData(nil).List(
+result, err := client.ReservationStatus(nil).Load(
     nil, nil,
 )
 ```
@@ -76,16 +85,16 @@ result, err := client.LiveData(nil).List(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = NextbikeSDK.test({
-  "entity" => { "livedata" => { "test01" => {} } },
+  "entity" => { "reservationstatus" => { "test01" => {} } },
 })
-livedatas = client.LiveData.list()
+reservationstatus = client.ReservationStatus.load()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local results, err = client:LiveData():list()
+local result, err = client:ReservationStatus():load()
 ```
 
 ## Packages
@@ -112,7 +121,7 @@ const client = new NextbikeSDK({
   apikey: process.env.NEXTBIKE_APIKEY,
 })
 
-// List all livedatas (returns LiveData[])
+// List all livedatas (returns LiveDataEntity[] — .data() for the record)
 const livedatas = await client.LiveData().list()
 for (const livedata of livedatas) {
   console.log(livedata)
@@ -359,6 +368,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://api.nextbike.net/api/doc.php](https://api.nextbike.net/api/doc.php)
 

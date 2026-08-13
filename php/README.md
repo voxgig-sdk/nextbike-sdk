@@ -40,7 +40,7 @@ try {
     // list() returns an array of LiveData records — iterate directly.
     $livedatas = $client->LiveData()->list();
     foreach ($livedatas as $item) {
-        echo $item["city"] . "\n";
+        echo $item["cities"] . "\n";
     }
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -55,7 +55,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $livedatas = $client->LiveData()->list();
+    $reservationstatus = $client->ReservationStatus()->load();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -127,9 +127,10 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = NextbikeSDK::test();
 
-// Entity ops return the bare mock record (throws on error).
-$livedata = $client->LiveData()->list();
-print_r($livedata);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$reservationstatus = $client->ReservationStatus()->load();
+print_r($reservationstatus);
 ```
 
 ### Use a custom fetch function
@@ -233,7 +234,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -255,7 +256,7 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `city` |  |
+| `cities` |  |
 | `country` |  |
 | `country_name` |  |
 | `domain` |  |
@@ -264,7 +265,7 @@ On error, `ok` is `false` and `$err` contains the error value.
 | `lng` |  |
 | `name` |  |
 | `policy` |  |
-| `term` |  |
+| `terms` |  |
 | `website` |  |
 | `zoom` |  |
 
@@ -330,7 +331,7 @@ Create an instance: `$live_data = $client->LiveData();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `city` | `array` |  |
+| `cities` | `array` |  |
 | `country` | `string` |  |
 | `country_name` | `string` |  |
 | `domain` | `string` |  |
@@ -339,7 +340,7 @@ Create an instance: `$live_data = $client->LiveData();`
 | `lng` | `float` |  |
 | `name` | `string` |  |
 | `policy` | `string` |  |
-| `term` | `string` |  |
+| `terms` | `string` |  |
 | `website` | `string` |  |
 | `zoom` | `int` |  |
 
@@ -364,7 +365,7 @@ Create an instance: `$public = $client->Public();`
 #### Example: Load
 
 ```php
-// load() returns the bare Public record (throws on error).
+// load() returns the ENTITY — call data_get() for the Public record (throws on error).
 $public = $client->Public()->load();
 ```
 
@@ -423,7 +424,7 @@ Create an instance: `$reservation_status = $client->ReservationStatus();`
 #### Example: Load
 
 ```php
-// load() returns the bare ReservationStatus record (throws on error).
+// load() returns the ENTITY — call data_get() for the ReservationStatus record (throws on error).
 $reservation_status = $client->ReservationStatus()->load();
 ```
 
@@ -500,15 +501,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$livedata = $client->LiveData();
-$livedata->list();
+$reservationstatus = $client->ReservationStatus();
+$reservationstatus->load();
 
-// $livedata->data_get() now returns the livedata data from the last list
-// $livedata->match_get() returns the last match criteria
+// $reservationstatus->data_get() now returns the reservationstatus data from the last load
+// $reservationstatus->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

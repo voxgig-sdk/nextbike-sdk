@@ -41,7 +41,7 @@ describe("ReservationEntity", function()
 
     local reservation_ref01_data_result, err = reservation_ref01_ent:create(reservation_ref01_data, nil)
     assert.is_nil(err)
-    reservation_ref01_data = helpers.to_map(reservation_ref01_data_result)
+    reservation_ref01_data = helpers.to_map(type(reservation_ref01_data_result) == 'table' and reservation_ref01_data_result.data_get and reservation_ref01_data_result:data_get() or reservation_ref01_data_result)
     assert.is_not_nil(reservation_ref01_data)
 
   end)

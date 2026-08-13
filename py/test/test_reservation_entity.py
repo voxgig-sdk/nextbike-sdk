@@ -6,9 +6,9 @@ import time
 
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from nextbike_sdk.utility.voxgig_struct import voxgig_struct as vs
 from nextbike_sdk import NextbikeSDK
-from core import helpers
+from nextbike_sdk.core import helpers
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 from test import runner
@@ -44,7 +44,7 @@ class TestReservationEntity:
         reservation_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.reservation"), "reservation_ref01"))
 
-        reservation_ref01_data = helpers.to_map(reservation_ref01_ent.create(reservation_ref01_data, None))
+        reservation_ref01_data = helpers.to_map(runner.entity_data(reservation_ref01_ent.create(reservation_ref01_data, None)))
         assert reservation_ref01_data is not None
 
 

@@ -100,7 +100,7 @@ live_data = client.LiveData()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `city` | `list` | No |  |
+| `cities` | `list` | No |  |
 | `country` | `str` | No |  |
 | `country_name` | `str` | No |  |
 | `domain` | `str` | No |  |
@@ -109,7 +109,7 @@ live_data = client.LiveData()
 | `lng` | `float` | No |  |
 | `name` | `str` | No |  |
 | `policy` | `str` | No |  |
-| `term` | `str` | No |  |
+| `terms` | `str` | No |  |
 | `website` | `str` | No |  |
 | `zoom` | `int` | No |  |
 

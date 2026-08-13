@@ -62,7 +62,7 @@ describe('ReservationEntity', async () => {
     const reservation_ref01_ent = client.Reservation()
     let reservation_ref01_data = setup.data.new.reservation['reservation_ref01']
 
-    reservation_ref01_data = await reservation_ref01_ent.create(reservation_ref01_data)
+    reservation_ref01_data = (await reservation_ref01_ent.create(reservation_ref01_data)).data()
     assert(null != reservation_ref01_data)
 
 

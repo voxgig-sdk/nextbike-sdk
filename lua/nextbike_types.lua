@@ -7,7 +7,7 @@
 -- edit by hand.
 
 ---@class LiveData
----@field city? table
+---@field cities? table
 ---@field country? string
 ---@field country_name? string
 ---@field domain? string
@@ -16,12 +16,12 @@
 ---@field lng? number
 ---@field name? string
 ---@field policy? string
----@field term? string
+---@field terms? string
 ---@field website? string
 ---@field zoom? number
 
 ---@class LiveDataListMatch
----@field city? table
+---@field cities? table
 ---@field country? string
 ---@field country_name? string
 ---@field domain? string
@@ -30,7 +30,7 @@
 ---@field lng? number
 ---@field name? string
 ---@field policy? string
----@field term? string
+---@field terms? string
 ---@field website? string
 ---@field zoom? number
 

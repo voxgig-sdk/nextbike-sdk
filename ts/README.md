@@ -37,7 +37,9 @@ const client = new NextbikeSDK({
 
 ### 2. List livedata records
 
-`list()` resolves to an array of LiveData objects — iterate it directly:
+`list()` resolves to an array of LiveData ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
 const livedatas = await client.LiveData().list()
@@ -54,10 +56,10 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const livedatas = await client.LiveData().list()
-  console.log(livedatas)
+  const reservationstatus = await client.ReservationStatus().load()
+  console.log(reservationstatus)
 } catch (err) {
-  console.error('list failed:', err)
+  console.error('load failed:', err)
 }
 ```
 
@@ -121,9 +123,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = NextbikeSDK.test()
 
-const livedata = await client.LiveData().list()
-// livedata is a bare entity populated with mock response data
-console.log(livedata)
+const reservationstatus = await client.ReservationStatus().load()
+// reservationstatus is the entity, populated with mock response data
+// — call reservationstatus.data() for the record itself
+console.log(reservationstatus)
 ```
 
 You can also use the instance method:
@@ -138,10 +141,10 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.LiveData()
+const entity = client.ReservationStatus()
 
 // First call runs the operation and stores its result
-await entity.list()
+await entity.load()
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -296,7 +299,7 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `city` |  |
+| `cities` |  |
 | `country` |  |
 | `country_name` |  |
 | `domain` |  |
@@ -305,7 +308,7 @@ The `prepare()` method returns:
 | `lng` |  |
 | `name` |  |
 | `policy` |  |
-| `term` |  |
+| `terms` |  |
 | `website` |  |
 | `zoom` |  |
 
@@ -371,7 +374,7 @@ Create an instance: `const live_data = client.LiveData()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `city` | `any[]` |  |
+| `cities` | `any[]` |  |
 | `country` | `string` |  |
 | `country_name` | `string` |  |
 | `domain` | `string` |  |
@@ -380,7 +383,7 @@ Create an instance: `const live_data = client.LiveData()`
 | `lng` | `number` |  |
 | `name` | `string` |  |
 | `policy` | `string` |  |
-| `term` | `string` |  |
+| `terms` | `string` |  |
 | `website` | `string` |  |
 | `zoom` | `number` |  |
 
@@ -530,16 +533,16 @@ import { NextbikeSDK } from '@voxgig-sdk/nextbike'
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const livedata = client.LiveData()
-await livedata.list()
+const reservationstatus = client.ReservationStatus()
+await reservationstatus.load()
 
-// livedata.data() now returns the livedata data from the last `list`
-// livedata.match() returns the last match criteria
+// reservationstatus.data() now returns the reservationstatus data from the last `load`
+// reservationstatus.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

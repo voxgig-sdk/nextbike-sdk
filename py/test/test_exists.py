@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# Nextbike SDK exists test
 
 import pytest
 from nextbike_sdk import NextbikeSDK

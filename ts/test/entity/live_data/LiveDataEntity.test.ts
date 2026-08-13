@@ -63,7 +63,7 @@ describe('LiveDataEntity', async () => {
     const live_data_ref01_ent = client.LiveData()
     const live_data_ref01_match: any = {}
 
-    const live_data_ref01_list = await live_data_ref01_ent.list(live_data_ref01_match)
+    const live_data_ref01_list = (await live_data_ref01_ent.list(live_data_ref01_match)).map((e: any) => e.data())
 
 
   })

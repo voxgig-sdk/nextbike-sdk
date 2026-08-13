@@ -37,7 +37,7 @@ class ReservationEntityTest < Minitest::Test
       Vs.getpath(setup[:data], "new.reservation"), "reservation_ref01"))
 
     reservation_ref01_data_result = reservation_ref01_ent.create(reservation_ref01_data, nil)
-    reservation_ref01_data = Helpers.to_map(reservation_ref01_data_result)
+    reservation_ref01_data = Helpers.to_map(reservation_ref01_data_result.respond_to?(:data_get) ? reservation_ref01_data_result.data_get : reservation_ref01_data_result)
     assert !reservation_ref01_data.nil?
 
   end

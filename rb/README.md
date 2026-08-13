@@ -39,7 +39,7 @@ begin
   # list returns an Array of LiveData records — iterate directly.
   livedatas = client.LiveData.list
   livedatas.each do |item|
-    puts "#{item["city"]}"
+    puts "#{item["cities"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -53,9 +53,9 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  livedatas = client.LiveData.list()
+  reservationstatus = client.ReservationStatus.load()
 rescue => err
-  warn "list failed: #{err}"
+  warn "load failed: #{err}"
 end
 ```
 
@@ -121,9 +121,10 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = NextbikeSDK.test
 
-# Entity ops return the bare mock record (raises on error).
-livedata = client.LiveData.list()
-puts livedata
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+reservationstatus = client.ReservationStatus.load()
+puts reservationstatus
 ```
 
 ### Use a custom fetch function
@@ -245,7 +246,7 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `city` |  |
+| `cities` |  |
 | `country` |  |
 | `country_name` |  |
 | `domain` |  |
@@ -254,7 +255,7 @@ returns a result `Hash` with these keys:
 | `lng` |  |
 | `name` |  |
 | `policy` |  |
-| `term` |  |
+| `terms` |  |
 | `website` |  |
 | `zoom` |  |
 
@@ -320,7 +321,7 @@ Create an instance: `live_data = client.LiveData`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `city` | `Array` |  |
+| `cities` | `Array` |  |
 | `country` | `String` |  |
 | `country_name` | `String` |  |
 | `domain` | `String` |  |
@@ -329,7 +330,7 @@ Create an instance: `live_data = client.LiveData`
 | `lng` | `Float` |  |
 | `name` | `String` |  |
 | `policy` | `String` |  |
-| `term` | `String` |  |
+| `terms` | `String` |  |
 | `website` | `String` |  |
 | `zoom` | `Integer` |  |
 
@@ -354,7 +355,7 @@ Create an instance: `public = client.Public`
 #### Example: Load
 
 ```ruby
-# load returns the bare Public record (raises on error).
+# load returns the ENTITY — call data_get for the Public record (raises on error).
 public = client.Public.load()
 ```
 
@@ -413,7 +414,7 @@ Create an instance: `reservation_status = client.ReservationStatus`
 #### Example: Load
 
 ```ruby
-# load returns the bare ReservationStatus record (raises on error).
+# load returns the ENTITY — call data_get for the ReservationStatus record (raises on error).
 reservation_status = client.ReservationStatus.load()
 ```
 
@@ -490,15 +491,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-livedata = client.LiveData
-livedata.list()
+reservationstatus = client.ReservationStatus
+reservationstatus.load()
 
-# livedata.data_get now returns the livedata data from the last list
-# livedata.match_get returns the last match criteria
+# reservationstatus.data_get now returns the reservationstatus data from the last load
+# reservationstatus.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

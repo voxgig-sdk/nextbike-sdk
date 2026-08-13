@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from nextbike_sdk.utility.voxgig_struct import voxgig_struct as vs
 from nextbike_sdk import NextbikeSDK
-from core import helpers
+from nextbike_sdk.core import helpers
 from test import runner
 
 

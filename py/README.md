@@ -60,10 +60,10 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    livedatas = client.LiveData().list()
-    print(livedatas)
+    reservationstatus = client.ReservationStatus().load()
+    print(reservationstatus)
 except Exception as err:
-    print(f"list failed: {err}")
+    print(f"load failed: {err}")
 ```
 
 `direct()` does **not** raise — it returns the result envelope. Branch
@@ -127,9 +127,10 @@ Create a mock client for unit testing — no server required:
 ```python
 client = NextbikeSDK.test()
 
-# Entity ops return the bare record and raise on error.
-livedata = client.LiveData().list()
-# livedata contains the mock response record
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+reservationstatus = client.ReservationStatus().load()
+# reservationstatus contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -230,7 +231,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -252,7 +253,7 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `city` |  |
+| `cities` |  |
 | `country` |  |
 | `country_name` |  |
 | `domain` |  |
@@ -261,7 +262,7 @@ On error, `ok` is `False` and `err` contains the error value.
 | `lng` |  |
 | `name` |  |
 | `policy` |  |
-| `term` |  |
+| `terms` |  |
 | `website` |  |
 | `zoom` |  |
 
@@ -327,7 +328,7 @@ Create an instance: `live_data = client.LiveData()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `city` | `list` |  |
+| `cities` | `list` |  |
 | `country` | `str` |  |
 | `country_name` | `str` |  |
 | `domain` | `str` |  |
@@ -336,7 +337,7 @@ Create an instance: `live_data = client.LiveData()`
 | `lng` | `float` |  |
 | `name` | `str` |  |
 | `policy` | `str` |  |
-| `term` | `str` |  |
+| `terms` | `str` |  |
 | `website` | `str` |  |
 | `zoom` | `int` |  |
 
@@ -493,15 +494,15 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-livedata = client.LiveData()
-livedata.list()
+reservationstatus = client.ReservationStatus()
+reservationstatus.load()
 
-# livedata.data_get() now returns the livedata data from the last list
-# livedata.match_get() returns the last match criteria
+# reservationstatus.data_get() now returns the reservationstatus data from the last load
+# reservationstatus.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

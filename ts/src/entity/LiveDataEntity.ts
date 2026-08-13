@@ -37,7 +37,7 @@ class LiveDataEntity extends NextbikeEntityBase<LiveData> {
 
 
 
-  async list(this: any, reqmatch?: LiveDataListMatch, ctrl?: Control): Promise<LiveData[]> {
+  async list(this: any, reqmatch?: LiveDataListMatch, ctrl?: Control): Promise<LiveDataEntity[]> {
 
     const utility = this._utility
 

@@ -71,12 +71,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-livedatas, err := client.LiveData(nil).List(nil, nil)
+reservationstatus, err := client.ReservationStatus(nil).Load(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = livedatas
+_ = reservationstatus
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -140,13 +140,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-liveData, err := client.LiveData(nil).List(
+reservationStatus, err := client.ReservationStatus(nil).Load(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(liveData) // the returned mock data
+fmt.Println(reservationStatus) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -271,7 +271,7 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"city"` |  |
+| `"cities"` |  |
 | `"country"` |  |
 | `"country_name"` |  |
 | `"domain"` |  |
@@ -280,7 +280,7 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 | `"lng"` |  |
 | `"name"` |  |
 | `"policy"` |  |
-| `"term"` |  |
+| `"terms"` |  |
 | `"website"` |  |
 | `"zoom"` |  |
 
@@ -346,7 +346,7 @@ Create an instance: `liveData := client.LiveData(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `city` | `[]any` |  |
+| `cities` | `[]any` |  |
 | `country` | `string` |  |
 | `country_name` | `string` |  |
 | `domain` | `string` |  |
@@ -355,7 +355,7 @@ Create an instance: `liveData := client.LiveData(nil)`
 | `lng` | `float64` |  |
 | `name` | `string` |  |
 | `policy` | `string` |  |
-| `term` | `string` |  |
+| `terms` | `string` |  |
 | `website` | `string` |  |
 | `zoom` | `int` |  |
 
@@ -526,15 +526,15 @@ like `core.ToMapAny`.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `List`, the entity
+Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-livedata := client.LiveData(nil)
-livedata.List(nil, nil)
+reservationstatus := client.ReservationStatus(nil)
+reservationstatus.Load(nil, nil)
 
-// livedata.Data() now returns the livedata data from the last list
-// livedata.Match() returns the last match criteria
+// reservationstatus.Data() now returns the reservationstatus data from the last load
+// reservationstatus.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

@@ -153,7 +153,7 @@ const live_data = client.LiveData()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `city` | `any[]` | No |  |
+| `cities` | `any[]` | No |  |
 | `country` | `string` | No |  |
 | `country_name` | `string` | No |  |
 | `domain` | `string` | No |  |
@@ -162,7 +162,7 @@ const live_data = client.LiveData()
 | `lng` | `number` | No |  |
 | `name` | `string` | No |  |
 | `policy` | `string` | No |  |
-| `term` | `string` | No |  |
+| `terms` | `string` | No |  |
 | `website` | `string` | No |  |
 | `zoom` | `number` | No |  |
 
@@ -277,6 +277,26 @@ const reservation = client.Reservation()
 | `status` | - |
 | `unlock_code` | - |
 | `user_id` | - |
+
+### Actions
+
+This entity exposes custom API actions in addition to the standard
+operations. Select one with `$action` in the call's argument; the
+remaining keys are sent as that action's payload.
+
+| Action | Route | Call |
+| --- | --- | --- |
+| `reserve` | `/reservation/reserve` | `client.Reservation().create({ $action: 'reserve', ... })` |
+
+An action returns that action's OWN response, which is not necessarily a
+Reservation record — check the API definition for its shape.
+
+```ts
+const result = await client.Reservation().create({
+  $action: 'reserve',
+  /* ...the action's own arguments */
+})
+```
 
 ### Operations
 

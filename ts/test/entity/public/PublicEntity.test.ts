@@ -62,7 +62,7 @@ describe('PublicEntity', async () => {
     // LOAD
     const public_ref01_ent = client.Public()
     const public_ref01_match_dt0: any = {}
-    const public_ref01_data_dt0 = await public_ref01_ent.load(public_ref01_match_dt0)
+    const public_ref01_data_dt0 = (await public_ref01_ent.load(public_ref01_match_dt0)).data()
     assert(null != public_ref01_data_dt0)
 
 

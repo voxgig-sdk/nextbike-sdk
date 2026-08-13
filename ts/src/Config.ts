@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'Nextbike',
   }
 
 
@@ -69,7 +69,7 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "city",
+          "name": "cities",
           "req": false,
           "type": "`$ARRAY`",
           "index$": 0
@@ -132,7 +132,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "term",
+          "name": "terms",
           "req": false,
           "type": "`$STRING`",
           "index$": 9
@@ -197,6 +197,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/maps/nextbike-live.json",
               "parts": [
@@ -213,7 +214,7 @@ class Config {
               },
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.countries`"
               },
               "index$": 0
             }
@@ -272,6 +273,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/maps/nextbike-live.xml",
               "parts": [
@@ -367,6 +369,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "POST",
               "orig": "/reservation/reserve",
               "parts": [
@@ -448,6 +451,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/reservation/status",
               "parts": [

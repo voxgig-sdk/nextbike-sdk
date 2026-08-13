@@ -62,7 +62,7 @@ describe('ReservationStatusEntity', async () => {
     // LOAD
     const reservation_status_ref01_ent = client.ReservationStatus()
     const reservation_status_ref01_match_dt0: any = {}
-    const reservation_status_ref01_data_dt0 = await reservation_status_ref01_ent.load(reservation_status_ref01_match_dt0)
+    const reservation_status_ref01_data_dt0 = (await reservation_status_ref01_ent.load(reservation_status_ref01_match_dt0)).data()
     assert(null != reservation_status_ref01_data_dt0)
 
 

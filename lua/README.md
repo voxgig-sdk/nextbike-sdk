@@ -56,7 +56,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local livedatas, err = client:LiveData():list()
+local reservationstatus, err = client:ReservationStatus():load()
 if err then error(err) end
 ```
 
@@ -114,7 +114,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:LiveData():list()
+local result, err = client:ReservationStatus():load()
 -- result is the returned data; err is set on failure
 ```
 
@@ -228,9 +228,9 @@ data **directly** — there is no wrapper:
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local live_data, err = client:LiveData():load()
+    local public, err = client:Public():load()
     if err then error(err) end
-    -- live_data is the loaded record
+    -- public is the loaded record
 
 Only `direct()` returns a response envelope — a `table` with `ok`,
 `status`, `headers`, and `data` keys.
@@ -241,7 +241,7 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `city` |  |
+| `cities` |  |
 | `country` |  |
 | `country_name` |  |
 | `domain` |  |
@@ -250,7 +250,7 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 | `lng` |  |
 | `name` |  |
 | `policy` |  |
-| `term` |  |
+| `terms` |  |
 | `website` |  |
 | `zoom` |  |
 
@@ -316,7 +316,7 @@ Create an instance: `local live_data = client:LiveData(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `city` | `table` |  |
+| `cities` | `table` |  |
 | `country` | `string` |  |
 | `country_name` | `string` |  |
 | `domain` | `string` |  |
@@ -325,7 +325,7 @@ Create an instance: `local live_data = client:LiveData(nil)`
 | `lng` | `number` |  |
 | `name` | `string` |  |
 | `policy` | `string` |  |
-| `term` | `string` |  |
+| `terms` | `string` |  |
 | `website` | `string` |  |
 | `zoom` | `number` |  |
 
@@ -483,15 +483,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local livedata = client:LiveData()
-livedata:list()
+local reservationstatus = client:ReservationStatus()
+reservationstatus:load()
 
--- livedata:data_get() now returns the livedata data from the last list
--- livedata:match_get() returns the last match criteria
+-- reservationstatus:data_get() now returns the reservationstatus data from the last load
+-- reservationstatus:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

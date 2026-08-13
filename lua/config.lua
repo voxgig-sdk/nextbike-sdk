@@ -32,7 +32,7 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "city",
+            ["name"] = "cities",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
             ["index$"] = 0,
@@ -95,7 +95,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "term",
+            ["name"] = "terms",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 9,
@@ -160,6 +160,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/maps/nextbike-live.json",
                 ["parts"] = {
@@ -176,7 +177,7 @@ local function make_config()
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.countries`",
                 },
                 ["index$"] = 0,
               },
@@ -235,6 +236,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/maps/nextbike-live.xml",
                 ["parts"] = {
@@ -330,6 +332,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/reservation/reserve",
                 ["parts"] = {
@@ -411,6 +414,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/reservation/status",
                 ["parts"] = {

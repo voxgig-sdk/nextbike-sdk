@@ -16,11 +16,11 @@
 import pytest
 
 from nextbike_sdk import NextbikeSDK
-from core.error import NextbikeError
-from core.result import NextbikeResult
-from core.response import NextbikeResponse
-from core.spec import NextbikeSpec
-from feature.base_feature import NextbikeBaseFeature
+from nextbike_sdk.core.error import NextbikeError
+from nextbike_sdk.core.result import NextbikeResult
+from nextbike_sdk.core.response import NextbikeResponse
+from nextbike_sdk.core.spec import NextbikeSpec
+from nextbike_sdk.feature.base_feature import NextbikeBaseFeature
 
 
 def _client():

@@ -15,7 +15,7 @@ declare(strict_types=1);
 /** LiveData entity data model. */
 class LiveData
 {
-    public ?array $city = null;
+    public ?array $cities = null;
     public ?string $country = null;
     public ?string $country_name = null;
     public ?string $domain = null;
@@ -24,7 +24,7 @@ class LiveData
     public ?float $lng = null;
     public ?string $name = null;
     public ?string $policy = null;
-    public ?string $term = null;
+    public ?string $terms = null;
     public ?string $website = null;
     public ?int $zoom = null;
 }
@@ -32,7 +32,7 @@ class LiveData
 /** Request payload for LiveData#list. */
 class LiveDataListMatch
 {
-    public ?array $city = null;
+    public ?array $cities = null;
     public ?string $country = null;
     public ?string $country_name = null;
     public ?string $domain = null;
@@ -41,7 +41,7 @@ class LiveDataListMatch
     public ?float $lng = null;
     public ?string $name = null;
     public ?string $policy = null;
-    public ?string $term = null;
+    public ?string $terms = null;
     public ?string $website = null;
     public ?int $zoom = null;
 }

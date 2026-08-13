@@ -33,7 +33,7 @@ module NextbikeConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "city",
+              "name" => "cities",
               "req" => false,
               "type" => "`$ARRAY`",
               "index$" => 0,
@@ -96,7 +96,7 @@ module NextbikeConfig
             },
             {
               "active" => true,
-              "name" => "term",
+              "name" => "terms",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 9,
@@ -161,6 +161,7 @@ module NextbikeConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/maps/nextbike-live.json",
                   "parts" => [
@@ -177,7 +178,7 @@ module NextbikeConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.countries`",
                   },
                   "index$" => 0,
                 },
@@ -236,6 +237,7 @@ module NextbikeConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/maps/nextbike-live.xml",
                   "parts" => [
@@ -331,6 +333,7 @@ module NextbikeConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "POST",
                   "orig" => "/reservation/reserve",
                   "parts" => [
@@ -412,6 +415,7 @@ module NextbikeConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/reservation/status",
                   "parts" => [

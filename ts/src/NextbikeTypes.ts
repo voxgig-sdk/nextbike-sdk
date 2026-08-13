@@ -6,7 +6,7 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface LiveData {
-  city?: any[]
+  cities?: any[]
   country?: string
   country_name?: string
   domain?: string
@@ -15,13 +15,13 @@ export interface LiveData {
   lng?: number
   name?: string
   policy?: string
-  term?: string
+  terms?: string
   website?: string
   zoom?: number
 }
 
 export interface LiveDataListMatch {
-  city?: any[]
+  cities?: any[]
   country?: string
   country_name?: string
   domain?: string
@@ -30,7 +30,7 @@ export interface LiveDataListMatch {
   lng?: number
   name?: string
   policy?: string
-  term?: string
+  terms?: string
   website?: string
   zoom?: number
 }
@@ -59,6 +59,12 @@ export interface ReservationCreateData {
   status?: string
   unlock_code?: string
   user_id: string
+
+  // Selects a custom action instead of the plain create:
+  //   'reserve'
+  // The remaining keys are that action's own payload.
+  $action?: string
+  [action: string]: any
 }
 
 export interface ReservationStatus {

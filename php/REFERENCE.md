@@ -105,7 +105,7 @@ $live_data = $client->LiveData();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `city` | `array` | No |  |
+| `cities` | `array` | No |  |
 | `country` | `string` | No |  |
 | `country_name` | `string` | No |  |
 | `domain` | `string` | No |  |
@@ -114,7 +114,7 @@ $live_data = $client->LiveData();
 | `lng` | `float` | No |  |
 | `name` | `string` | No |  |
 | `policy` | `string` | No |  |
-| `term` | `string` | No |  |
+| `terms` | `string` | No |  |
 | `website` | `string` | No |  |
 | `zoom` | `int` | No |  |
 
