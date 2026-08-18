@@ -28,7 +28,7 @@ class NextbikeSDK
     utility = NextbikeUtility.new
     @_utility = utility
 
-    config = NextbikeConfig.make_config
+    config = NextbikeConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

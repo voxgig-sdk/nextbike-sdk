@@ -40,7 +40,7 @@ class NextbikeSDK
         $utility = new NextbikeUtility();
         $this->_utility = $utility;
 
-        $config = NextbikeConfig::make_config();
+        $config = NextbikeConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

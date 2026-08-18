@@ -23,8 +23,8 @@ class NextbikeSDK:
         utility = NextbikeUtility()
         self._utility = utility
 
-        from nextbike_sdk.config import make_config
-        config = make_config()
+        from nextbike_sdk.config import shared_config
+        config = shared_config()
 
         self._rootctx = utility.make_context({
             "client": self,

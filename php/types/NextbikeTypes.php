@@ -47,7 +47,7 @@ class LiveDataListMatch
 }
 
 /** Public entity data model. */
-class Public
+class PublicType
 {
 }
 

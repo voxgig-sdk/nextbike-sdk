@@ -40,7 +40,7 @@ class LiveDataEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = NextbikeConfig::make_config();
+        $cfg = NextbikeConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = NextbikeSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
