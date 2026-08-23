@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -300,17 +300,17 @@ The `prepare()` method returns:
 | Field | Description |
 | --- | --- |
 | `cities` |  |
-| `country` |  |
-| `country_name` |  |
-| `domain` |  |
-| `hotline` |  |
-| `lat` |  |
-| `lng` |  |
-| `name` |  |
-| `policy` |  |
-| `terms` |  |
-| `website` |  |
-| `zoom` |  |
+| `country` | Country code |
+| `country_name` | Full country name |
+| `domain` | Country domain |
+| `hotline` | Support hotline number |
+| `lat` | Country center latitude |
+| `lng` | Country center longitude |
+| `name` | Country name |
+| `policy` | Privacy policy URL |
+| `terms` | Terms and conditions URL |
+| `website` | Website URL |
+| `zoom` | Default zoom level |
 
 Operations: list.
 
@@ -329,13 +329,13 @@ API path: `/maps/nextbike-live.xml`
 
 | Field | Description |
 | --- | --- |
-| `bike_number` |  |
-| `expires_at` |  |
-| `reservation_id` |  |
-| `station_id` |  |
-| `status` |  |
-| `unlock_code` |  |
-| `user_id` |  |
+| `bike_number` | Reserved bike number |
+| `expires_at` | Reservation expiration time |
+| `reservation_id` | Unique reservation identifier |
+| `station_id` | Station identifier |
+| `status` | Reservation status |
+| `unlock_code` | Code to unlock the bike |
+| `user_id` | User identifier |
 
 Operations: create.
 
@@ -345,11 +345,11 @@ API path: `/reservation/reserve`
 
 | Field | Description |
 | --- | --- |
-| `bike_number` |  |
-| `created_at` |  |
-| `expires_at` |  |
-| `reservation_id` |  |
-| `status` |  |
+| `bike_number` | Reserved bike number |
+| `created_at` | Reservation creation time |
+| `expires_at` | Reservation expiration time |
+| `reservation_id` | Reservation identifier |
+| `status` | Current reservation status |
 
 Operations: load.
 
@@ -375,17 +375,17 @@ Create an instance: `const live_data = client.LiveData()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `cities` | `any[]` |  |
-| `country` | `string` |  |
-| `country_name` | `string` |  |
-| `domain` | `string` |  |
-| `hotline` | `string` |  |
-| `lat` | `number` |  |
-| `lng` | `number` |  |
-| `name` | `string` |  |
-| `policy` | `string` |  |
-| `terms` | `string` |  |
-| `website` | `string` |  |
-| `zoom` | `number` |  |
+| `country` | `string` | Country code |
+| `country_name` | `string` | Full country name |
+| `domain` | `string` | Country domain |
+| `hotline` | `string` | Support hotline number |
+| `lat` | `number` | Country center latitude |
+| `lng` | `number` | Country center longitude |
+| `name` | `string` | Country name |
+| `policy` | `string` | Privacy policy URL |
+| `terms` | `string` | Terms and conditions URL |
+| `website` | `string` | Website URL |
+| `zoom` | `number` | Default zoom level |
 
 #### Example: List
 
@@ -425,13 +425,13 @@ Create an instance: `const reservation = client.Reservation()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bike_number` | `string` |  |
-| `expires_at` | `string` |  |
-| `reservation_id` | `string` |  |
-| `station_id` | `number` |  |
-| `status` | `string` |  |
-| `unlock_code` | `string` |  |
-| `user_id` | `string` |  |
+| `bike_number` | `string` | Reserved bike number |
+| `expires_at` | `string` | Reservation expiration time |
+| `reservation_id` | `string` | Unique reservation identifier |
+| `station_id` | `number` | Station identifier |
+| `status` | `string` | Reservation status |
+| `unlock_code` | `string` | Code to unlock the bike |
+| `user_id` | `string` | User identifier |
 
 #### Example: Create
 
@@ -456,11 +456,11 @@ Create an instance: `const reservation_status = client.ReservationStatus()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bike_number` | `string` |  |
-| `created_at` | `string` |  |
-| `expires_at` | `string` |  |
-| `reservation_id` | `string` |  |
-| `status` | `string` |  |
+| `bike_number` | `string` | Reserved bike number |
+| `created_at` | `string` | Reservation creation time |
+| `expires_at` | `string` | Reservation expiration time |
+| `reservation_id` | `string` | Reservation identifier |
+| `status` | `string` | Current reservation status |
 
 #### Example: Load
 

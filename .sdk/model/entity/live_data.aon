@@ -13,56 +13,67 @@ main: kit: entity: live_data: {
     {
       name: "country"
       req: false
+      short: "Country code"
       type: "`$STRING`"
     }
     {
       name: "country_name"
       req: false
+      short: "Full country name"
       type: "`$STRING`"
     }
     {
       name: "domain"
       req: false
+      short: "Country domain"
       type: "`$STRING`"
     }
     {
       name: "hotline"
       req: false
+      short: "Support hotline number"
       type: "`$STRING`"
     }
     {
       name: "lat"
       req: false
+      short: "Country center latitude"
       type: "`$NUMBER`"
     }
     {
       name: "lng"
       req: false
+      short: "Country center longitude"
       type: "`$NUMBER`"
     }
     {
       name: "name"
       req: false
+      short: "Country name"
       type: "`$STRING`"
     }
     {
       name: "policy"
       req: false
+      short: "Privacy policy URL"
       type: "`$STRING`"
     }
     {
       name: "terms"
       req: false
+      short: "Terms and conditions URL"
       type: "`$STRING`"
     }
     {
       name: "website"
       req: false
+      short: "Website URL"
       type: "`$STRING`"
     }
     {
       name: "zoom"
       req: false
+      short: "Default zoom level"
       type: "`$INTEGER`"
     }
   ]

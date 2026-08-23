@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "Nextbike",
+			"slug": "nextbike",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -43,46 +46,57 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "country",
+						"short": "Country code",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "country_name",
+						"short": "Full country name",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "domain",
+						"short": "Country domain",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "hotline",
+						"short": "Support hotline number",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "lat",
+						"short": "Country center latitude",
 						"type": "`$NUMBER`",
 					},
 					map[string]any{
 						"name": "lng",
+						"short": "Country center longitude",
 						"type": "`$NUMBER`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Country name",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "policy",
+						"short": "Privacy policy URL",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "terms",
+						"short": "Terms and conditions URL",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "website",
+						"short": "Website URL",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "zoom",
+						"short": "Default zoom level",
 						"type": "`$INTEGER`",
 					},
 				},
@@ -224,31 +238,38 @@ func MakeConfig() map[string]any {
 								"type": "`$STRING`",
 							},
 						},
+						"short": "Reserved bike number",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "expires_at",
+						"short": "Reservation expiration time",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "reservation_id",
+						"short": "Unique reservation identifier",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "station_id",
+						"short": "Station identifier",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "status",
+						"short": "Reservation status",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "unlock_code",
+						"short": "Code to unlock the bike",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "user_id",
 						"req": true,
+						"short": "User identifier",
 						"type": "`$STRING`",
 					},
 				},
@@ -286,22 +307,27 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "bike_number",
+						"short": "Reserved bike number",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "created_at",
+						"short": "Reservation creation time",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "expires_at",
+						"short": "Reservation expiration time",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "reservation_id",
+						"short": "Reservation identifier",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "status",
+						"short": "Current reservation status",
 						"type": "`$STRING`",
 					},
 				},

@@ -42,66 +42,77 @@
               "active": true,
               "name": "country",
               "req": false,
+              "short": "Country code",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "country_name",
               "req": false,
+              "short": "Full country name",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "domain",
               "req": false,
+              "short": "Country domain",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "hotline",
               "req": false,
+              "short": "Support hotline number",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "lat",
               "req": false,
+              "short": "Country center latitude",
               "type": "`$NUMBER`"
             },
             {
               "active": true,
               "name": "lng",
               "req": false,
+              "short": "Country center longitude",
               "type": "`$NUMBER`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Country name",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "policy",
               "req": false,
+              "short": "Privacy policy URL",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "terms",
               "req": false,
+              "short": "Terms and conditions URL",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "website",
               "req": false,
+              "short": "Website URL",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "zoom",
               "req": false,
+              "short": "Default zoom level",
               "type": "`$INTEGER`"
             }
           ],
@@ -271,42 +282,49 @@
                 }
               },
               "req": false,
+              "short": "Reserved bike number",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "expires_at",
               "req": false,
+              "short": "Reservation expiration time",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "reservation_id",
               "req": false,
+              "short": "Unique reservation identifier",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "station_id",
               "req": false,
+              "short": "Station identifier",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "status",
               "req": false,
+              "short": "Reservation status",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "unlock_code",
               "req": false,
+              "short": "Code to unlock the bike",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "user_id",
               "req": true,
+              "short": "User identifier",
               "type": "`$STRING`"
             }
           ],
@@ -351,30 +369,35 @@
               "active": true,
               "name": "bike_number",
               "req": false,
+              "short": "Reserved bike number",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "created_at",
               "req": false,
+              "short": "Reservation creation time",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "expires_at",
               "req": false,
+              "short": "Reservation expiration time",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "reservation_id",
               "req": false,
+              "short": "Reservation identifier",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "status",
               "req": false,
+              "short": "Current reservation status",
               "type": "`$STRING`"
             }
           ],

@@ -8,26 +8,31 @@ main: kit: entity: reservation_status: {
     {
       name: "bike_number"
       req: false
+      short: "Reserved bike number"
       type: "`$STRING`"
     }
     {
       name: "created_at"
       req: false
+      short: "Reservation creation time"
       type: "`$STRING`"
     }
     {
       name: "expires_at"
       req: false
+      short: "Reservation expiration time"
       type: "`$STRING`"
     }
     {
       name: "reservation_id"
       req: false
+      short: "Reservation identifier"
       type: "`$STRING`"
     }
     {
       name: "status"
       req: false
+      short: "Current reservation status"
       type: "`$STRING`"
     }
   ]

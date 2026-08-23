@@ -254,17 +254,17 @@ On error, `ok` is `False` and `err` contains the error value.
 | Field | Description |
 | --- | --- |
 | `cities` |  |
-| `country` |  |
-| `country_name` |  |
-| `domain` |  |
-| `hotline` |  |
-| `lat` |  |
-| `lng` |  |
-| `name` |  |
-| `policy` |  |
-| `terms` |  |
-| `website` |  |
-| `zoom` |  |
+| `country` | Country code |
+| `country_name` | Full country name |
+| `domain` | Country domain |
+| `hotline` | Support hotline number |
+| `lat` | Country center latitude |
+| `lng` | Country center longitude |
+| `name` | Country name |
+| `policy` | Privacy policy URL |
+| `terms` | Terms and conditions URL |
+| `website` | Website URL |
+| `zoom` | Default zoom level |
 
 Operations: List.
 
@@ -283,13 +283,13 @@ API path: `/maps/nextbike-live.xml`
 
 | Field | Description |
 | --- | --- |
-| `bike_number` |  |
-| `expires_at` |  |
-| `reservation_id` |  |
-| `station_id` |  |
-| `status` |  |
-| `unlock_code` |  |
-| `user_id` |  |
+| `bike_number` | Reserved bike number |
+| `expires_at` | Reservation expiration time |
+| `reservation_id` | Unique reservation identifier |
+| `station_id` | Station identifier |
+| `status` | Reservation status |
+| `unlock_code` | Code to unlock the bike |
+| `user_id` | User identifier |
 
 Operations: Create.
 
@@ -299,11 +299,11 @@ API path: `/reservation/reserve`
 
 | Field | Description |
 | --- | --- |
-| `bike_number` |  |
-| `created_at` |  |
-| `expires_at` |  |
-| `reservation_id` |  |
-| `status` |  |
+| `bike_number` | Reserved bike number |
+| `created_at` | Reservation creation time |
+| `expires_at` | Reservation expiration time |
+| `reservation_id` | Reservation identifier |
+| `status` | Current reservation status |
 
 Operations: Load.
 
@@ -329,17 +329,17 @@ Create an instance: `live_data = client.LiveData()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `cities` | `list` |  |
-| `country` | `str` |  |
-| `country_name` | `str` |  |
-| `domain` | `str` |  |
-| `hotline` | `str` |  |
-| `lat` | `float` |  |
-| `lng` | `float` |  |
-| `name` | `str` |  |
-| `policy` | `str` |  |
-| `terms` | `str` |  |
-| `website` | `str` |  |
-| `zoom` | `int` |  |
+| `country` | `str` | Country code |
+| `country_name` | `str` | Full country name |
+| `domain` | `str` | Country domain |
+| `hotline` | `str` | Support hotline number |
+| `lat` | `float` | Country center latitude |
+| `lng` | `float` | Country center longitude |
+| `name` | `str` | Country name |
+| `policy` | `str` | Privacy policy URL |
+| `terms` | `str` | Terms and conditions URL |
+| `website` | `str` | Website URL |
+| `zoom` | `int` | Default zoom level |
 
 #### Example: List
 
@@ -379,13 +379,13 @@ Create an instance: `reservation = client.Reservation()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bike_number` | `str` |  |
-| `expires_at` | `str` |  |
-| `reservation_id` | `str` |  |
-| `station_id` | `int` |  |
-| `status` | `str` |  |
-| `unlock_code` | `str` |  |
-| `user_id` | `str` |  |
+| `bike_number` | `str` | Reserved bike number |
+| `expires_at` | `str` | Reservation expiration time |
+| `reservation_id` | `str` | Unique reservation identifier |
+| `station_id` | `int` | Station identifier |
+| `status` | `str` | Reservation status |
+| `unlock_code` | `str` | Code to unlock the bike |
+| `user_id` | `str` | User identifier |
 
 #### Example: Create
 
@@ -410,11 +410,11 @@ Create an instance: `reservation_status = client.ReservationStatus()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bike_number` | `str` |  |
-| `created_at` | `str` |  |
-| `expires_at` | `str` |  |
-| `reservation_id` | `str` |  |
-| `status` | `str` |  |
+| `bike_number` | `str` | Reserved bike number |
+| `created_at` | `str` | Reservation creation time |
+| `expires_at` | `str` | Reservation expiration time |
+| `reservation_id` | `str` | Reservation identifier |
+| `status` | `str` | Current reservation status |
 
 #### Example: Load
 

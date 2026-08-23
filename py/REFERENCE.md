@@ -101,17 +101,17 @@ live_data = client.LiveData()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `cities` | `list` | No |  |
-| `country` | `str` | No |  |
-| `country_name` | `str` | No |  |
-| `domain` | `str` | No |  |
-| `hotline` | `str` | No |  |
-| `lat` | `float` | No |  |
-| `lng` | `float` | No |  |
-| `name` | `str` | No |  |
-| `policy` | `str` | No |  |
-| `terms` | `str` | No |  |
-| `website` | `str` | No |  |
-| `zoom` | `int` | No |  |
+| `country` | `str` | No | Country code |
+| `country_name` | `str` | No | Full country name |
+| `domain` | `str` | No | Country domain |
+| `hotline` | `str` | No | Support hotline number |
+| `lat` | `float` | No | Country center latitude |
+| `lng` | `float` | No | Country center longitude |
+| `name` | `str` | No | Country name |
+| `policy` | `str` | No | Privacy policy URL |
+| `terms` | `str` | No | Terms and conditions URL |
+| `website` | `str` | No | Website URL |
+| `zoom` | `int` | No | Default zoom level |
 
 ### Operations
 
@@ -209,13 +209,13 @@ reservation = client.Reservation()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bike_number` | `str` | No |  |
-| `expires_at` | `str` | No |  |
-| `reservation_id` | `str` | No |  |
-| `station_id` | `int` | No |  |
-| `status` | `str` | No |  |
-| `unlock_code` | `str` | No |  |
-| `user_id` | `str` | Yes |  |
+| `bike_number` | `str` | No | Reserved bike number |
+| `expires_at` | `str` | No | Reservation expiration time |
+| `reservation_id` | `str` | No | Unique reservation identifier |
+| `station_id` | `int` | No | Station identifier |
+| `status` | `str` | No | Reservation status |
+| `unlock_code` | `str` | No | Code to unlock the bike |
+| `user_id` | `str` | Yes | User identifier |
 
 ### Field Usage by Operation
 
@@ -280,11 +280,11 @@ reservation_status = client.ReservationStatus()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bike_number` | `str` | No |  |
-| `created_at` | `str` | No |  |
-| `expires_at` | `str` | No |  |
-| `reservation_id` | `str` | No |  |
-| `status` | `str` | No |  |
+| `bike_number` | `str` | No | Reserved bike number |
+| `created_at` | `str` | No | Reservation creation time |
+| `expires_at` | `str` | No | Reservation expiration time |
+| `reservation_id` | `str` | No | Reservation identifier |
+| `status` | `str` | No | Current reservation status |
 
 ### Operations
 

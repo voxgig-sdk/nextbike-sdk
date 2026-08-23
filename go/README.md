@@ -6,7 +6,7 @@ The Golang SDK for the Nextbike API — an entity-oriented client using standard
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.LiveData(nil)` — each with the same small set of operations (`List`, `Load`, `Create`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -272,17 +272,17 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 | Field | Description |
 | --- | --- |
 | `"cities"` |  |
-| `"country"` |  |
-| `"country_name"` |  |
-| `"domain"` |  |
-| `"hotline"` |  |
-| `"lat"` |  |
-| `"lng"` |  |
-| `"name"` |  |
-| `"policy"` |  |
-| `"terms"` |  |
-| `"website"` |  |
-| `"zoom"` |  |
+| `"country"` | Country code |
+| `"country_name"` | Full country name |
+| `"domain"` | Country domain |
+| `"hotline"` | Support hotline number |
+| `"lat"` | Country center latitude |
+| `"lng"` | Country center longitude |
+| `"name"` | Country name |
+| `"policy"` | Privacy policy URL |
+| `"terms"` | Terms and conditions URL |
+| `"website"` | Website URL |
+| `"zoom"` | Default zoom level |
 
 Operations: List.
 
@@ -301,13 +301,13 @@ API path: `/maps/nextbike-live.xml`
 
 | Field | Description |
 | --- | --- |
-| `"bike_number"` |  |
-| `"expires_at"` |  |
-| `"reservation_id"` |  |
-| `"station_id"` |  |
-| `"status"` |  |
-| `"unlock_code"` |  |
-| `"user_id"` |  |
+| `"bike_number"` | Reserved bike number |
+| `"expires_at"` | Reservation expiration time |
+| `"reservation_id"` | Unique reservation identifier |
+| `"station_id"` | Station identifier |
+| `"status"` | Reservation status |
+| `"unlock_code"` | Code to unlock the bike |
+| `"user_id"` | User identifier |
 
 Operations: Create.
 
@@ -317,11 +317,11 @@ API path: `/reservation/reserve`
 
 | Field | Description |
 | --- | --- |
-| `"bike_number"` |  |
-| `"created_at"` |  |
-| `"expires_at"` |  |
-| `"reservation_id"` |  |
-| `"status"` |  |
+| `"bike_number"` | Reserved bike number |
+| `"created_at"` | Reservation creation time |
+| `"expires_at"` | Reservation expiration time |
+| `"reservation_id"` | Reservation identifier |
+| `"status"` | Current reservation status |
 
 Operations: Load.
 
@@ -347,17 +347,17 @@ Create an instance: `liveData := client.LiveData(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `cities` | `[]any` |  |
-| `country` | `string` |  |
-| `country_name` | `string` |  |
-| `domain` | `string` |  |
-| `hotline` | `string` |  |
-| `lat` | `float64` |  |
-| `lng` | `float64` |  |
-| `name` | `string` |  |
-| `policy` | `string` |  |
-| `terms` | `string` |  |
-| `website` | `string` |  |
-| `zoom` | `int` |  |
+| `country` | `string` | Country code |
+| `country_name` | `string` | Full country name |
+| `domain` | `string` | Country domain |
+| `hotline` | `string` | Support hotline number |
+| `lat` | `float64` | Country center latitude |
+| `lng` | `float64` | Country center longitude |
+| `name` | `string` | Country name |
+| `policy` | `string` | Privacy policy URL |
+| `terms` | `string` | Terms and conditions URL |
+| `website` | `string` | Website URL |
+| `zoom` | `int` | Default zoom level |
 
 #### Example: List
 
@@ -405,13 +405,13 @@ Create an instance: `reservation := client.Reservation(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bike_number` | `string` |  |
-| `expires_at` | `string` |  |
-| `reservation_id` | `string` |  |
-| `station_id` | `int` |  |
-| `status` | `string` |  |
-| `unlock_code` | `string` |  |
-| `user_id` | `string` |  |
+| `bike_number` | `string` | Reserved bike number |
+| `expires_at` | `string` | Reservation expiration time |
+| `reservation_id` | `string` | Unique reservation identifier |
+| `station_id` | `int` | Station identifier |
+| `status` | `string` | Reservation status |
+| `unlock_code` | `string` | Code to unlock the bike |
+| `user_id` | `string` | User identifier |
 
 #### Example: Create
 
@@ -440,11 +440,11 @@ Create an instance: `reservationStatus := client.ReservationStatus(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bike_number` | `string` |  |
-| `created_at` | `string` |  |
-| `expires_at` | `string` |  |
-| `reservation_id` | `string` |  |
-| `status` | `string` |  |
+| `bike_number` | `string` | Reserved bike number |
+| `created_at` | `string` | Reservation creation time |
+| `expires_at` | `string` | Reservation expiration time |
+| `reservation_id` | `string` | Reservation identifier |
+| `status` | `string` | Current reservation status |
 
 #### Example: Load
 

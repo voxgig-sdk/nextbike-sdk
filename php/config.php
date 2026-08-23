@@ -33,6 +33,9 @@ class NextbikeConfig
         return [
             "main" => [
                 "name" => "Nextbike",
+                "slug" => "nextbike",
+                "version" => "0.0.1",
+                "target" => "php",
             ],
             "feature" => [
                 "test" => [
@@ -65,46 +68,57 @@ class NextbikeConfig
             ],
             [
               'name' => 'country',
+              'short' => 'Country code',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'country_name',
+              'short' => 'Full country name',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'domain',
+              'short' => 'Country domain',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'hotline',
+              'short' => 'Support hotline number',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'lat',
+              'short' => 'Country center latitude',
               'type' => '`$NUMBER`',
             ],
             [
               'name' => 'lng',
+              'short' => 'Country center longitude',
               'type' => '`$NUMBER`',
             ],
             [
               'name' => 'name',
+              'short' => 'Country name',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'policy',
+              'short' => 'Privacy policy URL',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'terms',
+              'short' => 'Terms and conditions URL',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'website',
+              'short' => 'Website URL',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'zoom',
+              'short' => 'Default zoom level',
               'type' => '`$INTEGER`',
             ],
           ],
@@ -246,31 +260,38 @@ class NextbikeConfig
                   'type' => '`$STRING`',
                 ],
               ],
+              'short' => 'Reserved bike number',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'expires_at',
+              'short' => 'Reservation expiration time',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'reservation_id',
+              'short' => 'Unique reservation identifier',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'station_id',
+              'short' => 'Station identifier',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'status',
+              'short' => 'Reservation status',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'unlock_code',
+              'short' => 'Code to unlock the bike',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'user_id',
               'req' => true,
+              'short' => 'User identifier',
               'type' => '`$STRING`',
             ],
           ],
@@ -308,22 +329,27 @@ class NextbikeConfig
           'fields' => [
             [
               'name' => 'bike_number',
+              'short' => 'Reserved bike number',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'created_at',
+              'short' => 'Reservation creation time',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'expires_at',
+              'short' => 'Reservation expiration time',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'reservation_id',
+              'short' => 'Reservation identifier',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'status',
+              'short' => 'Current reservation status',
               'type' => '`$STRING`',
             ],
           ],
