@@ -28,6 +28,7 @@ module NextbikeConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {

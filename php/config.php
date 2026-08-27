@@ -42,6 +42,7 @@ class NextbikeConfig
           'options' => [
             'active' => false,
           ],
+          'transport' => 'base',
         ],
             ],
             "options" => [
