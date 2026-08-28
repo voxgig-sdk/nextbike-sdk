@@ -63,54 +63,22 @@ LiveData = Struct.new(
 
 # Request payload for LiveData#list.
 #
-# @!attribute [rw] cities
-#   @return [Array, nil]
+# @!attribute [rw] city
+#   @return [Integer, nil]
 #
-# @!attribute [rw] country
-#   @return [String, nil]
-#
-# @!attribute [rw] country_name
-#   @return [String, nil]
-#
-# @!attribute [rw] domain
-#   @return [String, nil]
-#
-# @!attribute [rw] hotline
-#   @return [String, nil]
+# @!attribute [rw] distance
+#   @return [Integer, nil]
 #
 # @!attribute [rw] lat
 #   @return [Float, nil]
 #
 # @!attribute [rw] lng
 #   @return [Float, nil]
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] policy
-#   @return [String, nil]
-#
-# @!attribute [rw] terms
-#   @return [String, nil]
-#
-# @!attribute [rw] website
-#   @return [String, nil]
-#
-# @!attribute [rw] zoom
-#   @return [Integer, nil]
 LiveDataListMatch = Struct.new(
-  :cities,
-  :country,
-  :country_name,
-  :domain,
-  :hotline,
+  :city,
+  :distance,
   :lat,
   :lng,
-  :name,
-  :policy,
-  :terms,
-  :website,
-  :zoom,
   keyword_init: true
 )
 
@@ -119,8 +87,25 @@ class Public
 end
 
 # Request payload for Public#load.
-class PublicLoadMatch
-end
+#
+# @!attribute [rw] city
+#   @return [Integer, nil]
+#
+# @!attribute [rw] distance
+#   @return [Integer, nil]
+#
+# @!attribute [rw] lat
+#   @return [Float, nil]
+#
+# @!attribute [rw] lng
+#   @return [Float, nil]
+PublicLoadMatch = Struct.new(
+  :city,
+  :distance,
+  :lat,
+  :lng,
+  keyword_init: true
+)
 
 # Reservation entity data model.
 #
@@ -215,26 +200,10 @@ ReservationStatus = Struct.new(
 
 # Request payload for ReservationStatus#load.
 #
-# @!attribute [rw] bike_number
-#   @return [String, nil]
-#
-# @!attribute [rw] created_at
-#   @return [String, nil]
-#
-# @!attribute [rw] expires_at
-#   @return [String, nil]
-#
 # @!attribute [rw] reservation_id
-#   @return [String, nil]
-#
-# @!attribute [rw] status
-#   @return [String, nil]
+#   @return [String]
 ReservationStatusLoadMatch = Struct.new(
-  :bike_number,
-  :created_at,
-  :expires_at,
   :reservation_id,
-  :status,
   keyword_init: true
 )
 

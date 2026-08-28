@@ -71,7 +71,7 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-reservationstatus, err := client.ReservationStatus(nil).Load(nil, nil)
+reservationstatus, err := client.ReservationStatus(nil).Load(map[string]any{"reservation_id": "example"}, nil)
 if err != nil {
     // handle err
     return
@@ -141,7 +141,7 @@ Create a mock client for unit testing — no server required:
 client := sdk.Test()
 
 reservationStatus, err := client.ReservationStatus(nil).Load(
-    nil, nil,
+    map[string]any{"reservation_id": "example"}, nil,
 )
 if err != nil {
     panic(err)
@@ -449,12 +449,35 @@ Create an instance: `reservationStatus := client.ReservationStatus(nil)`
 #### Example: Load
 
 ```go
-reservationStatus, err := client.ReservationStatus(nil).Load(nil, nil)
+reservationStatus, err := client.ReservationStatus(nil).Load(map[string]any{"reservation_id": "reservation_id"}, nil)
 if err != nil {
     panic(err)
 }
 fmt.Println(reservationStatus) // the loaded record
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
@@ -531,7 +554,7 @@ stores the returned data and match criteria internally.
 
 ```go
 reservationstatus := client.ReservationStatus(nil)
-reservationstatus.Load(nil, nil)
+reservationstatus.Load(map[string]any{"reservation_id": "example"}, nil)
 
 // reservationstatus.Data() now returns the reservationstatus data from the last load
 // reservationstatus.Match() returns the last match criteria

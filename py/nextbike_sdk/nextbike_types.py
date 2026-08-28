@@ -32,26 +32,21 @@ class LiveData(TypedDict, total=False):
 
 
 class LiveDataListMatch(TypedDict, total=False):
-    cities: list
-    country: str
-    country_name: str
-    domain: str
-    hotline: str
+    city: int
+    distance: int
     lat: float
     lng: float
-    name: str
-    policy: str
-    terms: str
-    website: str
-    zoom: int
 
 
 class Public(TypedDict):
     pass
 
 
-class PublicLoadMatch(TypedDict):
-    pass
+class PublicLoadMatch(TypedDict, total=False):
+    city: int
+    distance: int
+    lat: float
+    lng: float
 
 
 class ReservationRequired(TypedDict):
@@ -88,9 +83,5 @@ class ReservationStatus(TypedDict, total=False):
     status: str
 
 
-class ReservationStatusLoadMatch(TypedDict, total=False):
-    bike_number: str
-    created_at: str
-    expires_at: str
+class ReservationStatusLoadMatch(TypedDict):
     reservation_id: str
-    status: str

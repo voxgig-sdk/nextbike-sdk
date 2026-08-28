@@ -60,7 +60,7 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    reservationstatus = client.ReservationStatus().load()
+    reservationstatus = client.ReservationStatus().load({"reservation_id": "example"})
     print(reservationstatus)
 except Exception as err:
     print(f"load failed: {err}")
@@ -129,7 +129,7 @@ client = NextbikeSDK.test()
 
 # Entity ops return the ENTITY and raises on error;
 # call data_get() for the record.
-reservationstatus = client.ReservationStatus().load()
+reservationstatus = client.ReservationStatus().load({"reservation_id": "example"})
 # reservationstatus contains the mock response record
 ```
 
@@ -419,8 +419,31 @@ Create an instance: `reservation_status = client.ReservationStatus()`
 #### Example: Load
 
 ```python
-reservation_status = client.ReservationStatus().load()
+reservation_status = client.ReservationStatus().load({"reservation_id": "reservation_id"})
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
@@ -499,7 +522,7 @@ stores the returned data and match criteria internally.
 
 ```python
 reservationstatus = client.ReservationStatus()
-reservationstatus.load()
+reservationstatus.load({"reservation_id": "example"})
 
 # reservationstatus.data_get() now returns the reservationstatus data from the last load
 # reservationstatus.match_get() returns the last match criteria

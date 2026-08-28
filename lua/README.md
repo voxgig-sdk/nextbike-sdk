@@ -56,7 +56,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local reservationstatus, err = client:ReservationStatus():load()
+local reservationstatus, err = client:ReservationStatus():load({ reservation_id = "example" })
 if err then error(err) end
 ```
 
@@ -114,7 +114,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:ReservationStatus():load()
+local result, err = client:ReservationStatus():load({ reservation_id = "example" })
 -- result is the returned data; err is set on failure
 ```
 
@@ -407,8 +407,31 @@ Create an instance: `local reservation_status = client:ReservationStatus(nil)`
 #### Example: Load
 
 ```lua
-local reservation_status, err = client:ReservationStatus():load()
+local reservation_status, err = client:ReservationStatus():load({ reservation_id = "reservation_id" })
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
@@ -488,7 +511,7 @@ stores the returned data and match criteria internally.
 
 ```lua
 local reservationstatus = client:ReservationStatus()
-reservationstatus:load()
+reservationstatus:load({ reservation_id = "example" })
 
 -- reservationstatus:data_get() now returns the reservationstatus data from the last load
 -- reservationstatus:match_get() returns the last match criteria

@@ -32,18 +32,10 @@ class LiveData
 /** Request payload for LiveData#list. */
 class LiveDataListMatch
 {
-    public ?array $cities = null;
-    public ?string $country = null;
-    public ?string $country_name = null;
-    public ?string $domain = null;
-    public ?string $hotline = null;
+    public ?int $city = null;
+    public ?int $distance = null;
     public ?float $lat = null;
     public ?float $lng = null;
-    public ?string $name = null;
-    public ?string $policy = null;
-    public ?string $terms = null;
-    public ?string $website = null;
-    public ?int $zoom = null;
 }
 
 /** Public entity data model. */
@@ -54,6 +46,10 @@ class PublicType
 /** Request payload for Public#load. */
 class PublicLoadMatch
 {
+    public ?int $city = null;
+    public ?int $distance = null;
+    public ?float $lat = null;
+    public ?float $lng = null;
 }
 
 /** Reservation entity data model. */
@@ -93,10 +89,6 @@ class ReservationStatus
 /** Request payload for ReservationStatus#load. */
 class ReservationStatusLoadMatch
 {
-    public ?string $bike_number = null;
-    public ?string $created_at = null;
-    public ?string $expires_at = null;
-    public ?string $reservation_id = null;
-    public ?string $status = null;
+    public string $reservation_id;
 }
 

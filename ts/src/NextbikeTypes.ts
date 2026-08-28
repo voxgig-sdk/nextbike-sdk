@@ -21,24 +21,20 @@ export interface LiveData {
 }
 
 export interface LiveDataListMatch {
-  cities?: any[]
-  country?: string
-  country_name?: string
-  domain?: string
-  hotline?: string
+  city?: number
+  distance?: number
   lat?: number
   lng?: number
-  name?: string
-  policy?: string
-  terms?: string
-  website?: string
-  zoom?: number
 }
 
 export interface Public {
 }
 
 export interface PublicLoadMatch {
+  city?: number
+  distance?: number
+  lat?: number
+  lng?: number
 }
 
 export interface Reservation {
@@ -76,10 +72,6 @@ export interface ReservationStatus {
 }
 
 export interface ReservationStatusLoadMatch {
-  bike_number?: string
-  created_at?: string
-  expires_at?: string
-  reservation_id?: string
-  status?: string
+  reservation_id: string
 }
 

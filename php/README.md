@@ -55,7 +55,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $reservationstatus = $client->ReservationStatus()->load();
+    $reservationstatus = $client->ReservationStatus()->load(["reservation_id" => "example"]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -129,7 +129,7 @@ $client = NextbikeSDK::test();
 
 // Entity ops return the ENTITY (throws on error);
 // call data_get() for the mock record.
-$reservationstatus = $client->ReservationStatus()->load();
+$reservationstatus = $client->ReservationStatus()->load(["reservation_id" => "example"]);
 print_r($reservationstatus);
 ```
 
@@ -425,8 +425,31 @@ Create an instance: `$reservation_status = $client->ReservationStatus();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the ReservationStatus record (throws on error).
-$reservation_status = $client->ReservationStatus()->load();
+$reservation_status = $client->ReservationStatus()->load(["reservation_id" => "reservation_id"]);
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
@@ -506,7 +529,7 @@ stores the returned data and match criteria internally.
 
 ```php
 $reservationstatus = $client->ReservationStatus();
-$reservationstatus->load();
+$reservationstatus->load(["reservation_id" => "example"]);
 
 // $reservationstatus->data_get() now returns the reservationstatus data from the last load
 // $reservationstatus->match_get() returns the last match criteria

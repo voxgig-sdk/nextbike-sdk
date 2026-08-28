@@ -30,18 +30,10 @@ type LiveData struct {
 
 // LiveDataListMatch is the typed request payload for LiveData.ListTyped.
 type LiveDataListMatch struct {
-	Cities *[]any `json:"cities,omitempty"`
-	Country *string `json:"country,omitempty"`
-	CountryName *string `json:"country_name,omitempty"`
-	Domain *string `json:"domain,omitempty"`
-	Hotline *string `json:"hotline,omitempty"`
+	City *int `json:"city,omitempty"`
+	Distance *int `json:"distance,omitempty"`
 	Lat *float64 `json:"lat,omitempty"`
 	Lng *float64 `json:"lng,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Policy *string `json:"policy,omitempty"`
-	Terms *string `json:"terms,omitempty"`
-	Website *string `json:"website,omitempty"`
-	Zoom *int `json:"zoom,omitempty"`
 }
 
 // Public is the typed data model for the public entity.
@@ -50,6 +42,10 @@ type Public struct {
 
 // PublicLoadMatch is the typed request payload for Public.LoadTyped.
 type PublicLoadMatch struct {
+	City *int `json:"city,omitempty"`
+	Distance *int `json:"distance,omitempty"`
+	Lat *float64 `json:"lat,omitempty"`
+	Lng *float64 `json:"lng,omitempty"`
 }
 
 // Reservation is the typed data model for the reservation entity.
@@ -85,11 +81,7 @@ type ReservationStatus struct {
 
 // ReservationStatusLoadMatch is the typed request payload for ReservationStatus.LoadTyped.
 type ReservationStatusLoadMatch struct {
-	BikeNumber *string `json:"bike_number,omitempty"`
-	CreatedAt *string `json:"created_at,omitempty"`
-	ExpiresAt *string `json:"expires_at,omitempty"`
-	ReservationId *string `json:"reservation_id,omitempty"`
-	Status *string `json:"status,omitempty"`
+	ReservationId string `json:"reservation_id"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

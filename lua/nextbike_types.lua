@@ -21,22 +21,18 @@
 ---@field zoom? number
 
 ---@class LiveDataListMatch
----@field cities? table
----@field country? string
----@field country_name? string
----@field domain? string
----@field hotline? string
+---@field city? number
+---@field distance? number
 ---@field lat? number
 ---@field lng? number
----@field name? string
----@field policy? string
----@field terms? string
----@field website? string
----@field zoom? number
 
 ---@class Public
 
 ---@class PublicLoadMatch
+---@field city? number
+---@field distance? number
+---@field lat? number
+---@field lng? number
 
 ---@class Reservation
 ---@field bike_number? string
@@ -64,11 +60,7 @@
 ---@field status? string
 
 ---@class ReservationStatusLoadMatch
----@field bike_number? string
----@field created_at? string
----@field expires_at? string
----@field reservation_id? string
----@field status? string
+---@field reservation_id string
 
 local M = {}
 
