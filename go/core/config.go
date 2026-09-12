@@ -66,11 +66,13 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
+						"format": "double",
 						"name": "lat",
 						"short": "Country center latitude",
 						"type": "`$NUMBER`",
 					},
 					map[string]any{
+						"format": "double",
 						"name": "lng",
 						"short": "Country center longitude",
 						"type": "`$NUMBER`",
@@ -140,9 +142,13 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/maps/nextbike-live.json",
-								"parts": []any{
-									"maps",
-									"nextbike-live.json",
+								"segments": []any{
+									map[string]any{
+										"lit": "maps",
+									},
+									map[string]any{
+										"lit": "nextbike-live.json",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -155,6 +161,10 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.countries`",
+								},
+								"parts": []any{
+									"maps",
+									"nextbike-live.json",
 								},
 							},
 						},
@@ -205,9 +215,13 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/maps/nextbike-live.xml",
-								"parts": []any{
-									"maps",
-									"nextbike-live.xml",
+								"segments": []any{
+									map[string]any{
+										"lit": "maps",
+									},
+									map[string]any{
+										"lit": "nextbike-live.xml",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -220,6 +234,10 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"maps",
+									"nextbike-live.xml",
 								},
 							},
 						},
@@ -243,6 +261,7 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "expires_at",
 						"short": "Reservation expiration time",
 						"type": "`$STRING`",
@@ -285,9 +304,13 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "POST",
 								"orig": "/reservation/reserve",
-								"parts": []any{
-									"reservation",
-									"reserve",
+								"segments": []any{
+									map[string]any{
+										"lit": "reservation",
+									},
+									map[string]any{
+										"lit": "reserve",
+									},
 								},
 								"select": map[string]any{
 									"$action": "reserve",
@@ -295,6 +318,10 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"reservation",
+									"reserve",
 								},
 							},
 						},
@@ -312,11 +339,13 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "created_at",
 						"short": "Reservation creation time",
 						"type": "`$STRING`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "expires_at",
 						"short": "Reservation expiration time",
 						"type": "`$STRING`",
@@ -353,9 +382,13 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/reservation/status",
-								"parts": []any{
-									"reservation",
-									"status",
+								"segments": []any{
+									map[string]any{
+										"lit": "reservation",
+									},
+									map[string]any{
+										"lit": "status",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -365,6 +398,10 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"reservation",
+									"status",
 								},
 							},
 						},
@@ -376,6 +413,17 @@ func MakeConfig() map[string]any {
 			},
 		},
 	}
+}
+
+// The plugin definitions the model selected per feature, as []any so a
+// feature package can consume them without core naming its types. Empty
+// when no active feature declares active plugin groups for this target.
+var featurePlugins = map[string][]any{
+}
+
+// FeaturePlugins is the definitions list for one feature's chain.
+func FeaturePlugins(name string) []any {
+	return featurePlugins[name]
 }
 
 var (

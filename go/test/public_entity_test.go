@@ -50,7 +50,7 @@ func TestPublicEntity(t *testing.T) {
 		client := setup.client
 
 		// Bootstrap entity data from existing test data (no create step in flow).
-		publicRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.public", setup.data)))
+		publicRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.public")))
 		var publicRef01Data map[string]any
 		if len(publicRef01DataRaw) > 0 {
 			publicRef01Data = core.ToMapAny(publicRef01DataRaw[0][1])
@@ -97,7 +97,7 @@ func publicBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"public01", "public02", "public03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -117,7 +117,7 @@ func publicBasicSetup(extra map[string]any) *entityTestSetup {
 		"NEXTBIKE_TEST_PUBLIC_ENTID": idmap,
 		"NEXTBIKE_TEST_LIVE":      "FALSE",
 		"NEXTBIKE_TEST_EXPLAIN":   "FALSE",
-		"NEXTBIKE_APIKEY":         "NONE",
+		"NEXTBIKE_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["NEXTBIKE_TEST_PUBLIC_ENTID"])
@@ -126,11 +126,23 @@ func publicBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["NEXTBIKE_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["NEXTBIKE_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewNextbikeSDK(core.ToMapAny(mergedOpts))
 	}

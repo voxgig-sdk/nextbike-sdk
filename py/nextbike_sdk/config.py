@@ -1,6 +1,14 @@
 # Nextbike SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -83,11 +91,13 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "double",
             "name": "lat",
             "short": "Country center latitude",
             "type": "`$NUMBER`",
           },
           {
+            "format": "double",
             "name": "lng",
             "short": "Country center longitude",
             "type": "`$NUMBER`",
@@ -157,9 +167,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/maps/nextbike-live.json",
-                "parts": [
-                  "maps",
-                  "nextbike-live.json",
+                "segments": [
+                  {
+                    "lit": "maps",
+                  },
+                  {
+                    "lit": "nextbike-live.json",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -173,6 +187,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.countries`",
                 },
+                "parts": [
+                  "maps",
+                  "nextbike-live.json",
+                ],
               },
             ],
           },
@@ -222,9 +240,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/maps/nextbike-live.xml",
-                "parts": [
-                  "maps",
-                  "nextbike-live.xml",
+                "segments": [
+                  {
+                    "lit": "maps",
+                  },
+                  {
+                    "lit": "nextbike-live.xml",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -238,6 +260,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "maps",
+                  "nextbike-live.xml",
+                ],
               },
             ],
           },
@@ -260,6 +286,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "expires_at",
             "short": "Reservation expiration time",
             "type": "`$STRING`",
@@ -302,9 +329,13 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/reservation/reserve",
-                "parts": [
-                  "reservation",
-                  "reserve",
+                "segments": [
+                  {
+                    "lit": "reservation",
+                  },
+                  {
+                    "lit": "reserve",
+                  },
                 ],
                 "select": {
                   "$action": "reserve",
@@ -313,6 +344,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "reservation",
+                  "reserve",
+                ],
               },
             ],
           },
@@ -329,11 +364,13 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "short": "Reservation creation time",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "expires_at",
             "short": "Reservation expiration time",
             "type": "`$STRING`",
@@ -370,9 +407,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/reservation/status",
-                "parts": [
-                  "reservation",
-                  "status",
+                "segments": [
+                  {
+                    "lit": "reservation",
+                  },
+                  {
+                    "lit": "status",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -383,6 +424,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "reservation",
+                  "status",
+                ],
               },
             ],
           },

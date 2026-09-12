@@ -18,6 +18,7 @@ main: kit: entity: reservation: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "expires_at"
       req: false
       short: "Reservation expiration time"
@@ -63,9 +64,13 @@ main: kit: entity: reservation: {
         {
           method: "POST"
           orig: "/reservation/reserve"
-          parts: [
-            "reservation"
-            "reserve"
+          segments: [
+            {
+              lit: "reservation"
+            }
+            {
+              lit: "reserve"
+            }
           ]
           select: {
             "$action": "reserve"

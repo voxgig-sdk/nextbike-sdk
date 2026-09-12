@@ -12,12 +12,14 @@ main: kit: entity: reservation_status: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "created_at"
       req: false
       short: "Reservation creation time"
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "expires_at"
       req: false
       short: "Reservation expiration time"
@@ -56,9 +58,13 @@ main: kit: entity: reservation_status: {
           }
           method: "GET"
           orig: "/reservation/status"
-          parts: [
-            "reservation"
-            "status"
+          segments: [
+            {
+              lit: "reservation"
+            }
+            {
+              lit: "status"
+            }
           ]
           select: {
             exist: [

@@ -52,7 +52,7 @@ func TestReservationEntity(t *testing.T) {
 		// CREATE
 		reservationRef01Ent := client.Reservation(nil)
 		reservationRef01Data := core.ToMapAny(vs.GetProp(
-			vs.GetPath([]any{"new", "reservation"}, setup.data), "reservation_ref01"))
+			vs.GetPath(setup.data, []any{"new", "reservation"}), "reservation_ref01"))
 
 		reservationRef01DataResult, err := reservationRef01Ent.Create(reservationRef01Data, nil)
 		if err != nil {
@@ -90,7 +90,7 @@ func reservationBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"reservation01", "reservation02", "reservation03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -110,7 +110,7 @@ func reservationBasicSetup(extra map[string]any) *entityTestSetup {
 		"NEXTBIKE_TEST_RESERVATION_ENTID": idmap,
 		"NEXTBIKE_TEST_LIVE":      "FALSE",
 		"NEXTBIKE_TEST_EXPLAIN":   "FALSE",
-		"NEXTBIKE_APIKEY":         "NONE",
+		"NEXTBIKE_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["NEXTBIKE_TEST_RESERVATION_ENTID"])
@@ -119,11 +119,23 @@ func reservationBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["NEXTBIKE_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["NEXTBIKE_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewNextbikeSDK(core.ToMapAny(mergedOpts))
 	}

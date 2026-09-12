@@ -35,12 +35,14 @@ main: kit: entity: live_data: {
       type: "`$STRING`"
     }
     {
+      format: "double"
       name: "lat"
       req: false
       short: "Country center latitude"
       type: "`$NUMBER`"
     }
     {
+      format: "double"
       name: "lng"
       req: false
       short: "Country center longitude"
@@ -119,9 +121,13 @@ main: kit: entity: live_data: {
           }
           method: "GET"
           orig: "/maps/nextbike-live.json"
-          parts: [
-            "maps"
-            "nextbike-live.json"
+          segments: [
+            {
+              lit: "maps"
+            }
+            {
+              lit: "nextbike-live.json"
+            }
           ]
           select: {
             exist: [

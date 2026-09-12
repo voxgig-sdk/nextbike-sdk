@@ -88,11 +88,13 @@ class NextbikeConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'double',
               'name' => 'lat',
               'short' => 'Country center latitude',
               'type' => '`$NUMBER`',
             ],
             [
+              'format' => 'double',
               'name' => 'lng',
               'short' => 'Country center longitude',
               'type' => '`$NUMBER`',
@@ -162,9 +164,13 @@ class NextbikeConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/maps/nextbike-live.json',
-                  'parts' => [
-                    'maps',
-                    'nextbike-live.json',
+                  'segments' => [
+                    [
+                      'lit' => 'maps',
+                    ],
+                    [
+                      'lit' => 'nextbike-live.json',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -177,6 +183,10 @@ class NextbikeConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.countries`',
+                  ],
+                  'parts' => [
+                    'maps',
+                    'nextbike-live.json',
                   ],
                 ],
               ],
@@ -227,9 +237,13 @@ class NextbikeConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/maps/nextbike-live.xml',
-                  'parts' => [
-                    'maps',
-                    'nextbike-live.xml',
+                  'segments' => [
+                    [
+                      'lit' => 'maps',
+                    ],
+                    [
+                      'lit' => 'nextbike-live.xml',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -242,6 +256,10 @@ class NextbikeConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'maps',
+                    'nextbike-live.xml',
                   ],
                 ],
               ],
@@ -265,6 +283,7 @@ class NextbikeConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'expires_at',
               'short' => 'Reservation expiration time',
               'type' => '`$STRING`',
@@ -307,9 +326,13 @@ class NextbikeConfig
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/reservation/reserve',
-                  'parts' => [
-                    'reservation',
-                    'reserve',
+                  'segments' => [
+                    [
+                      'lit' => 'reservation',
+                    ],
+                    [
+                      'lit' => 'reserve',
+                    ],
                   ],
                   'select' => [
                     '$action' => 'reserve',
@@ -317,6 +340,10 @@ class NextbikeConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'reservation',
+                    'reserve',
                   ],
                 ],
               ],
@@ -334,11 +361,13 @@ class NextbikeConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'created_at',
               'short' => 'Reservation creation time',
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'expires_at',
               'short' => 'Reservation expiration time',
               'type' => '`$STRING`',
@@ -375,9 +404,13 @@ class NextbikeConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/reservation/status',
-                  'parts' => [
-                    'reservation',
-                    'status',
+                  'segments' => [
+                    [
+                      'lit' => 'reservation',
+                    ],
+                    [
+                      'lit' => 'status',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -387,6 +420,10 @@ class NextbikeConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'reservation',
+                    'status',
                   ],
                 ],
               ],

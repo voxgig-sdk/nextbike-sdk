@@ -81,7 +81,7 @@ def public_basic_setup(extra)
     "NEXTBIKE_TEST_PUBLIC_ENTID" => idmap,
     "NEXTBIKE_TEST_LIVE" => "FALSE",
     "NEXTBIKE_TEST_EXPLAIN" => "FALSE",
-    "NEXTBIKE_APIKEY" => "NONE",
+    "NEXTBIKE_APIKEY" => "",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -92,6 +92,9 @@ def public_basic_setup(extra)
 
   if env["NEXTBIKE_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
+      # FIRST, so the generated fields below win: sdk-test-control.json's
+      # test.client.options adds to the live client, it does not redirect it.
+      Runner.live_client_options,
       {
         "apikey" => env["NEXTBIKE_APIKEY"],
       },

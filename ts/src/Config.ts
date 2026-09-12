@@ -10,6 +10,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -104,11 +115,13 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "double",
           "name": "lat",
           "short": "Country center latitude",
           "type": "`$NUMBER`"
         },
         {
+          "format": "double",
           "name": "lng",
           "short": "Country center longitude",
           "type": "`$NUMBER`"
@@ -178,9 +191,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/maps/nextbike-live.json",
-              "parts": [
-                "maps",
-                "nextbike-live.json"
+              "segments": [
+                {
+                  "lit": "maps"
+                },
+                {
+                  "lit": "nextbike-live.json"
+                }
               ],
               "select": {
                 "exist": [
@@ -193,7 +210,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.countries`"
-              }
+              },
+              "parts": [
+                "maps",
+                "nextbike-live.json"
+              ]
             }
           ]
         }
@@ -243,9 +264,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/maps/nextbike-live.xml",
-              "parts": [
-                "maps",
-                "nextbike-live.xml"
+              "segments": [
+                {
+                  "lit": "maps"
+                },
+                {
+                  "lit": "nextbike-live.xml"
+                }
               ],
               "select": {
                 "exist": [
@@ -258,7 +283,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "maps",
+                "nextbike-live.xml"
+              ]
             }
           ]
         }
@@ -281,6 +310,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "expires_at",
           "short": "Reservation expiration time",
           "type": "`$STRING`"
@@ -323,9 +353,13 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/reservation/reserve",
-              "parts": [
-                "reservation",
-                "reserve"
+              "segments": [
+                {
+                  "lit": "reservation"
+                },
+                {
+                  "lit": "reserve"
+                }
               ],
               "select": {
                 "$action": "reserve"
@@ -333,7 +367,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "reservation",
+                "reserve"
+              ]
             }
           ]
         }
@@ -350,11 +388,13 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "short": "Reservation creation time",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "expires_at",
           "short": "Reservation expiration time",
           "type": "`$STRING`"
@@ -391,9 +431,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/reservation/status",
-              "parts": [
-                "reservation",
-                "status"
+              "segments": [
+                {
+                  "lit": "reservation"
+                },
+                {
+                  "lit": "status"
+                }
               ],
               "select": {
                 "exist": [
@@ -403,7 +447,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "reservation",
+                "status"
+              ]
             }
           ]
         }
@@ -419,6 +467,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 

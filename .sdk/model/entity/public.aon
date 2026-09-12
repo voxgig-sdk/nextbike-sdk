@@ -45,9 +45,13 @@ main: kit: entity: public: {
           }
           method: "GET"
           orig: "/maps/nextbike-live.xml"
-          parts: [
-            "maps"
-            "nextbike-live.xml"
+          segments: [
+            {
+              lit: "maps"
+            }
+            {
+              lit: "nextbike-live.xml"
+            }
           ]
           select: {
             exist: [

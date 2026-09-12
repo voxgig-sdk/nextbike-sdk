@@ -74,11 +74,13 @@ module NextbikeConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "double",
               "name" => "lat",
               "short" => "Country center latitude",
               "type" => "`$NUMBER`",
             },
             {
+              "format" => "double",
               "name" => "lng",
               "short" => "Country center longitude",
               "type" => "`$NUMBER`",
@@ -148,9 +150,13 @@ module NextbikeConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/maps/nextbike-live.json",
-                  "parts" => [
-                    "maps",
-                    "nextbike-live.json",
+                  "segments" => [
+                    {
+                      "lit" => "maps",
+                    },
+                    {
+                      "lit" => "nextbike-live.json",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -164,6 +170,10 @@ module NextbikeConfig
                     "req" => "`reqdata`",
                     "res" => "`body.countries`",
                   },
+                  "parts" => [
+                    "maps",
+                    "nextbike-live.json",
+                  ],
                 },
               ],
             },
@@ -213,9 +223,13 @@ module NextbikeConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/maps/nextbike-live.xml",
-                  "parts" => [
-                    "maps",
-                    "nextbike-live.xml",
+                  "segments" => [
+                    {
+                      "lit" => "maps",
+                    },
+                    {
+                      "lit" => "nextbike-live.xml",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -229,6 +243,10 @@ module NextbikeConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "maps",
+                    "nextbike-live.xml",
+                  ],
                 },
               ],
             },
@@ -251,6 +269,7 @@ module NextbikeConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "expires_at",
               "short" => "Reservation expiration time",
               "type" => "`$STRING`",
@@ -293,9 +312,13 @@ module NextbikeConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/reservation/reserve",
-                  "parts" => [
-                    "reservation",
-                    "reserve",
+                  "segments" => [
+                    {
+                      "lit" => "reservation",
+                    },
+                    {
+                      "lit" => "reserve",
+                    },
                   ],
                   "select" => {
                     "$action" => "reserve",
@@ -304,6 +327,10 @@ module NextbikeConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "reservation",
+                    "reserve",
+                  ],
                 },
               ],
             },
@@ -320,11 +347,13 @@ module NextbikeConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "short" => "Reservation creation time",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "expires_at",
               "short" => "Reservation expiration time",
               "type" => "`$STRING`",
@@ -361,9 +390,13 @@ module NextbikeConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/reservation/status",
-                  "parts" => [
-                    "reservation",
-                    "status",
+                  "segments" => [
+                    {
+                      "lit" => "reservation",
+                    },
+                    {
+                      "lit" => "status",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -374,6 +407,10 @@ module NextbikeConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "reservation",
+                    "status",
+                  ],
                 },
               ],
             },
