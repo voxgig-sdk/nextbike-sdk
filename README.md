@@ -105,7 +105,7 @@ local result, err = client:ReservationStatus():load({ reservation_id = "example"
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/nextbike` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nextbike-sdk/releases) |
+| TypeScript | `@voxgig-sdk/nextbike-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nextbike-sdk/releases) |
 | Python | `voxgig-sdk-nextbike` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nextbike-sdk/releases) |
 | PHP | `voxgig-sdk/nextbike` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nextbike-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/nextbike-sdk/go` | `go get github.com/voxgig-sdk/nextbike-sdk/go@latest` |
@@ -119,7 +119,7 @@ local result, err = client:ReservationStatus():load({ reservation_id = "example"
 ### TypeScript
 
 ```ts
-import { NextbikeSDK } from '@voxgig-sdk/nextbike'
+import { NextbikeSDK } from '@voxgig-sdk/nextbike-sdk'
 
 const client = new NextbikeSDK({
   apikey: process.env.NEXTBIKE_APIKEY,

@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { NextbikeSDK } from '@voxgig-sdk/nextbike'
+import { NextbikeSDK } from '@voxgig-sdk/nextbike-sdk'
 
 const client = new NextbikeSDK({
   apikey: process.env.NEXTBIKE_APIKEY,
@@ -551,7 +551,7 @@ nextbike/
 Import the SDK from the package root:
 
 ```ts
-import { NextbikeSDK } from '@voxgig-sdk/nextbike'
+import { NextbikeSDK } from '@voxgig-sdk/nextbike-sdk'
 ```
 
 ### Entity state
