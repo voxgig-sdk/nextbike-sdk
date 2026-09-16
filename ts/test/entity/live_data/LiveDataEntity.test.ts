@@ -5,6 +5,8 @@ import * as Fs from 'node:fs'
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
 
 
 import { NextbikeSDK, BaseFeature, stdutil } from '../../..'
@@ -47,16 +49,13 @@ describe('LiveDataEntity', async () => {
 
     const live = 'TRUE' === process.env.NEXTBIKE_TEST_LIVE
     for (const op of ['list']) {
-      if (maybeSkipControl(t, 'entityOp', 'live_data.' + op, live)) return
+      if (!live && maybeSkipControl(t, 'entityOp', 'live_data.' + op, live)) return
     }
 
+    
     const setup = basicSetup()
-    // The basic flow consumes synthetic IDs and field values from the
-    // fixture (entity TestData.json). Those don't exist on the live API.
-    // Skip live runs unless the user provided a real ENTID env override.
-    if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set NEXTBIKE_TEST_LIVE_DATA_ENTID JSON to run live')
-      return
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"cities","req":false,"type":"`$ARRAY`","index$":0},{"active":true,"name":"country","req":false,"short":"Country code","type":"`$STRING`","index$":1},{"active":true,"name":"country_name","req":false,"short":"Full country name","type":"`$STRING`","index$":2},{"active":true,"name":"domain","req":false,"short":"Country domain","type":"`$STRING`","index$":3},{"active":true,"name":"hotline","req":false,"short":"Support hotline number","type":"`$STRING`","index$":4},{"active":true,"format":"double","name":"lat","req":false,"short":"Country center latitude","type":"`$NUMBER`","index$":5},{"active":true,"format":"double","name":"lng","req":false,"short":"Country center longitude","type":"`$NUMBER`","index$":6},{"active":true,"name":"name","req":false,"short":"Country name","type":"`$STRING`","index$":7},{"active":true,"name":"policy","req":false,"short":"Privacy policy URL","type":"`$STRING`","index$":8},{"active":true,"name":"terms","req":false,"short":"Terms and conditions URL","type":"`$STRING`","index$":9},{"active":true,"name":"website","req":false,"short":"Website URL","type":"`$STRING`","index$":10},{"active":true,"name":"zoom","req":false,"short":"Default zoom level","type":"`$INTEGER`","index$":11}],"name":"live_data","op":{"list":{"input":"data","name":"list","points":[{"active":true,"args":{"query":[{"active":true,"kind":"query","name":"city","orig":"city","reqd":false,"type":"`$INTEGER`","index$":0},{"active":true,"example":5000,"kind":"query","name":"distance","orig":"distance","reqd":false,"type":"`$INTEGER`","index$":1},{"active":true,"kind":"query","name":"lat","orig":"lat","reqd":false,"type":"`$NUMBER`","index$":2},{"active":true,"kind":"query","name":"lng","orig":"lng","reqd":false,"type":"`$NUMBER`","index$":3}]},"contract":{"id":"GET /maps/nextbike-live.json","json":"{\"operationId\":\"getLiveData\",\"parameters\":[{\"description\":\"Filter by city ID\",\"in\":\"query\",\"name\":\"city\",\"required\":false,\"schema\":{\"type\":\"integer\"}},{\"description\":\"Latitude for geographic filtering\",\"in\":\"query\",\"name\":\"lat\",\"required\":false,\"schema\":{\"format\":\"double\",\"type\":\"number\"}},{\"description\":\"Longitude for geographic filtering\",\"in\":\"query\",\"name\":\"lng\",\"required\":false,\"schema\":{\"format\":\"double\",\"type\":\"number\"}},{\"description\":\"Search radius in meters when using lat/lng\",\"in\":\"query\",\"name\":\"distance\",\"required\":false,\"schema\":{\"default\":5000,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"countries\":{\"items\":{\"properties\":{\"cities\":{\"items\":{\"properties\":{\"alias\":{\"description\":\"City alias\",\"type\":\"string\"},\"available_bikes\":{\"description\":\"Number of available bikes\",\"type\":\"integer\"},\"booked_bikes\":{\"description\":\"Number of currently booked bikes\",\"type\":\"integer\"},\"bounds\":{\"properties\":{\"north_east\":{\"properties\":{\"lat\":{\"format\":\"double\",\"type\":\"number\"},\"lng\":{\"format\":\"double\",\"type\":\"number\"}},\"type\":\"object\"},\"south_west\":{\"properties\":{\"lat\":{\"format\":\"double\",\"type\":\"number\"},\"lng\":{\"format\":\"double\",\"type\":\"number\"}},\"type\":\"object\"}},\"type\":\"object\"},\"break\":{\"description\":\"Service break status\",\"type\":\"boolean\"},\"lat\":{\"description\":\"City center latitude\",\"format\":\"double\",\"type\":\"number\"},\"lng\":{\"description\":\"City center longitude\",\"format\":\"double\",\"type\":\"number\"},\"maps_icon\":{\"description\":\"Icon URL for maps\",\"type\":\"string\"},\"name\":{\"description\":\"City name\",\"type\":\"string\"},\"num_places\":{\"description\":\"Number of stations\",\"type\":\"integer\"},\"places\":{\"items\":{\"properties\":{\"bike_list\":{\"items\":{\"properties\":{\"active\":{\"description\":\"Bike is active\",\"type\":\"boolean\"},\"bike_type\":{\"description\":\"Type of bike\",\"type\":\"integer\"},\"boardcomputer\":{\"description\":\"Board computer identifier\",\"type\":\"integer\"},\"electric_lock\":{\"description\":\"Has electric lock\",\"type\":\"boolean\"},\"lock_types\":{\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"number\":{\"description\":\"Bike number\",\"type\":\"string\"},\"state\":{\"description\":\"Current state of the bike\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"bike_racks\":{\"description\":\"Total bike rack capacity\",\"type\":\"integer\"},\"bikes\":{\"description\":\"Number of available bikes\",\"type\":\"integer\"},\"bikes_available_to_rent\":{\"description\":\"Bikes available for rental\",\"type\":\"integer\"},\"free_racks\":{\"description\":\"Number of free racks\",\"type\":\"integer\"},\"lat\":{\"description\":\"Station latitude\",\"format\":\"double\",\"type\":\"number\"},\"lng\":{\"description\":\"Station longitude\",\"format\":\"double\",\"type\":\"number\"},\"maintenance\":{\"description\":\"Station under maintenance\",\"type\":\"boolean\"},\"name\":{\"description\":\"Station name\",\"type\":\"string\"},\"number\":{\"description\":\"Station number\",\"type\":\"integer\"},\"spot\":{\"description\":\"Is flex zone/spot\",\"type\":\"boolean\"},\"terminal_type\":{\"description\":\"Type of terminal\",\"type\":\"string\"},\"uid\":{\"description\":\"Unique station identifier\",\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"},\"refresh_rate\":{\"description\":\"Data refresh rate in seconds\",\"type\":\"integer\"},\"set_point_bikes\":{\"description\":\"Target number of bikes\",\"type\":\"integer\"},\"uid\":{\"description\":\"Unique city identifier\",\"type\":\"integer\"},\"zoom\":{\"description\":\"Default zoom level\",\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"},\"country\":{\"description\":\"Country code\",\"type\":\"string\"},\"country_name\":{\"description\":\"Full country name\",\"type\":\"string\"},\"domain\":{\"description\":\"Country domain\",\"type\":\"string\"},\"hotline\":{\"description\":\"Support hotline number\",\"type\":\"string\"},\"lat\":{\"description\":\"Country center latitude\",\"format\":\"double\",\"type\":\"number\"},\"lng\":{\"description\":\"Country center longitude\",\"format\":\"double\",\"type\":\"number\"},\"name\":{\"description\":\"Country name\",\"type\":\"string\"},\"policy\":{\"description\":\"Privacy policy URL\",\"type\":\"string\"},\"terms\":{\"description\":\"Terms and conditions URL\",\"type\":\"string\"},\"website\":{\"description\":\"Website URL\",\"type\":\"string\"},\"zoom\":{\"description\":\"Default zoom level\",\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"}}},\"description\":\"Successful response with live bike sharing data\"},\"400\":{\"description\":\"Bad request - Invalid parameters\"},\"500\":{\"description\":\"Internal server error\"}},\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for accessing restricted endpoints\",\"in\":\"query\",\"name\":\"apikey\",\"type\":\"apiKey\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/maps/nextbike-live.json","segments":[{"lit":"maps"},{"lit":"nextbike-live.json"}],"select":{"exist":["city","distance","lat","lng"]},"transform":{"req":"`reqdata`","res":"`body.countries`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"live_data","name__orig":"live_data","Name":"LiveData","name_":"live_data","name-":"live-data","NAME":"LIVE_DATA","index$":0}, {"active":true,"entity":"live_data","key$":"BasicLiveDataFlow","kind":"basic","name":"BasicLiveDataFlow","param":{},"step":[{"active":true,"data":{},"input":{},"match":{},"op":"list","spec":[],"valid":[{"apply":"ItemExists","def":{"ref":"live_data_ref01"}}],"index$":0}]}, 'LiveData')
     }
     const client = setup.client
     const struct = setup.struct
@@ -109,13 +108,6 @@ function basicSetup(extra?: any) {
       }]
     })
 
-  // Detect whether the user provided a real ENTID JSON via env var. The
-  // basic flow consumes synthetic IDs from the fixture file; without an
-  // override those synthetic IDs reach the live API and 4xx. Surface this
-  // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['NEXTBIKE_TEST_LIVE_DATA_ENTID']
-  const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
-
   const env = envOverride({
     'NEXTBIKE_TEST_LIVE_DATA_ENTID': idmap,
     'NEXTBIKE_TEST_LIVE': 'FALSE',
@@ -127,7 +119,13 @@ function basicSetup(extra?: any) {
 
   const live = 'TRUE' === env.NEXTBIKE_TEST_LIVE
 
+  const transport = createLiveTransport()
   if (live) {
+    const rawIds = process.env['NEXTBIKE_TEST_LIVE_DATA_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new NextbikeSDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -140,7 +138,8 @@ function basicSetup(extra?: any) {
       // argument at all - so a bare 'extra' silently discarded the apikey
       // and server values above and handed the SDK undefined. Harmless
       // while there was nothing in that object; not harmless now.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -153,7 +152,7 @@ function basicSetup(extra?: any) {
     data: entityData,
     explain: 'TRUE' === env.NEXTBIKE_TEST_EXPLAIN,
     live,
-    syntheticOnly: live && !idmapOverridden,
+    transport,
     now: Date.now(),
   }
 

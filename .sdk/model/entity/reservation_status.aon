@@ -56,6 +56,12 @@ main: kit: entity: reservation_status: {
               }
             ]
           }
+          contract: {
+            id: "GET /reservation/status"
+            json: "{\"operationId\":\"getReservationStatus\",\"parameters\":[{\"description\":\"ID of the reservation to check\",\"in\":\"query\",\"name\":\"reservation_id\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"bike_number\":{\"description\":\"Reserved bike number\",\"type\":\"string\"},\"created_at\":{\"description\":\"Reservation creation time\",\"format\":\"date-time\",\"type\":\"string\"},\"expires_at\":{\"description\":\"Reservation expiration time\",\"format\":\"date-time\",\"type\":\"string\"},\"reservation_id\":{\"description\":\"Reservation identifier\",\"type\":\"string\"},\"status\":{\"description\":\"Current reservation status\",\"enum\":[\"active\",\"expired\",\"cancelled\",\"completed\"],\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Reservation status retrieved successfully\"},\"400\":{\"description\":\"Bad request - Invalid parameters\"},\"401\":{\"description\":\"Unauthorized - Invalid or missing API key\"},\"404\":{\"description\":\"Reservation not found\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for accessing restricted endpoints\",\"in\":\"query\",\"name\":\"apikey\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/reservation/status"
           segments: [

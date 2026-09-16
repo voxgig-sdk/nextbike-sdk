@@ -1,12 +1,18 @@
 # Nextbike SDK feature factory
 
 from nextbike_sdk.feature.base_feature import NextbikeBaseFeature
+from nextbike_sdk.feature.ratelimit_feature import NextbikeRatelimitFeature
+from nextbike_sdk.feature.retry_feature import NextbikeRetryFeature
 from nextbike_sdk.feature.test_feature import NextbikeTestFeature
+from nextbike_sdk.feature.timeout_feature import NextbikeTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: NextbikeBaseFeature(),
+    "ratelimit": lambda: NextbikeRatelimitFeature(),
+    "retry": lambda: NextbikeRetryFeature(),
     "test": lambda: NextbikeTestFeature(),
+    "timeout": lambda: NextbikeTimeoutFeature(),
 }
 
 

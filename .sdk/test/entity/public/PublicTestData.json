@@ -16,5 +16,82 @@
     "public": {
       "public_ref01": {}
     }
+  },
+  "requests": {
+    "GET /maps/nextbike-live.xml": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getLiveDataXML",
+        "parameters": [
+          {
+            "description": "Filter by city ID",
+            "in": "query",
+            "name": "city",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Latitude for geographic filtering",
+            "in": "query",
+            "name": "lat",
+            "required": false,
+            "schema": {
+              "format": "double",
+              "type": "number"
+            }
+          },
+          {
+            "description": "Longitude for geographic filtering",
+            "in": "query",
+            "name": "lng",
+            "required": false,
+            "schema": {
+              "format": "double",
+              "type": "number"
+            }
+          },
+          {
+            "description": "Search radius in meters when using lat/lng",
+            "in": "query",
+            "name": "distance",
+            "required": false,
+            "schema": {
+              "default": 5000,
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Successful response with live bike sharing data in XML format"
+          },
+          "400": {
+            "description": "Bad request - Invalid parameters"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for accessing restricted endpoints",
+            "in": "query",
+            "name": "apikey",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

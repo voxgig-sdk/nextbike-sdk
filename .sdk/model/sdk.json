@@ -24,7 +24,71 @@
         "repr": "auto"
       },
       "contributor": {},
-      "docs": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "live_data": {
           "active": true,
@@ -163,6 +227,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /maps/nextbike-live.json",
+                    "json": "{\"operationId\":\"getLiveData\",\"parameters\":[{\"description\":\"Filter by city ID\",\"in\":\"query\",\"name\":\"city\",\"required\":false,\"schema\":{\"type\":\"integer\"}},{\"description\":\"Latitude for geographic filtering\",\"in\":\"query\",\"name\":\"lat\",\"required\":false,\"schema\":{\"format\":\"double\",\"type\":\"number\"}},{\"description\":\"Longitude for geographic filtering\",\"in\":\"query\",\"name\":\"lng\",\"required\":false,\"schema\":{\"format\":\"double\",\"type\":\"number\"}},{\"description\":\"Search radius in meters when using lat/lng\",\"in\":\"query\",\"name\":\"distance\",\"required\":false,\"schema\":{\"default\":5000,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"countries\":{\"items\":{\"properties\":{\"cities\":{\"items\":{\"properties\":{\"alias\":{\"description\":\"City alias\",\"type\":\"string\"},\"available_bikes\":{\"description\":\"Number of available bikes\",\"type\":\"integer\"},\"booked_bikes\":{\"description\":\"Number of currently booked bikes\",\"type\":\"integer\"},\"bounds\":{\"properties\":{\"north_east\":{\"properties\":{\"lat\":{\"format\":\"double\",\"type\":\"number\"},\"lng\":{\"format\":\"double\",\"type\":\"number\"}},\"type\":\"object\"},\"south_west\":{\"properties\":{\"lat\":{\"format\":\"double\",\"type\":\"number\"},\"lng\":{\"format\":\"double\",\"type\":\"number\"}},\"type\":\"object\"}},\"type\":\"object\"},\"break\":{\"description\":\"Service break status\",\"type\":\"boolean\"},\"lat\":{\"description\":\"City center latitude\",\"format\":\"double\",\"type\":\"number\"},\"lng\":{\"description\":\"City center longitude\",\"format\":\"double\",\"type\":\"number\"},\"maps_icon\":{\"description\":\"Icon URL for maps\",\"type\":\"string\"},\"name\":{\"description\":\"City name\",\"type\":\"string\"},\"num_places\":{\"description\":\"Number of stations\",\"type\":\"integer\"},\"places\":{\"items\":{\"properties\":{\"bike_list\":{\"items\":{\"properties\":{\"active\":{\"description\":\"Bike is active\",\"type\":\"boolean\"},\"bike_type\":{\"description\":\"Type of bike\",\"type\":\"integer\"},\"boardcomputer\":{\"description\":\"Board computer identifier\",\"type\":\"integer\"},\"electric_lock\":{\"description\":\"Has electric lock\",\"type\":\"boolean\"},\"lock_types\":{\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"number\":{\"description\":\"Bike number\",\"type\":\"string\"},\"state\":{\"description\":\"Current state of the bike\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"bike_racks\":{\"description\":\"Total bike rack capacity\",\"type\":\"integer\"},\"bikes\":{\"description\":\"Number of available bikes\",\"type\":\"integer\"},\"bikes_available_to_rent\":{\"description\":\"Bikes available for rental\",\"type\":\"integer\"},\"free_racks\":{\"description\":\"Number of free racks\",\"type\":\"integer\"},\"lat\":{\"description\":\"Station latitude\",\"format\":\"double\",\"type\":\"number\"},\"lng\":{\"description\":\"Station longitude\",\"format\":\"double\",\"type\":\"number\"},\"maintenance\":{\"description\":\"Station under maintenance\",\"type\":\"boolean\"},\"name\":{\"description\":\"Station name\",\"type\":\"string\"},\"number\":{\"description\":\"Station number\",\"type\":\"integer\"},\"spot\":{\"description\":\"Is flex zone/spot\",\"type\":\"boolean\"},\"terminal_type\":{\"description\":\"Type of terminal\",\"type\":\"string\"},\"uid\":{\"description\":\"Unique station identifier\",\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"},\"refresh_rate\":{\"description\":\"Data refresh rate in seconds\",\"type\":\"integer\"},\"set_point_bikes\":{\"description\":\"Target number of bikes\",\"type\":\"integer\"},\"uid\":{\"description\":\"Unique city identifier\",\"type\":\"integer\"},\"zoom\":{\"description\":\"Default zoom level\",\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"},\"country\":{\"description\":\"Country code\",\"type\":\"string\"},\"country_name\":{\"description\":\"Full country name\",\"type\":\"string\"},\"domain\":{\"description\":\"Country domain\",\"type\":\"string\"},\"hotline\":{\"description\":\"Support hotline number\",\"type\":\"string\"},\"lat\":{\"description\":\"Country center latitude\",\"format\":\"double\",\"type\":\"number\"},\"lng\":{\"description\":\"Country center longitude\",\"format\":\"double\",\"type\":\"number\"},\"name\":{\"description\":\"Country name\",\"type\":\"string\"},\"policy\":{\"description\":\"Privacy policy URL\",\"type\":\"string\"},\"terms\":{\"description\":\"Terms and conditions URL\",\"type\":\"string\"},\"website\":{\"description\":\"Website URL\",\"type\":\"string\"},\"zoom\":{\"description\":\"Default zoom level\",\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"}}},\"description\":\"Successful response with live bike sharing data\"},\"400\":{\"description\":\"Bad request - Invalid parameters\"},\"500\":{\"description\":\"Internal server error\"}},\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for accessing restricted endpoints\",\"in\":\"query\",\"name\":\"apikey\",\"type\":\"apiKey\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/maps/nextbike-live.json",
@@ -244,6 +314,12 @@
                         "type": "`$NUMBER`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /maps/nextbike-live.xml",
+                    "json": "{\"operationId\":\"getLiveDataXML\",\"parameters\":[{\"description\":\"Filter by city ID\",\"in\":\"query\",\"name\":\"city\",\"required\":false,\"schema\":{\"type\":\"integer\"}},{\"description\":\"Latitude for geographic filtering\",\"in\":\"query\",\"name\":\"lat\",\"required\":false,\"schema\":{\"format\":\"double\",\"type\":\"number\"}},{\"description\":\"Longitude for geographic filtering\",\"in\":\"query\",\"name\":\"lng\",\"required\":false,\"schema\":{\"format\":\"double\",\"type\":\"number\"}},{\"description\":\"Search radius in meters when using lat/lng\",\"in\":\"query\",\"name\":\"distance\",\"required\":false,\"schema\":{\"default\":5000,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/xml\":{\"schema\":{\"type\":\"string\"}}},\"description\":\"Successful response with live bike sharing data in XML format\"},\"400\":{\"description\":\"Bad request - Invalid parameters\"},\"500\":{\"description\":\"Internal server error\"}},\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for accessing restricted endpoints\",\"in\":\"query\",\"name\":\"apikey\",\"type\":\"apiKey\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -348,6 +424,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "POST /reservation/reserve",
+                    "json": "{\"operationId\":\"reserveBike\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"bike_number\":{\"description\":\"Number of the bike to reserve\",\"type\":\"string\"},\"station_id\":{\"description\":\"Station identifier\",\"type\":\"integer\"},\"user_id\":{\"description\":\"User identifier\",\"type\":\"string\"}},\"required\":[\"bike_number\",\"user_id\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"bike_number\":{\"description\":\"Reserved bike number\",\"type\":\"string\"},\"expires_at\":{\"description\":\"Reservation expiration time\",\"format\":\"date-time\",\"type\":\"string\"},\"reservation_id\":{\"description\":\"Unique reservation identifier\",\"type\":\"string\"},\"status\":{\"description\":\"Reservation status\",\"enum\":[\"confirmed\",\"pending\",\"failed\"],\"type\":\"string\"},\"unlock_code\":{\"description\":\"Code to unlock the bike\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bike successfully reserved\"},\"400\":{\"description\":\"Bad request - Invalid input\"},\"401\":{\"description\":\"Unauthorized - Invalid or missing API key\"},\"404\":{\"description\":\"Bike or station not found\"},\"409\":{\"description\":\"Conflict - Bike already reserved or unavailable\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for accessing restricted endpoints\",\"in\":\"query\",\"name\":\"apikey\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "POST",
                   "orig": "/reservation/reserve",
@@ -438,6 +520,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /reservation/status",
+                    "json": "{\"operationId\":\"getReservationStatus\",\"parameters\":[{\"description\":\"ID of the reservation to check\",\"in\":\"query\",\"name\":\"reservation_id\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"bike_number\":{\"description\":\"Reserved bike number\",\"type\":\"string\"},\"created_at\":{\"description\":\"Reservation creation time\",\"format\":\"date-time\",\"type\":\"string\"},\"expires_at\":{\"description\":\"Reservation expiration time\",\"format\":\"date-time\",\"type\":\"string\"},\"reservation_id\":{\"description\":\"Reservation identifier\",\"type\":\"string\"},\"status\":{\"description\":\"Current reservation status\",\"enum\":[\"active\",\"expired\",\"cancelled\",\"completed\"],\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Reservation status retrieved successfully\"},\"400\":{\"description\":\"Bad request - Invalid parameters\"},\"401\":{\"description\":\"Unauthorized - Invalid or missing API key\"},\"404\":{\"description\":\"Reservation not found\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for accessing restricted endpoints\",\"in\":\"query\",\"name\":\"apikey\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/reservation/status",
@@ -468,13 +556,223 @@
         }
       },
       "feature": {
+        "ratelimit": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "burst": 5,
+              "rate": 5
+            },
+            "optspec": {
+              "now": "`$FUNCTION`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "ratelimit",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Client-side rate limiting via a token bucket",
+          "transport": "wrap",
+          "version": "0.0.1"
+        },
+        "retry": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "factor": 2,
+              "maxDelay": 2000,
+              "minDelay": 50,
+              "retries": 2,
+              "statuses": [
+                408,
+                425,
+                429,
+                500,
+                502,
+                503,
+                504
+              ]
+            },
+            "optspec": {
+              "jitter": "`$BOOLEAN`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "retry",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Automatic retry of transient failures with exponential backoff",
+          "transport": "wrap",
+          "version": "0.0.1"
+        },
         "test": {
           "active": true,
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "config": {
             "options": {
               "active": false
-            }
+            },
+            "optspec": {
+              "entity": "`$MAP`",
+              "net": "`$MAP`"
+            },
+            "strict": false
           },
           "hook": {
             "GetData": {
@@ -564,6 +862,102 @@
           },
           "title": "In-memory mock transport for testing without a live server",
           "transport": "base",
+          "version": "0.0.1"
+        },
+        "timeout": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "ms": 30000
+            },
+            "optspec": {
+              "clearTimer": "`$FUNCTION`",
+              "setTimer": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "timeout",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Per-request timeout with transport abort",
+          "transport": "wrap",
           "version": "0.0.1"
         }
       },
@@ -702,6 +1096,48 @@
         "website": "https://nextbike.net"
       },
       "option": {},
+      "optspec": {
+        "allow": {
+          "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
+          "op": "create,update,load,list,remove,command,direct,graphql"
+        },
+        "apikey": "",
+        "auth": {
+          "basic": false,
+          "prefix": ""
+        },
+        "base": "http://localhost:8000",
+        "clean": {
+          "keys": "key,token,id"
+        },
+        "entity": {
+          "`$CHILD`": {
+            "`$OPEN`": true,
+            "active": false,
+            "alias": {}
+          }
+        },
+        "extend": "`$ANY`",
+        "headers": {
+          "`$CHILD`": "`$STRING`"
+        },
+        "prefix": "",
+        "secret": "",
+        "server": {
+          "`$CHILD`": ""
+        },
+        "suffix": "",
+        "system": {
+          "fetch": "`$ANY`"
+        },
+        "test": {
+          "active": false,
+          "entity": {
+            "`$OPEN`": true
+          }
+        },
+        "utility": {}
+      },
       "repo": {
         "host": "github.com",
         "path": ""
@@ -1256,6 +1692,7 @@
           },
           "package": "@voxgig/sdkgen",
           "provides": {
+            "schema": true,
             "sekreto": true
           },
           "publish": {
@@ -1297,7 +1734,7 @@
         "live": {
           "app": false,
           "base": "",
-          "strict": false
+          "strict": true
         }
       }
     }

@@ -5,6 +5,8 @@ import * as Fs from 'node:fs'
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
 
 
 import { NextbikeSDK, BaseFeature, stdutil } from '../../..'
@@ -47,16 +49,13 @@ describe('ReservationEntity', async () => {
 
     const live = 'TRUE' === process.env.NEXTBIKE_TEST_LIVE
     for (const op of ['create']) {
-      if (maybeSkipControl(t, 'entityOp', 'reservation.' + op, live)) return
+      if (!live && maybeSkipControl(t, 'entityOp', 'reservation.' + op, live)) return
     }
 
+    
     const setup = basicSetup()
-    // The basic flow consumes synthetic IDs and field values from the
-    // fixture (entity TestData.json). Those don't exist on the live API.
-    // Skip live runs unless the user provided a real ENTID env override.
-    if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set NEXTBIKE_TEST_RESERVATION_ENTID JSON to run live')
-      return
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"bike_number","op":{"create":{"req":true,"type":"`$STRING`"}},"req":false,"short":"Reserved bike number","type":"`$STRING`","index$":0},{"active":true,"format":"date-time","name":"expires_at","req":false,"short":"Reservation expiration time","type":"`$STRING`","index$":1},{"active":true,"name":"reservation_id","req":false,"short":"Unique reservation identifier","type":"`$STRING`","index$":2},{"active":true,"name":"station_id","req":false,"short":"Station identifier","type":"`$INTEGER`","index$":3},{"active":true,"name":"status","req":false,"short":"Reservation status","type":"`$STRING`","index$":4},{"active":true,"name":"unlock_code","req":false,"short":"Code to unlock the bike","type":"`$STRING`","index$":5},{"active":true,"name":"user_id","req":true,"short":"User identifier","type":"`$STRING`","index$":6}],"name":"reservation","op":{"create":{"input":"data","name":"create","points":[{"active":true,"args":{},"contract":{"id":"POST /reservation/reserve","json":"{\"operationId\":\"reserveBike\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"bike_number\":{\"description\":\"Number of the bike to reserve\",\"type\":\"string\"},\"station_id\":{\"description\":\"Station identifier\",\"type\":\"integer\"},\"user_id\":{\"description\":\"User identifier\",\"type\":\"string\"}},\"required\":[\"bike_number\",\"user_id\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"bike_number\":{\"description\":\"Reserved bike number\",\"type\":\"string\"},\"expires_at\":{\"description\":\"Reservation expiration time\",\"format\":\"date-time\",\"type\":\"string\"},\"reservation_id\":{\"description\":\"Unique reservation identifier\",\"type\":\"string\"},\"status\":{\"description\":\"Reservation status\",\"enum\":[\"confirmed\",\"pending\",\"failed\"],\"type\":\"string\"},\"unlock_code\":{\"description\":\"Code to unlock the bike\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bike successfully reserved\"},\"400\":{\"description\":\"Bad request - Invalid input\"},\"401\":{\"description\":\"Unauthorized - Invalid or missing API key\"},\"404\":{\"description\":\"Bike or station not found\"},\"409\":{\"description\":\"Conflict - Bike already reserved or unavailable\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for accessing restricted endpoints\",\"in\":\"query\",\"name\":\"apikey\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}","source":"openapi3","version":1},"kind":"http","method":"POST","orig":"/reservation/reserve","segments":[{"lit":"reservation"},{"lit":"reserve"}],"select":{"$action":"reserve"},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"}},"relations":{"ancestors":[]},"key$":"reservation","name__orig":"reservation","Name":"Reservation","name_":"reservation","name-":"reservation","NAME":"RESERVATION","index$":2}, {"active":true,"entity":"reservation","key$":"BasicReservationFlow","kind":"basic","name":"BasicReservationFlow","param":{},"step":[{"active":true,"data":{},"input":{"ref":"reservation_ref01"},"match":{},"op":"create","spec":[],"valid":[],"index$":0}]}, 'Reservation')
     }
     const client = setup.client
     const struct = setup.struct
@@ -109,13 +108,6 @@ function basicSetup(extra?: any) {
       }]
     })
 
-  // Detect whether the user provided a real ENTID JSON via env var. The
-  // basic flow consumes synthetic IDs from the fixture file; without an
-  // override those synthetic IDs reach the live API and 4xx. Surface this
-  // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['NEXTBIKE_TEST_RESERVATION_ENTID']
-  const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
-
   const env = envOverride({
     'NEXTBIKE_TEST_RESERVATION_ENTID': idmap,
     'NEXTBIKE_TEST_LIVE': 'FALSE',
@@ -127,7 +119,13 @@ function basicSetup(extra?: any) {
 
   const live = 'TRUE' === env.NEXTBIKE_TEST_LIVE
 
+  const transport = createLiveTransport()
   if (live) {
+    const rawIds = process.env['NEXTBIKE_TEST_RESERVATION_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new NextbikeSDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -140,7 +138,8 @@ function basicSetup(extra?: any) {
       // argument at all - so a bare 'extra' silently discarded the apikey
       // and server values above and handed the SDK undefined. Harmless
       // while there was nothing in that object; not harmless now.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -153,7 +152,7 @@ function basicSetup(extra?: any) {
     data: entityData,
     explain: 'TRUE' === env.NEXTBIKE_TEST_EXPLAIN,
     live,
-    syntheticOnly: live && !idmapOverridden,
+    transport,
     now: Date.now(),
   }
 
