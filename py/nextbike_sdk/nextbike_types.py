@@ -49,30 +49,12 @@ class PublicLoadMatch(TypedDict, total=False):
     lng: float
 
 
-class ReservationRequired(TypedDict):
-    user_id: str
+class Reservation(TypedDict):
+    pass
 
 
-class Reservation(ReservationRequired, total=False):
-    bike_number: str
-    expires_at: str
-    reservation_id: str
-    station_id: int
-    status: str
-    unlock_code: str
-
-
-class ReservationCreateDataRequired(TypedDict):
-    user_id: str
-
-
-class ReservationCreateData(ReservationCreateDataRequired, total=False):
-    bike_number: str
-    expires_at: str
-    reservation_id: str
-    station_id: int
-    status: str
-    unlock_code: str
+class ReservationCreateData(TypedDict):
+    pass
 
 
 class ReservationStatus(TypedDict, total=False):

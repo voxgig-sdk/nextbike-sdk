@@ -211,30 +211,6 @@ Return the entity name.
 reservation = client.Reservation
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `bike_number` | `String` | No | Reserved bike number |
-| `expires_at` | `String` | No | Reservation expiration time |
-| `reservation_id` | `String` | No | Unique reservation identifier |
-| `station_id` | `Integer` | No | Station identifier |
-| `status` | `String` | No | Reservation status |
-| `unlock_code` | `String` | No | Code to unlock the bike |
-| `user_id` | `String` | Yes | User identifier |
-
-### Field Usage by Operation
-
-| Field | create |
-| --- | --- |
-| `bike_number` | Yes |
-| `expires_at` | - |
-| `reservation_id` | - |
-| `station_id` | - |
-| `status` | - |
-| `unlock_code` | - |
-| `user_id` | - |
-
 ### Operations
 
 #### `create(reqdata, ctrl = nil) -> result`
@@ -243,7 +219,6 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Reservation.create({
-  "user_id" => "example_user_id", # String
 })
 ```
 

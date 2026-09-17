@@ -301,13 +301,6 @@ API path: `/maps/nextbike-live.xml`
 
 | Field | Description |
 | --- | --- |
-| `"bike_number"` | Reserved bike number |
-| `"expires_at"` | Reservation expiration time |
-| `"reservation_id"` | Unique reservation identifier |
-| `"station_id"` | Station identifier |
-| `"status"` | Reservation status |
-| `"unlock_code"` | Code to unlock the bike |
-| `"user_id"` | User identifier |
 
 Operations: Create.
 
@@ -401,23 +394,10 @@ Create an instance: `reservation := client.Reservation(nil)`
 | --- | --- |
 | `Create(data, ctrl)` | Create a new entity with the given data. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `bike_number` | `string` | Reserved bike number |
-| `expires_at` | `string` | Reservation expiration time |
-| `reservation_id` | `string` | Unique reservation identifier |
-| `station_id` | `int` | Station identifier |
-| `status` | `string` | Reservation status |
-| `unlock_code` | `string` | Code to unlock the bike |
-| `user_id` | `string` | User identifier |
-
 #### Example: Create
 
 ```go
 result, err := client.Reservation(nil).Create(map[string]any{
-    "user_id": "example_user_id",
 }, nil)
 if err != nil {
     panic(err)

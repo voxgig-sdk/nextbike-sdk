@@ -105,12 +105,12 @@ local result, err = client:ReservationStatus():load({ reservation_id = "example"
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/nextbike-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nextbike-sdk/releases) |
-| Python | `voxgig-sdk-nextbike` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nextbike-sdk/releases) |
-| PHP | `voxgig-sdk/nextbike` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nextbike-sdk/releases) |
+| TypeScript | `@voxgig-sdk/nextbike-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nextbike-sdk/tags) |
+| Python | `voxgig-sdk-nextbike` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nextbike-sdk/tags) |
+| PHP | `voxgig-sdk/nextbike` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nextbike-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/nextbike-sdk/go` | `go get github.com/voxgig-sdk/nextbike-sdk/go@latest` |
-| Ruby | `voxgig-sdk-nextbike` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nextbike-sdk/releases) |
-| Lua | `voxgig-sdk-nextbike` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nextbike-sdk/releases) |
+| Ruby | `voxgig-sdk-nextbike` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nextbike-sdk/tags) |
+| Lua | `voxgig-sdk-nextbike` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nextbike-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/nextbike-sdk/go-cli` | `go install github.com/voxgig-sdk/nextbike-sdk/go-cli/cmd/nextbike@latest` |
 | Go MCP server | `github.com/voxgig-sdk/nextbike-sdk/go-mcp` | `go get github.com/voxgig-sdk/nextbike-sdk/go-mcp@latest` |
 

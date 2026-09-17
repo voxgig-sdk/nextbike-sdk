@@ -55,25 +55,11 @@ class PublicLoadMatch
 /** Reservation entity data model. */
 class Reservation
 {
-    public ?string $bike_number = null;
-    public ?string $expires_at = null;
-    public ?string $reservation_id = null;
-    public ?int $station_id = null;
-    public ?string $status = null;
-    public ?string $unlock_code = null;
-    public string $user_id;
 }
 
 /** Request payload for Reservation#create. */
 class ReservationCreateData
 {
-    public ?string $bike_number = null;
-    public ?string $expires_at = null;
-    public ?string $reservation_id = null;
-    public ?int $station_id = null;
-    public ?string $status = null;
-    public ?string $unlock_code = null;
-    public string $user_id;
 }
 
 /** ReservationStatus entity data model. */

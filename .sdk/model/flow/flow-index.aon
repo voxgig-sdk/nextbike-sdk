@@ -1,6 +1,6 @@
 # Flows
 
-@"BasicLiveDataFlow.aon"
-@"BasicPublicFlow.aon"
-@"BasicReservationFlow.aon"
-@"BasicReservationStatusFlow.aon"
+@"./BasicLiveDataFlow.aon"
+@"./BasicPublicFlow.aon"
+@"./BasicReservationFlow.aon"
+@"./BasicReservationStatusFlow.aon"

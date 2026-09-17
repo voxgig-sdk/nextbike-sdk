@@ -214,30 +214,6 @@ reservation := client.Reservation(nil)
 fmt.Println(reservation.GetName()) // "reservation"
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `bike_number` | `string` | No | Reserved bike number |
-| `expires_at` | `string` | No | Reservation expiration time |
-| `reservation_id` | `string` | No | Unique reservation identifier |
-| `station_id` | `int` | No | Station identifier |
-| `status` | `string` | No | Reservation status |
-| `unlock_code` | `string` | No | Code to unlock the bike |
-| `user_id` | `string` | Yes | User identifier |
-
-### Field Usage by Operation
-
-| Field | create |
-| --- | --- |
-| `bike_number` | Yes |
-| `expires_at` | - |
-| `reservation_id` | - |
-| `station_id` | - |
-| `status` | - |
-| `unlock_code` | - |
-| `user_id` | - |
-
 ### Operations
 
 #### `Create(reqdata, ctrl map[string]any) (any, error)`
@@ -246,7 +222,6 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Reservation(nil).Create(map[string]any{
-    "user_id": "example_user_id",
 }, nil)
 if err != nil {
     panic(err)

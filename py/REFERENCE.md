@@ -205,30 +205,6 @@ Return the entity name.
 reservation = client.Reservation()
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `bike_number` | `str` | No | Reserved bike number |
-| `expires_at` | `str` | No | Reservation expiration time |
-| `reservation_id` | `str` | No | Unique reservation identifier |
-| `station_id` | `int` | No | Station identifier |
-| `status` | `str` | No | Reservation status |
-| `unlock_code` | `str` | No | Code to unlock the bike |
-| `user_id` | `str` | Yes | User identifier |
-
-### Field Usage by Operation
-
-| Field | create |
-| --- | --- |
-| `bike_number` | Yes |
-| `expires_at` | - |
-| `reservation_id` | - |
-| `station_id` | - |
-| `status` | - |
-| `unlock_code` | - |
-| `user_id` | - |
-
 ### Operations
 
 #### `create(reqdata, ctrl=None) -> dict`
@@ -237,7 +213,6 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Reservation().create({
-    "user_id": "example_user_id",  # str
 })
 ```
 

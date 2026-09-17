@@ -27,22 +27,8 @@ export interface PublicLoadMatch {
     lng?: number;
 }
 export interface Reservation {
-    bike_number?: string;
-    expires_at?: string;
-    reservation_id?: string;
-    station_id?: number;
-    status?: string;
-    unlock_code?: string;
-    user_id: string;
 }
 export interface ReservationCreateData {
-    bike_number?: string;
-    expires_at?: string;
-    reservation_id?: string;
-    station_id?: number;
-    status?: string;
-    unlock_code?: string;
-    user_id: string;
     $action?: string;
     [action: string]: any;
 }

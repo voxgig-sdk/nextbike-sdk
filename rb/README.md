@@ -276,13 +276,6 @@ API path: `/maps/nextbike-live.xml`
 
 | Field | Description |
 | --- | --- |
-| `bike_number` | Reserved bike number |
-| `expires_at` | Reservation expiration time |
-| `reservation_id` | Unique reservation identifier |
-| `station_id` | Station identifier |
-| `status` | Reservation status |
-| `unlock_code` | Code to unlock the bike |
-| `user_id` | User identifier |
 
 Operations: Create.
 
@@ -370,23 +363,10 @@ Create an instance: `reservation = client.Reservation`
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `bike_number` | `String` | Reserved bike number |
-| `expires_at` | `String` | Reservation expiration time |
-| `reservation_id` | `String` | Unique reservation identifier |
-| `station_id` | `Integer` | Station identifier |
-| `status` | `String` | Reservation status |
-| `unlock_code` | `String` | Code to unlock the bike |
-| `user_id` | `String` | User identifier |
-
 #### Example: Create
 
 ```ruby
 reservation = client.Reservation.create({
-  "user_id" => "example_user_id", # String
 })
 ```
 
@@ -561,6 +541,7 @@ Use `Helpers.to_map()` to safely validate that a value is a hash.
 rb/
 ├── Nextbike_sdk.rb       -- Main SDK module
 ├── config.rb                  -- Configuration
+├── schema.rb                  -- Generated option + entity specs
 ├── features.rb                -- Feature factory
 ├── core/                      -- Core types and context
 ├── entity/                    -- Entity implementations

@@ -35,22 +35,8 @@
 ---@field lng? number
 
 ---@class Reservation
----@field bike_number? string
----@field expires_at? string
----@field reservation_id? string
----@field station_id? number
----@field status? string
----@field unlock_code? string
----@field user_id string
 
 ---@class ReservationCreateData
----@field bike_number? string
----@field expires_at? string
----@field reservation_id? string
----@field station_id? number
----@field status? string
----@field unlock_code? string
----@field user_id string
 
 ---@class ReservationStatus
 ---@field bike_number? string

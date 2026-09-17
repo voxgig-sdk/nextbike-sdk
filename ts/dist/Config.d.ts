@@ -67,6 +67,8 @@ declare class Config {
         base: string;
         auth: {
             prefix: string;
+            in: string;
+            name: string;
         };
         headers: {
             "content-type": string;
@@ -183,40 +185,7 @@ declare class Config {
             };
         };
         reservation: {
-            fields: ({
-                name: string;
-                op: {
-                    create: {
-                        req: boolean;
-                        type: string;
-                    };
-                };
-                short: string;
-                type: string;
-                format?: undefined;
-                req?: undefined;
-            } | {
-                format: string;
-                name: string;
-                short: string;
-                type: string;
-                op?: undefined;
-                req?: undefined;
-            } | {
-                name: string;
-                short: string;
-                type: string;
-                op?: undefined;
-                format?: undefined;
-                req?: undefined;
-            } | {
-                name: string;
-                req: boolean;
-                short: string;
-                type: string;
-                op?: undefined;
-                format?: undefined;
-            })[];
+            fields: never[];
             name: string;
             op: {
                 create: {

@@ -283,13 +283,6 @@ API path: `/maps/nextbike-live.xml`
 
 | Field | Description |
 | --- | --- |
-| `bike_number` | Reserved bike number |
-| `expires_at` | Reservation expiration time |
-| `reservation_id` | Unique reservation identifier |
-| `station_id` | Station identifier |
-| `status` | Reservation status |
-| `unlock_code` | Code to unlock the bike |
-| `user_id` | User identifier |
 
 Operations: Create.
 
@@ -375,23 +368,10 @@ Create an instance: `reservation = client.Reservation()`
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `bike_number` | `str` | Reserved bike number |
-| `expires_at` | `str` | Reservation expiration time |
-| `reservation_id` | `str` | Unique reservation identifier |
-| `station_id` | `int` | Station identifier |
-| `status` | `str` | Reservation status |
-| `unlock_code` | `str` | Code to unlock the bike |
-| `user_id` | `str` | User identifier |
-
 #### Example: Create
 
 ```python
 reservation = client.Reservation().create({
-    "user_id": "example_user_id",  # str
 })
 ```
 
@@ -565,6 +545,7 @@ Use `helpers.to_map()` to safely validate that a value is a dict.
 py/
 ├── nextbike_sdk.py         -- Main SDK module
 ├── config.py                    -- Configuration
+├── schema.py                    -- Generated option + entity specs
 ├── features.py                  -- Feature factory
 ├── core/                        -- Core types and context
 ├── entity/                      -- Entity implementations

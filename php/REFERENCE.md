@@ -210,30 +210,6 @@ Return the entity name.
 $reservation = $client->Reservation();
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `bike_number` | `string` | No | Reserved bike number |
-| `expires_at` | `string` | No | Reservation expiration time |
-| `reservation_id` | `string` | No | Unique reservation identifier |
-| `station_id` | `int` | No | Station identifier |
-| `status` | `string` | No | Reservation status |
-| `unlock_code` | `string` | No | Code to unlock the bike |
-| `user_id` | `string` | Yes | User identifier |
-
-### Field Usage by Operation
-
-| Field | create |
-| --- | --- |
-| `bike_number` | Yes |
-| `expires_at` | - |
-| `reservation_id` | - |
-| `station_id` | - |
-| `status` | - |
-| `unlock_code` | - |
-| `user_id` | - |
-
 ### Operations
 
 #### `create(array $reqdata, ?array $ctrl = null): mixed`
@@ -242,7 +218,6 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Reservation()->create([
-  "user_id" => null, // string
 ]);
 ```
 

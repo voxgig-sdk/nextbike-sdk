@@ -106,6 +106,8 @@ def make_config():
             "base": "https://api.nextbike.net",
             "auth": {
                 "prefix": "",
+                "in": "query",
+                "name": "apikey",
             },
             "headers": {
         "content-type": "application/json",
@@ -327,51 +329,7 @@ def make_config():
         },
       },
       "reservation": {
-        "fields": [
-          {
-            "name": "bike_number",
-            "op": {
-              "create": {
-                "req": True,
-                "type": "`$STRING`",
-              },
-            },
-            "short": "Reserved bike number",
-            "type": "`$STRING`",
-          },
-          {
-            "format": "date-time",
-            "name": "expires_at",
-            "short": "Reservation expiration time",
-            "type": "`$STRING`",
-          },
-          {
-            "name": "reservation_id",
-            "short": "Unique reservation identifier",
-            "type": "`$STRING`",
-          },
-          {
-            "name": "station_id",
-            "short": "Station identifier",
-            "type": "`$INTEGER`",
-          },
-          {
-            "name": "status",
-            "short": "Reservation status",
-            "type": "`$STRING`",
-          },
-          {
-            "name": "unlock_code",
-            "short": "Code to unlock the bike",
-            "type": "`$STRING`",
-          },
-          {
-            "name": "user_id",
-            "req": True,
-            "short": "User identifier",
-            "type": "`$STRING`",
-          },
-        ],
+        "fields": [],
         "name": "reservation",
         "op": {
           "create": {

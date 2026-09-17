@@ -50,24 +50,10 @@ type PublicLoadMatch struct {
 
 // Reservation is the typed data model for the reservation entity.
 type Reservation struct {
-	BikeNumber *string `json:"bike_number,omitempty"`
-	ExpiresAt *string `json:"expires_at,omitempty"`
-	ReservationId *string `json:"reservation_id,omitempty"`
-	StationId *int `json:"station_id,omitempty"`
-	Status *string `json:"status,omitempty"`
-	UnlockCode *string `json:"unlock_code,omitempty"`
-	UserId string `json:"user_id"`
 }
 
 // ReservationCreateData is the typed request payload for Reservation.CreateTyped.
 type ReservationCreateData struct {
-	BikeNumber *string `json:"bike_number,omitempty"`
-	ExpiresAt *string `json:"expires_at,omitempty"`
-	ReservationId *string `json:"reservation_id,omitempty"`
-	StationId *int `json:"station_id,omitempty"`
-	Status *string `json:"status,omitempty"`
-	UnlockCode *string `json:"unlock_code,omitempty"`
-	UserId string `json:"user_id"`
 }
 
 // ReservationStatus is the typed data model for the reservation_status entity.

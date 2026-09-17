@@ -108,70 +108,12 @@ PublicLoadMatch = Struct.new(
 )
 
 # Reservation entity data model.
-#
-# @!attribute [rw] bike_number
-#   @return [String, nil]
-#
-# @!attribute [rw] expires_at
-#   @return [String, nil]
-#
-# @!attribute [rw] reservation_id
-#   @return [String, nil]
-#
-# @!attribute [rw] station_id
-#   @return [Integer, nil]
-#
-# @!attribute [rw] status
-#   @return [String, nil]
-#
-# @!attribute [rw] unlock_code
-#   @return [String, nil]
-#
-# @!attribute [rw] user_id
-#   @return [String]
-Reservation = Struct.new(
-  :bike_number,
-  :expires_at,
-  :reservation_id,
-  :station_id,
-  :status,
-  :unlock_code,
-  :user_id,
-  keyword_init: true
-)
+class Reservation
+end
 
 # Request payload for Reservation#create.
-#
-# @!attribute [rw] bike_number
-#   @return [String, nil]
-#
-# @!attribute [rw] expires_at
-#   @return [String, nil]
-#
-# @!attribute [rw] reservation_id
-#   @return [String, nil]
-#
-# @!attribute [rw] station_id
-#   @return [Integer, nil]
-#
-# @!attribute [rw] status
-#   @return [String, nil]
-#
-# @!attribute [rw] unlock_code
-#   @return [String, nil]
-#
-# @!attribute [rw] user_id
-#   @return [String]
-ReservationCreateData = Struct.new(
-  :bike_number,
-  :expires_at,
-  :reservation_id,
-  :station_id,
-  :status,
-  :unlock_code,
-  :user_id,
-  keyword_init: true
-)
+class ReservationCreateData
+end
 
 # ReservationStatus entity data model.
 #

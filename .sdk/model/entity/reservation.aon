@@ -4,58 +4,6 @@ main: kit: entity: reservation: {
 
   alias: field: {}
 
-  fields: [
-    {
-      name: "bike_number"
-      op: {
-        create: {
-          req: true
-          type: "`$STRING`"
-        }
-      }
-      req: false
-      short: "Reserved bike number"
-      type: "`$STRING`"
-    }
-    {
-      format: "date-time"
-      name: "expires_at"
-      req: false
-      short: "Reservation expiration time"
-      type: "`$STRING`"
-    }
-    {
-      name: "reservation_id"
-      req: false
-      short: "Unique reservation identifier"
-      type: "`$STRING`"
-    }
-    {
-      name: "station_id"
-      req: false
-      short: "Station identifier"
-      type: "`$INTEGER`"
-    }
-    {
-      name: "status"
-      req: false
-      short: "Reservation status"
-      type: "`$STRING`"
-    }
-    {
-      name: "unlock_code"
-      req: false
-      short: "Code to unlock the bike"
-      type: "`$STRING`"
-    }
-    {
-      name: "user_id"
-      req: true
-      short: "User identifier"
-      type: "`$STRING`"
-    }
-  ]
-
   name: "reservation"
   op: {
     create: {

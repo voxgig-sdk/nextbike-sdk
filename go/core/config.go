@@ -81,6 +81,8 @@ func MakeConfig() map[string]any {
 			"base": "https://api.nextbike.net",
 			"auth": map[string]any{
 				"prefix": "",
+				"in": "query",
+				"name": "apikey",
 			},
 			"headers": map[string]any{
 				"content-type": "application/json",
@@ -302,51 +304,7 @@ func MakeConfig() map[string]any {
 				},
 			},
 			"reservation": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"name": "bike_number",
-						"op": map[string]any{
-							"create": map[string]any{
-								"req": true,
-								"type": "`$STRING`",
-							},
-						},
-						"short": "Reserved bike number",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"format": "date-time",
-						"name": "expires_at",
-						"short": "Reservation expiration time",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "reservation_id",
-						"short": "Unique reservation identifier",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "station_id",
-						"short": "Station identifier",
-						"type": "`$INTEGER`",
-					},
-					map[string]any{
-						"name": "status",
-						"short": "Reservation status",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "unlock_code",
-						"short": "Code to unlock the bike",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "user_id",
-						"req": true,
-						"short": "User identifier",
-						"type": "`$STRING`",
-					},
-				},
+				"fields": []any{},
 				"name": "reservation",
 				"op": map[string]any{
 					"create": map[string]any{
